@@ -105,8 +105,8 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-[#030303] px-5 py-20 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-black uppercase text-[#ffcc00]">Our Work</p>
-          <h1 className="mt-3 text-5xl font-black text-white">Our Portfolio</h1>
+          <p className="text-lg font-black uppercase text-[#ffcc00] sm:text-xl">Our Work</p>
+          <h1 className="mt-3 text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">Our Portfolio</h1>
           <p className="mt-5 text-base leading-7 text-white/65">
             Explore recent projects and see how we help businesses transform their digital presence.
           </p>
@@ -131,7 +131,7 @@ export default function PortfolioPage() {
                 <span className="inline-flex rounded-md bg-[#ffcc00] px-3 py-1 text-xs font-black text-black">
                   {project.category}
                 </span>
-                <h2 className="mt-4 text-2xl font-black text-white">{project.title}</h2>
+                <h2 className="mt-4 text-2xl font-black leading-tight text-white">{project.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-white/62">{project.description}</p>
                 {project.link && (
                   <a href={project.link} className="mt-5 inline-flex text-sm font-black text-[#ffcc00] transition hover:text-white">

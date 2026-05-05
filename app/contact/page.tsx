@@ -60,8 +60,8 @@ export default function ContactPage() {
       <div className="px-5 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.8fr_1fr] lg:items-start">
           <div>
-            <p className="text-sm font-black uppercase text-[#ffcc00]">Our Contact Page</p>
-            <h1 className="mt-3 text-5xl font-black leading-tight text-white">Let&apos;s Work Together</h1>
+            <p className="text-lg font-black uppercase text-[#ffcc00] sm:text-xl">Our Contact Page</p>
+            <h1 className="mt-3 text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">Let&apos;s Work Together</h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-white/65">
               Have a project in mind? Tell us what you want to build and we will get back to you with the next step.
             </p>

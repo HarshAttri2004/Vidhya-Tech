@@ -9,6 +9,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: process.env["postgresql://postgres:QfWWRyGzaBddrOvognuDxFSkzAFntjHI@tramway.proxy.rlwy.net:48199/railway"],
   },
 });

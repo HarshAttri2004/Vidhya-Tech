@@ -1,13 +1,27 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, phone, message } = await req.json();
+    const body = await req.json();
+
+    const name = typeof body.name === 'string' ? body.name.trim() : '';
+    const email = typeof body.email === 'string' ? body.email.trim() : '';
+    const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
+    const message = typeof body.message === 'string' ? body.message.trim() : '';
 
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: 'Name, email, and message are required' },
+        { success: false, error: 'Name, email, and message are required' },
+        { status: 400 }
+      );
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid email format' },
         { status: 400 }
       );
     }
@@ -22,26 +36,12 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, data: contact });
-  } catch (error) {
-    console.error('Contact error:', error);
-    return NextResponse.json(
-      { error: 'Failed to save contact message' },
-      { status: 500 }
-    );
-  }
-}
 
-export async function GET() {
-  try {
-    const contacts = await prisma.contact.findMany({
-      orderBy: { createdAt: 'desc' },
-      take: 50,
-    });
-    return NextResponse.json({ data: contacts });
-  } catch (error) {
-    console.error('Fetch contacts error:', error);
+  } catch (error: any) {
+    console.error("❌ FULL ERROR:", error);
+
     return NextResponse.json(
-      { error: 'Failed to fetch contacts' },
+      { success: false, error: error.message || "Server error" }, // 🔥 REAL ERROR
       { status: 500 }
     );
   }

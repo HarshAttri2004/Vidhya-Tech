@@ -12,8 +12,8 @@ const clients = [
 ];
 
 const proofStats = [
-  ['30+', 'Project builds'],
-  ['15+', 'Client conversations'],
+  ['12+', 'Project builds'],
+  ['7+', 'Client conversations'],
   ['6', 'Core service lines'],
   ['24h', 'First response target'],
 ];
@@ -81,7 +81,7 @@ export function ClientsShowcase() {
                   Sample
                 </span>
               </div>
-              <h3 className="mt-6 text-2xl font-black text-white">{client.name}</h3>
+              <h3 className="mt-6 text-2xl font-black leading-tight text-white">{client.name}</h3>
               <p className="mt-2 text-sm font-bold text-[#ffcc00]">{client.category}</p>
               <p className="mt-4 text-sm leading-7 text-white/62">{client.result}</p>
             </article>
@@ -106,7 +106,7 @@ export function SocialProofSection() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {proofStats.map(([value, label]) => (
             <article key={label} className="rounded-lg border border-white/12 bg-black/35 p-7 text-center">
-              <p className="text-5xl font-black text-[#ffcc00]">{value}</p>
+              <p className="text-6xl font-black text-[#ffcc00]">{value}</p>
               <p className="mt-3 text-sm font-bold uppercase text-white/58">{label}</p>
             </article>
           ))}
@@ -129,7 +129,7 @@ export function BusinessStorySection() {
     <section id="story" className="border-b border-white/10 bg-[#050505] px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
         <div>
-          <p className="text-sm font-black uppercase text-[#ffcc00]">Our Business Story</p>
+          <p className="text-lg font-black uppercase text-[#ffcc00] sm:text-xl">Our Business Story</p>
           <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
             A small agency system built for practical digital growth.
           </h2>
@@ -148,7 +148,7 @@ export function BusinessStorySection() {
                 {step.year}
               </div>
               <div>
-                <h3 className="text-2xl font-black text-white">{step.title}</h3>
+                <h3 className="text-2xl font-black leading-tight text-white">{step.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-white/62">{step.text}</p>
               </div>
             </article>
@@ -173,8 +173,8 @@ export function CertificatesSection() {
           {certificatePlaceholders.map((certificate) => (
             <article key={certificate.title} className="relative overflow-hidden rounded-lg border border-[#ffcc00]/30 bg-[linear-gradient(145deg,rgba(255,204,0,.16),rgba(255,255,255,.04)_48%,rgba(0,0,0,.2))] p-6">
               <div className="absolute right-5 top-5 h-16 w-16 rounded-full border-4 border-[#ffcc00]/45" />
-              <p className="text-xs font-black uppercase text-[#ffcc00]">Demo Certificate</p>
-              <h3 className="mt-12 text-2xl font-black text-white">{certificate.title}</h3>
+              <p className="text-base font-black uppercase text-[#ffcc00]">Demo Certificate</p>
+              <h3 className="mt-12 text-2xl font-black leading-tight text-white">{certificate.title}</h3>
               <p className="mt-3 text-sm font-bold text-white/72">{certificate.issuer}</p>
               <p className="mt-8 border-t border-white/12 pt-5 text-xs leading-6 text-white/52">{certificate.note}</p>
             </article>
@@ -226,7 +226,7 @@ export function LocationSection() {
     <section id="location" className="border-t border-white/10 bg-[#05080c] px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <div>
-          <p className="text-sm font-black uppercase text-[#ffcc00]">Location</p>
+          <p className="text-lg font-black uppercase text-[#ffcc00] sm:text-xl">Location</p>
           <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">India Based, Remote Friendly</h2>
           <p className="mt-6 text-base leading-8 text-white/65">
             Vidhya Tech works from India and supports online business projects through calls, shared documents, and clear delivery checkpoints.
@@ -245,7 +245,7 @@ export function LocationSection() {
           <div className="absolute left-[48%] top-[48%] h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffcc00] shadow-[0_0_40px_rgba(255,204,0,.9)]" />
           <div className="relative z-10 mt-auto flex h-full min-h-[312px] flex-col justify-end">
             <div className="max-w-sm rounded-lg border border-white/12 bg-black/70 p-5 backdrop-blur">
-              <p className="text-xs font-black uppercase text-[#ffcc00]">Office Marker</p>
+              <p className="text-base font-black uppercase text-[#ffcc00]">Office Marker</p>
               <h3 className="mt-2 text-2xl font-black text-white">Vidhya Tech</h3>
               <p className="mt-3 text-sm leading-7 text-white/62">Digital services delivered from India with remote-first project communication.</p>
             </div>
@@ -259,7 +259,7 @@ export function LocationSection() {
 function SectionIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <p className="text-sm font-black uppercase text-[#ffcc00]">{eyebrow}</p>
+      <p className="text-lg font-black uppercase text-[#ffcc00] sm:text-xl">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">{title}</h2>
       <p className="mt-5 text-base leading-8 text-white/65">{text}</p>
     </div>
