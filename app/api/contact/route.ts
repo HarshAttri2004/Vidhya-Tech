@@ -6,11 +6,15 @@ export const runtime = 'nodejs';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    const payload =
+      typeof body === 'object' && body !== null
+        ? (body as Record<string, unknown>)
+        : {};
 
-    const name = typeof body.name === 'string' ? body.name.trim() : '';
-    const email = typeof body.email === 'string' ? body.email.trim() : '';
-    const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
-    const message = typeof body.message === 'string' ? body.message.trim() : '';
+    const name = typeof payload.name === 'string' ? payload.name.trim() : '';
+    const email = typeof payload.email === 'string' ? payload.email.trim() : '';
+    const phone = typeof payload.phone === 'string' ? payload.phone.trim() : '';
+    const message = typeof payload.message === 'string' ? payload.message.trim() : '';
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -36,12 +40,12 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, data: contact });
-
-  } catch (error: any) {
-    console.error("❌ FULL ERROR:", error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Server error';
+    console.error('Contact form error:', error);
 
     return NextResponse.json(
-      { success: false, error: error.message || "Server error" }, // 🔥 REAL ERROR
+      { success: false, error: errorMessage },
       { status: 500 }
     );
   }
