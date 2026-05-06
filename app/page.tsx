@@ -128,21 +128,21 @@ const teamMembers = [
   }
 ];
 
-// Animated Circle Component
+// Animated Circle Component with Enhanced Zoom
 const AnimatedCircle = ({ delay = 0, size = 300, opacity = 0.1 }) => {
   return (
     <motion.div
-      className="absolute rounded-full border border-[#ffcc00]/30 bg-[#ffcc00]/5"
+      className="absolute rounded-full border border-[#ffcc00]/40 bg-[#ffcc00]/8 blur-sm"
       style={{
         width: size,
         height: size,
       }}
       animate={{
-        scale: [1, 1.2, 1],
-        opacity: [opacity, opacity * 1.5, opacity],
+        scale: [1, 1.5, 0.8, 1],
+        opacity: [opacity, opacity * 2, opacity * 0.5, opacity],
       }}
       transition={{
-        duration: 4,
+        duration: 6,
         delay: delay,
         repeat: Infinity,
         ease: 'easeInOut',
@@ -164,10 +164,40 @@ const HeroCarousel = () => {
 
   return (
     <div className="relative w-full h-96 md:h-full flex items-center justify-center overflow-hidden">
-      {/* Animated Background Circles */}
-      <AnimatedCircle delay={0} size={400} opacity={0.15} />
-      <AnimatedCircle delay={1} size={300} opacity={0.1} />
-      <AnimatedCircle delay={2} size={200} opacity={0.08} />
+      {/* Enhanced Animated Background Circles */}
+      <AnimatedCircle delay={0} size={500} opacity={0.2} />
+      <AnimatedCircle delay={1.5} size={350} opacity={0.15} />
+      <AnimatedCircle delay={3} size={250} opacity={0.12} />
+      
+      {/* Additional accent circles for dramatic effect */}
+      <motion.div
+        className="absolute rounded-full border-2 border-[#ffcc00]/30 bg-[#ffcc00]/5"
+        style={{ width: 450, height: 450, left: '-10%', top: '50%', transform: 'translateY(-50%)' }}
+        animate={{
+          scale: [1, 1.3, 0.7, 1],
+          opacity: [0.08, 0.25, 0.05, 0.08],
+        }}
+        transition={{
+          duration: 7,
+          delay: 0.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      <motion.div
+        className="absolute rounded-full border-2 border-[#ffcc00]/20 bg-[#ffcc00]/3"
+        style={{ width: 600, height: 600, right: '-15%', bottom: '-20%' }}
+        animate={{
+          scale: [1, 1.4, 0.75, 1],
+          opacity: [0.05, 0.2, 0.03, 0.05],
+        }}
+        transition={{
+          duration: 8,
+          delay: 2,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
 
       {/* Carousel Container */}
       <div className="relative w-full h-full flex items-center justify-center">
@@ -319,7 +349,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
               >
-                Vidhya Tech is a full-service digital agency helping brands stand out in the digital world through innovative websites, AI solutions, and creative marketing. We transform ideas into powerful digital experiences.
+                Vidhya Tech is a full-service digital agency helping brands stand out in the digital world through innovative websites, AI solutions, and creative marketing.
               </motion.p>
 
               {/* Stats */}
