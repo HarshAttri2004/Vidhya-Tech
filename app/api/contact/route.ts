@@ -1,5 +1,14 @@
-import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
+
+// In-memory storage for demo (replace with database later)
+let contactSubmissions: Array<{
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+  createdAt: Date;
+}> = [];
 
 export const runtime = 'nodejs';
 
@@ -30,16 +39,37 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const contact = await prisma.contact.create({
-      data: {
-        name,
-        email,
-        phone: phone || null,
-        message,
-      },
-    });
+    // Create contact submission (in-memory for now)
+    const contact = {
+      id: Date.now().toString(),
+      name,
+      email,
+      phone: phone || undefined,
+      message,
+      createdAt: new Date(),
+    };
 
-    return NextResponse.json({ success: true, data: contact });
+    // Store in memory (temporary solution)
+    contactSubmissions.push(contact);
+
+    // Keep only last 100 submissions to prevent memory issues
+    if (contactSubmissions.length > 100) {
+      contactSubmissions = contactSubmissions.slice(-100);
+    }
+
+    console.log('New contact submission:', { name, email, phone, message });
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        id: contact.id,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
+        message: contact.message,
+        createdAt: contact.createdAt,
+      }
+    });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Server error';
     console.error('Contact form error:', error);
