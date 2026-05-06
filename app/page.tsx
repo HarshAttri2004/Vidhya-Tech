@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Link from 'next/link';
-
+import { heroSlides } from './heroSlides';
 // Services Data
 const services = [
   {
@@ -90,38 +90,6 @@ const portfolioProjects = [
     image: '📱',
     color: '#06b6d4'
   }
-];
-
-// Hero Carousel Images
-const heroSlides = [
-  {
-    id: 1,
-    image:
-      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
-    title: 'Creative Digital Experiences',
-    subtitle: 'Beautiful interfaces and powerful web solutions built to scale.',
-  },
-  {
-    id: 2,
-    image:
-      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80',
-    title: 'Modern Web Design',
-    subtitle: 'Visually striking websites with polished typography and UI.',
-  },
-  {
-    id: 3,
-    image:
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80',
-    title: 'AI-Powered Growth',
-    subtitle: 'Smart automation and data-driven experiences for real results.',
-  },
-  {
-    id: 4,
-    image:
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
-    title: 'Fast & Responsive Sites',
-    subtitle: 'High-performance websites optimized for every device.',
-  },
 ];
 
 // Team Members
@@ -227,7 +195,7 @@ const HeroCarousel = () => {
       <div className="relative w-full h-full flex items-center justify-center">
         {heroSlides.map((slide, index) => (
           <motion.div
-            key={slide.id}
+            key={index}
             className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{
@@ -255,7 +223,7 @@ const HeroCarousel = () => {
                 {slide.title}
               </h3>
               <p className="mt-4 max-w-md text-sm md:text-base text-white/75">
-                {slide.subtitle}
+                {slide.text}
               </p>
             </div>
           </motion.div>

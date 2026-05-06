@@ -1,11 +1,10 @@
 'use client';
 export const heroSlides = [
-{
+  {
     title: 'vidhya tech',
     text: 'Build fast, scalable digital solutions.',
-    image: '/images/vidhyatech.png',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=85',
   },
-
   {
     title: 'Websites that feel premium',
     text: 'High-converting pages, dashboards, and business websites with fast performance.',
@@ -21,5 +20,4 @@ export const heroSlides = [
     text: 'Launch-ready creative, campaigns, content, and analytics for growing brands.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85',
   },
-  
 ];
