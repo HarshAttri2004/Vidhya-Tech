@@ -98,7 +98,8 @@ const teamMembers = [
     id: 1,
     name: 'Harsh Kumar',
     role: 'Web Development',
-    emoji: '👨‍💻',
+    image: '',  // Replace with image URL
+    icon: '💻',  // Fallback icon
     description: 'Expert in building scalable web applications with modern technologies.',
     bgColor: 'from-blue-600 to-blue-400'
   },
@@ -106,7 +107,8 @@ const teamMembers = [
     id: 2,
     name: 'Harsh Vasisth',
     role: 'Web & Software Development',
-    emoji: '👨‍🔧',
+    image: '',  // Replace with image URL
+    icon: '⚙️',  // Fallback icon
     description: 'Specialized in full-stack development and software architecture.',
     bgColor: 'from-purple-600 to-purple-400'
   },
@@ -114,7 +116,8 @@ const teamMembers = [
     id: 3,
     name: 'Lakshya Gupta',
     role: 'UI/UX Designer',
-    emoji: '🎨',
+    image: '',  // Replace with image URL
+    icon: '🎨',  // Fallback icon
     description: 'Creating beautiful and intuitive user experiences for digital products.',
     bgColor: 'from-pink-600 to-pink-400'
   }
@@ -161,10 +164,34 @@ const HeroCarousel = () => {
       <AnimatedCircle delay={1.5} size={350} opacity={0.15} />
       <AnimatedCircle delay={3} size={250} opacity={0.12} />
       
+      {/* Prominent Glowing Yellow Circle */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{ 
+          width: 400, 
+          height: 400, 
+          left: '10%', 
+          top: '50%', 
+          transform: 'translateY(-50%)',
+          background: 'radial-gradient(circle, #ffcc00 0%, rgba(255,204,0,0.4) 40%, transparent 70%)',
+          filter: 'blur(60px)'
+        }}
+        animate={{
+          scale: [1, 1.2, 0.95, 1],
+          opacity: [0.15, 0.25, 0.12, 0.15],
+        }}
+        transition={{
+          duration: 6,
+          delay: 0,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      
       {/* Additional accent circles for dramatic effect */}
       <motion.div
         className="absolute rounded-full border-2 border-[#ffcc00]/30 bg-[#ffcc00]/5"
-        style={{ width: 450, height: 450, left: '-10%', top: '50%', transform: 'translateY(-50%)' }}
+        style={{ width: 450, height: 450, left: '-20%', top: '50%', transform: 'translateY(-50%)' }}
         animate={{
           scale: [1, 1.3, 0.7, 1],
           opacity: [0.08, 0.25, 0.05, 0.08],
@@ -178,7 +205,7 @@ const HeroCarousel = () => {
       />
       <motion.div
         className="absolute rounded-full border-2 border-[#ffcc00]/20 bg-[#ffcc00]/3"
-        style={{ width: 600, height: 600, right: '-15%', bottom: '-20%' }}
+        style={{ width: 600, height: 600, right: '-20%', bottom: '-30%' }}
         animate={{
           scale: [1, 1.4, 0.75, 1],
           opacity: [0.05, 0.2, 0.03, 0.05],
@@ -196,7 +223,7 @@ const HeroCarousel = () => {
         {heroSlides.map((slide, index) => (
           <motion.div
             key={index}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-start justify-center pt-12"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{
               opacity: index === currentIndex ? 1 : 0,
@@ -215,7 +242,7 @@ const HeroCarousel = () => {
               transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent rounded-[28px]" />
-            <div className="absolute left-8 bottom-8 max-w-xl text-left text-white">
+            <div className="absolute left-8 top-32 max-w-xl text-left text-white">
               <p className="text-sm uppercase tracking-[0.3em] text-[#ffcc00] mb-2">
                 {slide.label}
               </p>
@@ -547,9 +574,17 @@ export default function Home() {
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3, delay: index * 0.3, repeat: Infinity }}
                   >
-                    <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${member.bgColor} flex items-center justify-center text-5xl border-2 border-[#ffcc00]/50 shadow-lg`}>
-                      {member.emoji}
-                    </div>
+                    {member.image ? (
+                      <img 
+                        src={member.image} 
+                        alt={member.name}
+                        className="w-24 h-24 rounded-full object-cover border-2 border-[#ffcc00]/50 shadow-lg"
+                      />
+                    ) : (
+                      <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${member.bgColor} flex items-center justify-center text-4xl border-2 border-[#ffcc00]/50 shadow-lg`}>
+                        {member.icon}
+                      </div>
+                    )}
                   </motion.div>
 
                   {/* Name and Role */}
@@ -559,6 +594,12 @@ export default function Home() {
                   <p className="text-[#ffcc00] font-bold text-center mb-4 text-sm uppercase tracking-widest">
                     {member.role}
                   </p>
+
+                  {member.image && (
+                    <p className="text-xs text-white/50 text-center mb-4">
+                      [Profile image loaded]
+                    </p>
+                  )}
 
                   {/* Description */}
                   <p className="text-white/70 text-center leading-relaxed mb-6">
