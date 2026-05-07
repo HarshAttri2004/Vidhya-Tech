@@ -11,38 +11,37 @@ import { img } from 'framer-motion/client';
 // Services Data
 const services = [
   {
-    icon: '💻',
+    icon: 'https://cdn-icons-png.flaticon.com/512/2306/2306481.png',
     title: 'Web Development',
     description: 'We build fast, responsive websites that engage and convert your business needs.',
     color: 'from-blue-500/20 to-blue-600/20'
   },
   {
-    icon: '🤖',
+    icon: 'https://cdn-icons-png.flaticon.com/512/8297/8297839.png',
     title: 'AI Automation',
     description: 'Automate your business workflows with cutting-edge AI solutions.',
     color: 'from-purple-500/20 to-purple-600/20'
   },
   {
-
-    icon: '📊',
+    icon: 'https://cdn-icons-png.flaticon.com/512/4436/4436481.png',
     title: 'Digital Marketing',
     description: 'Grow your brand with result-driven marketing strategies.',
     color: 'from-pink-500/20 to-pink-600/20'
   },
   {
-    icon: '🎬',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3669/3669128.png',
     title: 'Video Editing',
     description: 'Professional video editing services for YouTube, Reels and social media.',
     color: 'from-cyan-500/20 to-cyan-600/20'
   },
   {
-    icon: '👥',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3556/3556098.png',
     title: 'Social Media Management',
     description: 'We manage your social media accounts and boost your online presence.',
     color: 'from-orange-500/20 to-orange-600/20'
   },
   {
-    icon: '⚙️',
+    icon: 'https://cdn-icons-png.flaticon.com/512/4436/4436509.png',
     title: 'AI Integration',
     description: 'Integrate AI into your business for smarter solutions.',
     color: 'from-green-500/20 to-green-600/20'
@@ -55,42 +54,42 @@ const portfolioProjects = [
     id: 1,
     title: 'Digital Agency Website',
     category: 'Web Design',
-    image: '🌐',
+    image: 'https://cdn-icons-png.flaticon.com/512/1995/1995506.png',
     color: '#3b82f6'
   },
   {
     id: 2,
     title: 'E-Commerce Website',
     category: 'Web Development',
-    image: '🛍️',
+    image: 'https://cdn-icons-png.flaticon.com/512/1913/1913949.png',
     color: '#ec4899'
   },
   {
     id: 3,
     title: 'AI Chatbot Solution',
     category: 'AI Solutions',
-    image: '🤖',
+    image: 'https://cdn-icons-png.flaticon.com/512/8297/8297839.png',
     color: '#8b5cf6'
   },
   {
     id: 4,
     title: 'Fitness Website Design',
     category: 'Web Design',
-    image: '💪',
+    image: 'https://cdn-icons-png.flaticon.com/512/1995/1995506.png',
     color: '#f59e0b'
   },
   {
     id: 5,
     title: 'Restaurant Website',
     category: 'Web Development',
-    image: '🍽️',
+    image: 'https://cdn-icons-png.flaticon.com/512/921/921489.png',
     color: '#10b981'
   },
   {
     id: 6,
     title: 'Marketing Campaign',
     category: 'Marketing',
-    image: '📱',
+    image: 'https://cdn-icons-png.flaticon.com/512/3556/3556098.png',
     color: '#06b6d4'
   }
 ];
@@ -458,11 +457,11 @@ export default function Home() {
                 whileHover={{ y: -5, scale: 1.02 }}
               >
                 <motion.div
-                  className="text-6xl md:text-7xl mb-6"
+                  className="w-16 h-16 mb-6 flex items-center justify-center"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 2.5, delay: index * 0.2, repeat: Infinity }}
                 >
-                  {service.icon}
+                  <img src={service.icon} alt={service.title} className="w-full h-full object-contain filter brightness-0 invert" />
                 </motion.div>
                 <h3 className="text-2xl font-black mb-3 text-white">{service.title}</h3>
                 <p className="text-white/70 leading-relaxed text-base">{service.description}</p>
@@ -510,11 +509,11 @@ export default function Home() {
                 <div className="aspect-video bg-gradient-to-br overflow-hidden flex items-center justify-center relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/5 to-transparent" />
                   <motion.div
-                    className="text-7xl md:text-8xl"
+                    className="w-24 h-24 md:w-32 md:h-32"
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
-                    {project.image}
+                    <img src={project.image} alt={project.title} className="w-full h-full object-contain filter brightness-0 invert" />
                   </motion.div>
                 </div>
                 <div className="p-6 border-t border-white/10">
@@ -541,6 +540,99 @@ export default function Home() {
               View All Projects
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ============ CLIENTS SECTION ============ */}
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+              OUR CLIENTS
+            </motion.p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Trusted By Leading Brands
+            </h2>
+            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
+              We've partnered with companies across various industries to deliver exceptional digital solutions.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {['https://via.placeholder.com/150?text=Client+1', 'https://via.placeholder.com/150?text=Client+2', 'https://via.placeholder.com/150?text=Client+3', 'https://via.placeholder.com/150?text=Client+4', 'https://via.placeholder.com/150?text=Client+5', 'https://via.placeholder.com/150?text=Client+6'].map((logo, index) => (
+              <motion.div
+                key={index}
+                className="flex items-center justify-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-[#ffcc00]/50 transition-all duration-300 h-32"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img src={logo} alt={`Client ${index + 1}`} className="w-full h-full object-contain filter brightness-75 hover:brightness-100 transition-all" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ CERTIFICATIONS SECTION ============ */}
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+              CREDENTIALS
+            </motion.p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Our Certifications & Skills
+            </h2>
+            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
+              Industry-recognized certifications and expertise that drive our excellence.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: 'Google Cloud Certified', credential: 'Cloud Associate', icon: '☁️' },
+              { title: 'AWS Certified', credential: 'Solutions Architect', icon: '⚙️' },
+              { title: 'Meta Blueprint', credential: 'Digital Marketing', icon: '📱' },
+              { title: 'HubSpot Academy', credential: 'Inbound Certification', icon: '🎯' },
+              { title: 'Figma Professional', credential: 'UI/UX Design', icon: '🎨' },
+              { title: 'OpenAI Partner', credential: 'AI Implementation', icon: '🤖' }
+            ].map((cert, index) => (
+              <motion.div
+                key={index}
+                className="group relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.15, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"
+                />
+
+                <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300 text-center">
+                  <div className="text-6xl mb-6 flex justify-center">{cert.icon}</div>
+                  <h3 className="text-2xl font-black text-white mb-2">{cert.title}</h3>
+                  <p className="text-[#ffcc00] font-bold text-sm uppercase tracking-widest mb-4">{cert.credential}</p>
+                  <div className="h-1 w-0 bg-[#ffcc00] mx-auto group-hover:w-full transition-all duration-300" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
