@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import { heroSlides } from './heroSlides';
+import { img } from 'framer-motion/client';
 // Services Data
 const services = [
   {
@@ -21,6 +23,7 @@ const services = [
     color: 'from-purple-500/20 to-purple-600/20'
   },
   {
+
     icon: '📊',
     title: 'Digital Marketing',
     description: 'Grow your brand with result-driven marketing strategies.',
@@ -98,8 +101,10 @@ const teamMembers = [
     id: 1,
     name: 'Harsh Kumar',
     role: 'Web Development',
-    image: '',  // Replace with image URL
-    icon: '💻',  // Fallback icon
+    image: '/team/harsh-kumar.jpg',
+    imagePosition: '50% 42%',
+    // Replace with image 
+    icon: '',  // Fallback icon
     description: 'Expert in building scalable web applications with modern technologies.',
     bgColor: 'from-blue-600 to-blue-400'
   },
@@ -107,17 +112,19 @@ const teamMembers = [
     id: 2,
     name: 'Harsh Vasisth',
     role: 'Web & Software Development',
-    image: '',  // Replace with image URL
-    icon: '⚙️',  // Fallback icon
+     image: '/team/harsh-vasisth.jpg',
+    imagePosition: '50% 42%',
+    icon: '',  // Fallback icon
     description: 'Specialized in full-stack development and software architecture.',
     bgColor: 'from-purple-600 to-purple-400'
   },
   {
     id: 3,
-    name: 'Lakshya Gupta',
+    name: 'Lakshya Kumar Gupta',
     role: 'UI/UX Designer',
-    image: '',  // Replace with image URL
-    icon: '🎨',  // Fallback icon
+    image: '/team/lakshya-gupta.jpg',
+    imagePosition: '50% 42%',
+    icon: '',  // Fallback icon
     description: 'Creating beautiful and intuitive user experiences for digital products.',
     bgColor: 'from-pink-600 to-pink-400'
   }
@@ -131,6 +138,7 @@ const AnimatedCircle = ({ delay = 0, size = 300, opacity = 0.1 }) => {
       style={{
         width: size,
         height: size,
+      
       }}
       animate={{
         scale: [1, 1.5, 0.8, 1],
@@ -158,27 +166,28 @@ const HeroCarousel = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-96 md:h-[500px] lg:h-[600px] flex items-center justify-center overflow-hidden rounded-[28px]">
+    <div className="relative w-full h-96 md:h-[500px] lg:h-screen flex items-center justify-center overflow-hidden rounded-[32px]">
       {/* Enhanced Animated Background Circles */}
       <AnimatedCircle delay={0} size={500} opacity={0.2} />
       <AnimatedCircle delay={1.5} size={350} opacity={0.15} />
       <AnimatedCircle delay={3} size={250} opacity={0.12} />
       
-      {/* Prominent Glowing Yellow Circle */}
+      {/* Prominent Glowing Yellow Circle - Behind Image */}
       <motion.div
-        className="absolute rounded-full"
+        className="absolute z-0 rounded-full"
         style={{ 
-          width: 400, 
-          height: 400, 
-          left: '10%', 
+          width: 450, 
+          height: 450, 
+          left: '50%', 
           top: '50%', 
-          transform: 'translateY(-50%)',
-          background: 'radial-gradient(circle, #ffcc00 0%, rgba(255,204,0,0.4) 40%, transparent 70%)',
-          filter: 'blur(60px)'
+          transform: 'translate(-50%, -50%)',
+          background: 'radial-gradient(circle, #ffcc00 0%, rgba(255,204,0,0.6) 35%, transparent 70%)',
+          filter: 'blur(50px)',
+          boxShadow: '0 0 80px 20px rgba(255,204,0,0.3)'
         }}
         animate={{
-          scale: [1, 1.2, 0.95, 1],
-          opacity: [0.15, 0.25, 0.12, 0.15],
+          scale: [1, 1.15, 0.95, 1],
+          opacity: [0.25, 0.35, 0.2, 0.25],
         }}
         transition={{
           duration: 6,
@@ -191,7 +200,7 @@ const HeroCarousel = () => {
       {/* Additional accent circles for dramatic effect */}
       <motion.div
         className="absolute rounded-full border-2 border-[#ffcc00]/30 bg-[#ffcc00]/5"
-        style={{ width: 450, height: 450, left: '-20%', top: '50%', transform: 'translateY(-50%)' }}
+        style={{ width: 450, height: 450, left: '-8%', top: '50%', transform: 'translateY(-50%)' }}
         animate={{
           scale: [1, 1.3, 0.7, 1],
           opacity: [0.08, 0.25, 0.05, 0.08],
@@ -219,11 +228,11 @@ const HeroCarousel = () => {
       />
 
       {/* Carousel Container */}
-      <div className="relative w-full h-full flex items-center justify-center">
+      <div className="relative z-10 w-full h-full flex items-center justify-center px-4 md:px-8">
         {heroSlides.map((slide, index) => (
           <motion.div
             key={index}
-            className="absolute inset-0 flex items-start justify-center pt-12"
+            className="absolute inset-0 flex items-center justify-end px-4 md:px-8"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{
               opacity: index === currentIndex ? 1 : 0,
@@ -231,18 +240,22 @@ const HeroCarousel = () => {
             }}
             transition={{ duration: 1, ease: 'easeInOut' }}
           >
-            <motion.img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover rounded-[28px] shadow-2xl border border-white/10"
-              initial={{ scale: 1.05 }}
+            <motion.div
+              className="relative h-96 md:h-[500px] lg:h-[600px] w-full md:w-1/2 lg:w-3/5 overflow-hidden rounded-[28px] border border-white/10 shadow-2xl"
+              initial={{ scale: 1 }}
               animate={{
-                scale: index === currentIndex ? [1.05, 1, 1.08] : 1.05,
+                 scale: index === currentIndex ? [1, 1.02, 1] : 1,
               }}
               transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent rounded-[28px]" />
-            <div className="absolute left-8 top-32 max-w-xl text-left text-white">
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+            </motion.div>
+            <div className="absolute left-8 top-20 max-w-xl text-left text-white md:left-16 md:top-32 lg:left-20">
               <p className="text-sm uppercase tracking-[0.3em] text-[#ffcc00] mb-2">
                 {slide.label}
               </p>
@@ -270,8 +283,8 @@ const HeroCarousel = () => {
         ))}
       </div>
 
-      {/* Framed Border */}
-      <div className="absolute inset-0 rounded-2xl border-2 border-[#ffcc00]/40 pointer-events-none md:inset-8" />
+       {/* Rounded focus ring */}
+      <div className="pointer-events-none absolute inset-2 rounded-[34px] border-2 border-[#ffcc00]/45 md:inset-8" />
     </div>
   );
 };
@@ -574,12 +587,14 @@ export default function Home() {
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3, delay: index * 0.3, repeat: Infinity }}
                   >
-                    {member.image ? (
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
-                        className="w-24 h-24 rounded-full object-cover border-2 border-[#ffcc00]/50 shadow-lg"
-                      />
+                    {member.image && member.image.trim() !== '' ? (
+                      <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     ) : (
                       <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${member.bgColor} flex items-center justify-center text-4xl border-2 border-[#ffcc00]/50 shadow-lg`}>
                         {member.icon}
@@ -595,11 +610,7 @@ export default function Home() {
                     {member.role}
                   </p>
 
-                  {member.image && (
-                    <p className="text-xs text-white/50 text-center mb-4">
-                      [Profile image loaded]
-                    </p>
-                  )}
+                
 
                   {/* Description */}
                   <p className="text-white/70 text-center leading-relaxed mb-6">
@@ -680,7 +691,7 @@ export default function Home() {
                 <div className="text-[#ffcc00] text-lg mb-4">
                   {'⭐'.repeat(testimonial.rating)}
                 </div>
-                <p className="text-white/80 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+                 <p className="text-white/80 mb-6 leading-relaxed italic">&ldquo;{testimonial.text}&rdquo;</p>
                 <div>
                   <p className="font-black text-white">{testimonial.author}</p>
                   <p className="text-sm text-white/60">{testimonial.company}</p>
@@ -727,7 +738,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Let's discuss how we can help you achieve your digital goals with innovative solutions tailored to your unique business needs.
+             Let&apos;s discuss how we can help you achieve your digital goals with innovative solutions tailored to your unique business needs.
           </motion.p>
 
           <motion.div
