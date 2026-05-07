@@ -54,6 +54,7 @@ const portfolioProjects = [
     id: 1,
     title: 'School Website',
     category: 'Web Design',
+    description: 'Modern educational platform with enrollment system and course management.',
     image: 'https://cdn-icons-png.flaticon.com/512/1995/1995506.png',
     link: 'https://example-school.com',
     color: '#3b82f6'
@@ -62,6 +63,7 @@ const portfolioProjects = [
     id: 2,
     title: 'E-Commerce Website',
     category: 'Web Development',
+    description: 'Modern product storefront with conversion-focused pages and checkout flow.',
     image: 'https://cdn-icons-png.flaticon.com/512/1913/1913949.png',
     link: 'https://example-ecommerce.com',
     color: '#ec4899'
@@ -70,6 +72,7 @@ const portfolioProjects = [
     id: 3,
     title: 'AI Chatbot Solution',
     category: 'AI Solutions',
+    description: 'Automated support flow for lead capture and service questions.',
     image: 'https://cdn-icons-png.flaticon.com/512/8297/8297839.png',
     link: 'https://example-chatbot.com',
     color: '#8b5cf6'
@@ -78,6 +81,7 @@ const portfolioProjects = [
     id: 4,
     title: 'Fitness Website Design',
     category: 'Web Design',
+    description: 'Bold fitness landing page with packages and booking CTA.',
     image: 'https://cdn-icons-png.flaticon.com/512/1995/1995506.png',
     link: 'https://example-fitness.com',
     color: '#f59e0b'
@@ -86,6 +90,7 @@ const portfolioProjects = [
     id: 5,
     title: 'Restaurant Website',
     category: 'Web Development',
+    description: 'Menu, gallery, reservation, and local SEO-ready restaurant site.',
     image: 'https://cdn-icons-png.flaticon.com/512/921/921489.png',
     link: 'https://example-restaurant.com',
     color: '#10b981'
@@ -93,6 +98,8 @@ const portfolioProjects = [
   {
     id: 6,
     title: 'Marketing Campaign',
+    category: 'Marketing',
+    description: 'Launch assets and social media campaign for a brand rollout.',
     image: 'https://cdn-icons-png.flaticon.com/512/3556/3556098.png',
     link: 'https://example-marketing.com',
     color: '#06b6d4'
@@ -253,7 +260,7 @@ const HeroCarousel = () => {
             transition={{ duration: 1, ease: 'easeInOut' }}
           >
             <motion.div
-              className="relative h-96 md:h-[500px] lg:h-[600px] w-full md:w-1/2 lg:w-3/5 overflow-hidden rounded-[28px] border border-white/10 shadow-2xl"
+              className="relative h-96 md:h-[500px] lg:h-[600px] w-96 md:w-[480px] lg:w-[480px] overflow-hidden rounded-[28px] border-4 border-white shadow-2xl"
               initial={{ scale: 1 }}
               animate={{
                  scale: index === currentIndex ? [1, 1.02, 1] : 1,
@@ -537,8 +544,16 @@ export default function Home() {
                   <p className="text-xs font-bold text-[#ffcc00] uppercase tracking-widest mb-3">
                     {project.category}
                   </p>
-                  <h3 className="text-lg font-black text-white leading-tight group-hover:text-[#ffcc00] transition-colors">{project.title}</h3>
-                  <p className="text-xs text-white/50 mt-2 group-hover:text-[#ffcc00] transition-colors">Click to view →</p>
+                  <h3 className="text-lg font-black text-white leading-tight group-hover:text-[#ffcc00] transition-colors mb-3">{project.title}</h3>
+                  <p className="text-sm text-white/70 mb-4 leading-relaxed">{project.description}</p>
+                  <motion.button
+                    className="inline-block px-4 py-2 bg-[#ffcc00] text-black font-bold rounded-lg hover:bg-white transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => window.open(project.link, '_blank')}
+                  >
+                    View Project →
+                  </motion.button>
                 </div>
               </motion.a>
             ))}
