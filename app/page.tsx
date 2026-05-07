@@ -432,62 +432,204 @@ export default function Home() {
       </section>
 
       {/* ============ SERVICES SECTION ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0a0a0a] relative">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-              WHAT WE DO
-            </motion.p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Our Services
-            </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              We offer a comprehensive range of digital services designed to elevate your brand and drive measurable business results.
-            </p>
-          </motion.div>
+      {/* SERVICES SECTION */}
+<section className="w-full bg-black py-20 px-6 md:px-12">
+  <div className="max-w-7xl mx-auto">
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                className={`group p-8 rounded-2xl border border-white/10 bg-gradient-to-br ${service.color} backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300 cursor-pointer`}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, scale: 1.02 }}
-              >
-                <motion.div
-                  className="w-16 h-16 mb-6 flex items-center justify-center"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 2.5, delay: index * 0.2, repeat: Infinity }}
-                >
-                  <div className="relative h-52 w-full overflow-hidden rounded-2xl mb-6">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+    {/* Heading */}
+    <div className="text-center mb-14">
+      <h2 className="text-4xl md:text-6xl font-black text-white">
+        Our <span className="text-yellow-400">Services</span>
+      </h2>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                  </div>
-                </motion.div>
-                <h3 className="text-2xl font-black mb-3 text-white">{service.title}</h3>
-                <p className="text-white/70 leading-relaxed text-base">{service.description}</p>
-                <motion.div
-                  className="mt-4 h-1 w-0 bg-[#ffcc00] group-hover:w-full transition-all duration-300"
-                />
-              </motion.div>
-            ))}
-          </div>
+      <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
+        Complete digital solutions to grow your business
+        and deliver measurable results.
+      </p>
+    </div>
+
+    {/* Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      {/* CARD 1 */}
+      <div className="group rounded-[28px] overflow-hidden border border-blue-500/40 bg-[#07152c] hover:scale-[1.02] transition duration-300">
+
+        {/* Image */}
+        <div className="relative h-[230px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+            alt="Web Development"
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#07152c] to-transparent" />
         </div>
-      </section>
+
+        {/* Content */}
+        <div className="p-8">
+          <div className="w-16 h-16 rounded-full bg-blue-600/30 border border-blue-400 flex items-center justify-center text-3xl mb-6">
+            💻
+          </div>
+
+          <h3 className="text-white text-4xl font-bold mb-4">
+            Web Development
+          </h3>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            We build fast, responsive websites that engage and
+            convert your business needs.
+          </p>
+        </div>
+      </div>
+
+      {/* CARD 2 */}
+      <div className="group rounded-[28px] overflow-hidden border border-purple-500/40 bg-[#210433] hover:scale-[1.02] transition duration-300">
+
+        <div className="relative h-[230px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop"
+            alt="AI Automation"
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#210433] to-transparent" />
+        </div>
+
+        <div className="p-8">
+          <div className="w-16 h-16 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-3xl mb-6">
+            🤖
+          </div>
+
+          <h3 className="text-white text-4xl font-bold mb-4">
+            AI Automation
+          </h3>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            Automate your business workflows with cutting-edge
+            AI solutions.
+          </p>
+        </div>
+      </div>
+
+      {/* CARD 3 */}
+      <div className="group rounded-[28px] overflow-hidden border border-pink-500/40 bg-[#330017] hover:scale-[1.02] transition duration-300">
+
+        <div className="relative h-[230px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
+            alt="Digital Marketing"
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#330017] to-transparent" />
+        </div>
+
+        <div className="p-8">
+          <div className="w-16 h-16 rounded-full bg-pink-600/30 border border-pink-400 flex items-center justify-center text-3xl mb-6">
+            📢
+          </div>
+
+          <h3 className="text-white text-4xl font-bold mb-4">
+            Digital Marketing
+          </h3>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            Grow your brand with result-driven marketing
+            strategies.
+          </p>
+        </div>
+      </div>
+
+      {/* CARD 4 */}
+      <div className="group rounded-[28px] overflow-hidden border border-cyan-500/40 bg-[#03242b] hover:scale-[1.02] transition duration-300">
+
+        <div className="relative h-[230px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop"
+            alt="Video Editing"
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#03242b] to-transparent" />
+        </div>
+
+        <div className="p-8">
+          <div className="w-16 h-16 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-3xl mb-6">
+            🎬
+          </div>
+
+          <h3 className="text-white text-4xl font-bold mb-4">
+            Video Editing
+          </h3>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            Professional video editing services for YouTube,
+            Reels and social media.
+          </p>
+        </div>
+      </div>
+
+      {/* CARD 5 */}
+      <div className="group rounded-[28px] overflow-hidden border border-orange-500/40 bg-[#2b1200] hover:scale-[1.02] transition duration-300">
+
+        <div className="relative h-[230px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=1200&auto=format&fit=crop"
+            alt="Social Media"
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2b1200] to-transparent" />
+        </div>
+
+        <div className="p-8">
+          <div className="w-16 h-16 rounded-full bg-orange-600/30 border border-orange-400 flex items-center justify-center text-3xl mb-6">
+            👥
+          </div>
+
+          <h3 className="text-white text-4xl font-bold mb-4">
+            Social Media Management
+          </h3>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            We manage your social media accounts and boost
+            your online presence.
+          </p>
+        </div>
+      </div>
+
+      {/* CARD 6 */}
+      <div className="group rounded-[28px] overflow-hidden border border-green-500/40 bg-[#03240f] hover:scale-[1.02] transition duration-300">
+
+        <div className="relative h-[230px] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?q=80&w=1200&auto=format&fit=crop"
+            alt="AI Integration"
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#03240f] to-transparent" />
+        </div>
+
+        <div className="p-8">
+          <div className="w-16 h-16 rounded-full bg-green-600/30 border border-green-400 flex items-center justify-center text-3xl mb-6">
+            🧠
+          </div>
+
+          <h3 className="text-white text-4xl font-bold mb-4">
+            AI Integration
+          </h3>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            Integrate AI into your business for smarter
+            solutions.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* ============ PORTFOLIO SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
