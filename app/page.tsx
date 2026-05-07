@@ -11,41 +11,58 @@ import { heroSlides } from './heroSlides';
 // Services Data
 const services = [
   {
-    icon: 'https://cdn-icons-png.flaticon.com/512/2306/2306481.png',
+    image:
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
     title: 'Web Development',
-    description: 'We build fast, responsive websites that engage and convert your business needs.',
-    color: 'from-blue-500/20 to-blue-600/20'
+    description:
+      'We build fast, responsive websites that engage and convert your business needs.',
+    color: 'from-blue-500/20 to-blue-600/20',
   },
+
   {
-    icon: 'https://cdn-icons-png.flaticon.com/512/8297/8297839.png',
+    image:
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop',
     title: 'AI Automation',
-    description: 'Automate your business workflows with cutting-edge AI solutions.',
-    color: 'from-purple-500/20 to-purple-600/20'
+    description:
+      'Automate your business workflows with cutting-edge AI solutions.',
+    color: 'from-purple-500/20 to-purple-600/20',
   },
+
   {
-    icon: 'https://cdn-icons-png.flaticon.com/512/4436/4436481.png',
+    image:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
     title: 'Digital Marketing',
-    description: 'Grow your brand with result-driven marketing strategies.',
-    color: 'from-pink-500/20 to-pink-600/20'
+    description:
+      'Grow your brand with result-driven marketing strategies.',
+    color: 'from-pink-500/20 to-pink-600/20',
   },
+
   {
-    icon: 'https://cdn-icons-png.flaticon.com/512/3669/3669128.png',
+    image:
+      'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop',
     title: 'Video Editing',
-    description: 'Professional video editing services for YouTube, Reels and social media.',
-    color: 'from-cyan-500/20 to-cyan-600/20'
+    description:
+      'Professional video editing services for YouTube, Reels and social media.',
+    color: 'from-cyan-500/20 to-cyan-600/20',
   },
+
   {
-    icon: 'https://cdn-icons-png.flaticon.com/512/3556/3556098.png',
+    image:
+      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200&auto=format&fit=crop',
     title: 'Social Media Management',
-    description: 'We manage your social media accounts and boost your online presence.',
-    color: 'from-orange-500/20 to-orange-600/20'
+    description:
+      'We manage your social media accounts and boost your online presence.',
+    color: 'from-orange-500/20 to-orange-600/20',
   },
+
   {
-    icon: 'https://cdn-icons-png.flaticon.com/512/4436/4436509.png',
+    image:
+      'https://images.unsplash.com/photo-1674027392884-7513d1e5e0b6?q=80&w=1200&auto=format&fit=crop',
     title: 'AI Integration',
-    description: 'Integrate AI into your business for smarter solutions.',
-    color: 'from-green-500/20 to-green-600/20'
-  }
+    description:
+      'Integrate AI into your business for smarter solutions.',
+    color: 'from-green-500/20 to-green-600/20',
+  },
 ];
 
 // Portfolio Projects
@@ -54,58 +71,68 @@ const portfolioProjects = [
     id: 1,
     title: 'School Website',
     category: 'Web Design',
-    description: 'Modern educational platform with enrollment system and course management.',
-    image: 'https://cdn-icons-png.flaticon.com/512/1995/1995506.png',
+    description:
+      'Modern educational platform with enrollment system and course management.',
+    image:
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop',
     link: 'https://example-school.com',
-    color: '#3b82f6'
   },
+
   {
     id: 2,
     title: 'E-Commerce Website',
     category: 'Web Development',
-    description: 'Modern product storefront with conversion-focused pages and checkout flow.',
-    image: 'https://cdn-icons-png.flaticon.com/512/1913/1913949.png',
+    description:
+      'Modern product storefront with conversion-focused pages and checkout flow.',
+    image:
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop',
     link: 'https://example-ecommerce.com',
-    color: '#ec4899'
   },
+
   {
     id: 3,
     title: 'AI Chatbot Solution',
     category: 'AI Solutions',
-    description: 'Automated support flow for lead capture and service questions.',
-    image: 'https://cdn-icons-png.flaticon.com/512/8297/8297839.png',
+    description:
+      'Automated support flow for lead capture and service questions.',
+    image:
+      'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200&auto=format&fit=crop',
     link: 'https://example-chatbot.com',
-    color: '#8b5cf6'
   },
+
   {
     id: 4,
     title: 'Fitness Website Design',
     category: 'Web Design',
-    description: 'Bold fitness landing page with packages and booking CTA.',
-    image: 'https://cdn-icons-png.flaticon.com/512/1995/1995506.png',
+    description:
+      'Bold fitness landing page with packages and booking CTA.',
+    image:
+      'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop',
     link: 'https://example-fitness.com',
-    color: '#f59e0b'
   },
+
   {
     id: 5,
     title: 'Restaurant Website',
     category: 'Web Development',
-    description: 'Menu, gallery, reservation, and local SEO-ready restaurant site.',
-    image: 'https://cdn-icons-png.flaticon.com/512/921/921489.png',
+    description:
+      'Menu, gallery, reservation, and local SEO-ready restaurant site.',
+    image:
+      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop',
     link: 'https://example-restaurant.com',
-    color: '#10b981'
   },
+
   {
     id: 6,
     title: 'Marketing Campaign',
     category: 'Marketing',
-    description: 'Launch assets and social media campaign for a brand rollout.',
-    image: 'https://cdn-icons-png.flaticon.com/512/3556/3556098.png',
+    description:
+      'Launch assets and social media campaign for a brand rollout.',
+    image:
+      'https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=1200&auto=format&fit=crop',
     link: 'https://example-marketing.com',
-    color: '#06b6d4'
-  }
+  },
 ];
-
 // Team Members
 const teamMembers = [
   {
@@ -441,7 +468,15 @@ export default function Home() {
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 2.5, delay: index * 0.2, repeat: Infinity }}
                 >
-                  <img src={service.icon} alt={service.title} className="w-full h-full object-contain filter brightness-0 invert" />
+                  <div className="relative h-52 w-full overflow-hidden rounded-2xl mb-6">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                  </div>
                 </motion.div>
                 <h3 className="text-2xl font-black mb-3 text-white">{service.title}</h3>
                 <p className="text-white/70 leading-relaxed text-base">{service.description}</p>
@@ -496,7 +531,13 @@ export default function Home() {
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
-                    <img src={project.image} alt={project.title} className="w-full h-full object-contain filter brightness-0 invert" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                   </motion.div>
                 </div>
                 <div className="p-6 border-t border-white/10 group-hover:bg-white/[0.05] transition-all">
