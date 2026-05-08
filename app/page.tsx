@@ -759,58 +759,88 @@ export default function Home() {
       </section>
 
       {/* ============ CERTIFICATIONS SECTION ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-              CREDENTIALS
-            </motion.p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Our Certifications & Skills
-            </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              Industry-recognized certifications and expertise that drive our excellence.
-            </p>
-          </motion.div>
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black">
+  <div className="mx-auto max-w-7xl">
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: 'Google Cloud Certified', credential: 'Cloud Associate', icon: '☁️' },
-              { title: 'AWS Certified', credential: 'Solutions Architect', icon: '⚙️' },
-              { title: 'Meta Blueprint', credential: 'Digital Marketing', icon: '📱' },
-              { title: 'HubSpot Academy', credential: 'Inbound Certification', icon: '🎯' },
-              { title: 'Figma Professional', credential: 'UI/UX Design', icon: '🎨' },
-              { title: 'OpenAI Partner', credential: 'AI Implementation', icon: '🤖' }
-            ].map((cert, index) => (
-              <motion.div
-                key={index}
-                className="group relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"
-                />
+    {/* Heading */}
+    <div className="text-center mb-20">
+      <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+        CREDENTIALS
+      </p>
 
-                <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300 text-center">
-                  <div className="text-6xl mb-6 flex justify-center">{cert.icon}</div>
-                  <h3 className="text-2xl font-black text-white mb-2">{cert.title}</h3>
-                  <p className="text-[#ffcc00] font-bold text-sm uppercase tracking-widest mb-4">{cert.credential}</p>
-                  <div className="h-1 w-0 bg-[#ffcc00] mx-auto group-hover:w-full transition-all duration-300" />
-                </div>
-              </motion.div>
-            ))}
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+        Our Certifications & Skills
+      </h2>
+
+      <p className="text-white/70 max-w-3xl mx-auto text-lg">
+        Industry-recognized certifications and expertise that drive our excellence.
+      </p>
+    </div>
+
+    {/* Grid */}
+    <div className="grid md:grid-cols-3 gap-8">
+
+      {/* CARD */}
+      {[
+        {
+          img: "/certificates/google.png",
+          title: "Google Cloud Certified",
+          subtitle: "Cloud Associate",
+        },
+        {
+          img: "/certificates/aws.png",
+          title: "AWS Certified",
+          subtitle: "Solutions Architect",
+        },
+        {
+          img: "/certificates/meta.png",
+          title: "Meta Blueprint",
+          subtitle: "Digital Marketing",
+        },
+        {
+          img: "/certificates/hubspot.png",
+          title: "HubSpot Academy",
+          subtitle: "Inbound Certification",
+        },
+        {
+          img: "/certificates/figma.png",
+          title: "Figma Professional",
+          subtitle: "UI/UX Design",
+        },
+        {
+          img: "/certificates/openai.png",
+          title: "OpenAI Partner",
+          subtitle: "AI Implementation",
+        },
+      ].map((cert, index) => (
+
+        <div
+          key={index}
+          className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-[#ffcc00]/50 transition-all duration-300"
+        >
+
+         {/* Certificate Image */}
+               <div className="rounded-xl overflow-hidden mb-5 group">
+            <img
+              src={cert.img}
+              alt={cert.title}
+              className="w-full h-[180px] object-cover object-center rounded-xl border border-white/10 shadow-lg transition duration-300 group-hover:scale-105"
+            />
           </div>
+            {/* Title */}
+            <h3 className="text-lg md:text-xl font-bold text-white text-center">
+              {cert.title}
+            </h3>
+
+            {/* Subtitle */}
+            <p className="text-[#ffcc00] text-sm font-bold text-center mt-2 uppercase tracking-widest">
+              {cert.subtitle}
+            </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ============ TEAM SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
