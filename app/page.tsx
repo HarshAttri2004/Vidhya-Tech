@@ -820,13 +820,13 @@ export default function Home() {
         >
 
          {/* Certificate Image */}
-               <div className="rounded-xl overflow-hidden mb-5 group">
-            <img
-              src={cert.img}
-              alt={cert.title}
-              className="w-full h-[180px] object-cover object-center rounded-xl border border-white/10 shadow-lg transition duration-300 group-hover:scale-105"
-            />
-          </div>
+               <div className="rounded-xl overflow-hidden mb-5 bg-white p-2">
+                <img
+                  src={cert.img}
+                  alt={cert.title}
+                  className="w-full h-[180px] object-contain rounded-lg"
+                />
+              </div>
             {/* Title */}
             <h3 className="text-lg md:text-xl font-bold text-white text-center">
               {cert.title}
