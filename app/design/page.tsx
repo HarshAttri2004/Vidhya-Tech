@@ -11,9 +11,9 @@ const designs = [
     link: 'https://example.com',
   },
   {
-    title: 'ERP Software UI',
-    category: 'Software',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200',
+    title: 'Vidyalaya International School',
+    category: 'website',
+    image: 'https://www.vviscbse.in/img/about-us.webp',
     link: '/design/erp', // 👈 internal page
   },
   {
