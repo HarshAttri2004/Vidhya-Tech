@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEELCORE INDUSTRIES — Precision Manufacturing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0b;
+    --dark: #111114;
+    --steel: #1c1c22;
+    --panel: #16161c;
+    --border: #2a2a35;
+    --orange: #ff6b2b;
+    --amber: #ffaa44;
+    --white: #f0efe8;
+    --muted: #7a7a8a;
+    --light: #c8c8d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    height: 72px;
+    background: rgba(10,10,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo span { color: var(--orange); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+
+  .nav-cta {
+    background: var(--orange);
+    color: var(--black) !important;
+    padding: 10px 22px;
+    font-weight: 700 !important;
+    transition: background .2s !important;
+  }
+  .nav-cta:hover { background: var(--amber) !important; color: var(--black) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(255,107,43,0.07) 0%, transparent 60%),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.02) 80px),
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.02) 80px),
+      var(--black);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    border: 1px solid rgba(255,107,43,0.35);
+    padding: 8px 18px;
+    margin-bottom: 36px;
+    width: fit-content;
+    position: relative;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(1.4); }
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 9vw, 140px);
+    line-height: .92;
+    letter-spacing: 2px;
+    color: var(--white);
+    max-width: 900px;
+    animation: fadeUp .8s .1s ease both;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--orange);
+    -webkit-text-stroke: 0;
+  }
+  h1 .outline {
+    -webkit-text-stroke: 1.5px var(--white);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--light);
+    max-width: 520px;
+    margin-top: 28px;
+    line-height: 1.65;
+    animation: fadeUp .8s .2s ease both;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    animation: fadeUp .8s .4s ease both;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: var(--black);
+    padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .2s, transform .2s;
+  }
+  .btn-primary:hover { background: var(--amber); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color .2s, color .2s, transform .2s;
+  }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeUp .8s .5s ease both;
+  }
+  .stat {
+    text-align: right;
+    border-right: 2px solid var(--orange);
+    padding-right: 20px;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .scroll-line {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    animation: fadeUp .8s .6s ease both;
+  }
+  .scroll-line::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 60px;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--orange);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 5vw, 72px);
+    letter-spacing: 1px;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--light);
+    max-width: 540px;
+    line-height: 1.75;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .about-visual {
+    position: relative;
+    height: 460px;
+    background: var(--steel);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .about-visual-inner {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,107,43,.03) 20px, rgba(255,107,43,.03) 22px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .factory-icon {
+    font-size: 100px;
+    opacity: .12;
+  }
+  .about-tag-corner {
+    position: absolute;
+    bottom: 0; right: 0;
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 3px;
+    padding: 10px 20px;
+  }
+
+  .about-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .about-item {
+    border-left: 2px solid var(--border);
+    padding-left: 20px;
+    transition: border-color .2s;
+  }
+  .about-item:hover { border-color: var(--orange); }
+  .about-item-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--orange);
+    letter-spacing: 1px;
+  }
+  .about-item-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  /* ── PRODUCTS ── */
+  #products {
+    border-top: 1px solid var(--border);
+  }
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .product-card {
+    background: var(--panel);
+    padding: 48px 36px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background .25s;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transition: transform .3s;
+    transform-origin: left;
+  }
+  .product-card:hover { background: var(--steel); }
+  .product-card:hover::before { transform: scaleX(1); }
+
+  .product-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--border);
+    line-height: 1;
+    position: absolute;
+    top: 24px; right: 28px;
+    transition: color .25s;
+  }
+  .product-card:hover .product-num { color: rgba(255,107,43,.2); }
+
+  .product-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .product-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    text-decoration: none;
+    margin-top: 24px;
+    transition: gap .2s;
+  }
+  .product-card:hover .product-link { gap: 14px; }
+
+  /* ── CAPABILITIES ── */
+  #capabilities {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+  }
+  .cap-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-top: 60px;
+  }
+  .cap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .cap-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .cap-item:hover, .cap-item.active { background: var(--steel); color: var(--orange); }
+  .cap-arrow { color: var(--muted); font-size: 18px; }
+  .cap-item:hover .cap-arrow, .cap-item.active .cap-arrow { color: var(--orange); }
+
+  .cap-detail {
+    border: 1px solid var(--border);
+    padding: 48px;
+    background: var(--panel);
+  }
+  .cap-detail-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .cap-detail-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--light);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .spec-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    background: var(--steel);
+    border: 1px solid var(--border);
+  }
+  .spec-key {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .spec-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications {
+    border-top: 1px solid var(--border);
+  }
+  .cert-ticker-wrap {
+    overflow: hidden;
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+    background: var(--dark);
+  }
+  .cert-ticker {
+    display: flex;
+    gap: 0;
+    animation: ticker 18s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 48px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--white);
+    border-right: 1px solid var(--border);
+  }
+  .cert-dot { width: 8px; height: 8px; background: var(--orange); flex-shrink: 0; }
+
+  .cert-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .cert-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 36px 28px;
+    text-align: center;
+    transition: background .2s;
+  }
+  .cert-card:hover { background: var(--steel); }
+  .cert-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .cert-info {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── INDUSTRIES ── */
+  #industries {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+  }
+  .industry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .industry-card {
+    border: 1px solid var(--border);
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .25s;
+  }
+  .industry-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-top: 40px solid var(--orange);
+    border-left: 40px solid transparent;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .industry-card:hover { border-color: rgba(255,107,43,.4); }
+  .industry-card:hover::after { opacity: 1; }
+  .industry-emoji { font-size: 32px; margin-bottom: 16px; display: block; }
+  .industry-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .industry-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ── QUOTE FORM ── */
+  #quote {
+    border-top: 1px solid var(--border);
+    background: var(--black);
+  }
+  .quote-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 60px;
+  }
+  .quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  input, textarea, select {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--orange); }
+  textarea { resize: vertical; min-height: 120px; }
+  select option { background: var(--panel); }
+
+  .quote-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .info-block {
+    border-left: 2px solid var(--orange);
+    padding-left: 24px;
+  }
+  .info-block-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .info-block-text {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 60px;
+  }
+  .contact-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+  }
+  .contact-items {
+    display: flex;
+    gap: 60px;
+  }
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .contact-type {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-val {
+    font-size: 16px;
+    color: var(--white);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    gap: 28px;
+  }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* mobile fallback */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section, #contact, footer { padding: 60px 24px; }
+    #hero { padding: 100px 24px 60px; }
+    h1 { font-size: 58px; }
+    .hero-stats { display: none; }
+    .about-grid, .cap-layout, .quote-layout { grid-template-columns: 1fr; gap: 40px; }
+    .products-grid, .cert-cards, .industry-grid { grid-template-columns: 1fr; }
+    .products-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .contact-bar { flex-direction: column; align-items: flex-start; gap: 32px; }
+    .contact-items { flex-direction: column; gap: 24px; }
+    footer { flex-direction: column; gap: 16px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">STEEL<span>CORE</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#certifications">Quality</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#quote" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-badge">
+    ISO 9001 Certified Manufacturer
+  </div>
+
+  <h1>
+    PRECISION<br>
+    <em>METAL</em><br>
+    <span class="outline">WORKS</span>
+  </h1>
+
+  <p class="hero-sub">
+    Precision CNC machining, sheet metal fabrication, and custom casting
+    for automotive, aerospace, and industrial sectors — built to exacting
+    tolerances with global shipping.
+  </p>
+
+  <div class="hero-tags">
+    <span class="tag">CNC Machining</span>
+    <span class="tag">Sheet Metal</span>
+    <span class="tag">Die Casting</span>
+    <span class="tag">Custom OEM/ODM</span>
+    <span class="tag">Global Shipping</span>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#quote" class="btn-primary">Request a Quote</a>
+    <a href="#products" class="btn-outline">View Products</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">28+</div>
+      <div class="stat-label">Years Operating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">47</div>
+      <div class="stat-label">Countries Served</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12K</div>
+      <div class="stat-label">Parts / Day</div>
+    </div>
+  </div>
+
+  <div class="scroll-line">Scroll to Explore</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who We Are</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title reveal">BUILT ON PRECISION, DRIVEN BY QUALITY</h2>
+      <p class="section-body reveal">
+        Founded in 1996, SteelCore Industries has grown from a regional job shop into a vertically integrated
+        precision manufacturer supplying Tier-1 automotive suppliers, aerospace OEMs, and industrial
+        equipment makers across six continents.
+      </p>
+
+      <div class="about-items">
+        <div class="about-item reveal">
+          <div class="about-item-num">280K</div>
+          <div class="about-item-label">sq ft factory floor</div>
+        </div>
+        <div class="about-item reveal">
+          <div class="about-item-num">620+</div>
+          <div class="about-item-label">skilled employees</div>
+        </div>
+        <div class="about-item reveal">
+          <div class="about-item-num">340+</div>
+          <div class="about-item-label">CNC machines</div>
+        </div>
+        <div class="about-item reveal">
+          <div class="about-item-num">99.4%</div>
+          <div class="about-item-label">on-time delivery rate</div>
+        </div>
+      </div>
+
+      <a href="#quote" class="btn-primary" style="margin-top:40px;display:inline-block;">Learn More</a>
+    </div>
+
+    <div class="about-visual reveal">
+      <div class="about-visual-inner">
+        <span class="factory-icon">⚙️</span>
+      </div>
+      <div style="position:absolute;top:28px;left:28px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--muted)">EST. 1996</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--white)">STEELCORE INDUSTRIES</div>
+      </div>
+      <div style="position:absolute;top:28px;right:28px;width:10px;height:10px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;"></div>
+      <div class="about-tag-corner">ISO 9001</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header">
+    <div>
+      <div class="section-label">What We Make</div>
+      <h2 class="section-title reveal" style="margin-bottom:0">PRODUCT CATALOG</h2>
+    </div>
+    <a href="#quote" class="btn-outline reveal">Download Full Catalog →</a>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card reveal">
+      <div class="product-num">01</div>
+      <div class="product-icon">⚙️</div>
+      <div class="product-name">CNC Machined Parts</div>
+      <p class="product-desc">High-precision turned and milled components from aluminum, stainless steel, titanium, and engineering plastics. Tolerances to ±0.005 mm.</p>
+      <a href="#quote" class="product-link">Inquire Now →</a>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-num">02</div>
+      <div class="product-icon">🔩</div>
+      <div class="product-name">Sheet Metal Fabrication</div>
+      <p class="product-desc">Laser cutting, stamping, bending, and welding for enclosures, brackets, and structural panels. Thickness 0.4 mm – 25 mm.</p>
+      <a href="#quote" class="product-link">Inquire Now →</a>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-num">03</div>
+      <div class="product-icon">🏭</div>
+      <div class="product-name">Die Casting</div>
+      <p class="product-desc">Aluminum and zinc high-pressure die casting for complex geometries. Clamping force up to 1,600 tonnes. ISO-qualified tooling.</p>
+      <a href="#quote" class="product-link">Inquire Now →</a>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-num">04</div>
+      <div class="product-icon">🔧</div>
+      <div class="product-name">Custom Assemblies</div>
+      <p class="product-desc">Sub-assembly and full-assembly services with vendor-managed inventory and kanban delivery programmes.</p>
+      <a href="#quote" class="product-link">Inquire Now →</a>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-num">05</div>
+      <div class="product-icon">⚡</div>
+      <div class="product-name">Surface Finishing</div>
+      <p class="product-desc">Anodizing, powder coating, electroplating, sandblasting, and passivation — all in-house for faster lead times.</p>
+      <a href="#quote" class="product-link">Inquire Now →</a>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-num">06</div>
+      <div class="product-icon">📐</div>
+      <div class="product-name">Tooling & Fixtures</div>
+      <p class="product-desc">Precision tool design and manufacture for progressive dies, injection molds, and jigs & fixtures.</p>
+      <a href="#quote" class="product-link">Inquire Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-label">Technical Specs</div>
+  <h2 class="section-title reveal">MANUFACTURING<br>CAPABILITIES</h2>
+
+  <div class="cap-layout reveal">
+    <div class="cap-list">
+      <div class="cap-item active" onclick="setCap(this,'cnc')">CNC Machining <span class="cap-arrow">→</span></div>
+      <div class="cap-item" onclick="setCap(this,'laser')">Laser Cutting <span class="cap-arrow">→</span></div>
+      <div class="cap-item" onclick="setCap(this,'casting')">Die Casting <span class="cap-arrow">→</span></div>
+      <div class="cap-item" onclick="setCap(this,'welding')">Welding &amp; Joining <span class="cap-arrow">→</span></div>
+      <div class="cap-item" onclick="setCap(this,'qc')">Quality Control <span class="cap-arrow">→</span></div>
+    </div>
+
+    <div class="cap-detail" id="cap-detail">
+      <div class="cap-detail-title">CNC MACHINING</div>
+      <p class="cap-detail-body">Our CNC machining center operates 340+ 3-axis, 4-axis, and 5-axis machining centers running 24/7. We handle prototypes to high-volume production runs with consistent quality control at every step.</p>
+      <div class="spec-grid">
+        <div class="spec-row"><span class="spec-key">Max Part Size</span><span class="spec-val">1,500 × 800 × 600 mm</span></div>
+        <div class="spec-row"><span class="spec-key">Tolerance</span><span class="spec-val">±0.005 mm</span></div>
+        <div class="spec-row"><span class="spec-key">Surface Finish</span><span class="spec-val">Ra 0.4 µm</span></div>
+        <div class="spec-row"><span class="spec-key">Materials</span><span class="spec-val">Al, SS, Ti, Cu, Brass, Plastics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Standards &amp; Compliance</div>
+  <h2 class="section-title reveal">CERTIFIED TO<br>GLOBAL STANDARDS</h2>
+  <p class="section-body reveal">Every part we ship meets or exceeds international quality, environmental, and safety standards. Our certifications are renewed annually and available upon request.</p>
+
+  <div class="cert-ticker-wrap">
+    <div class="cert-ticker">
+      <span class="cert-badge"><span class="cert-dot"></span>ISO 9001:2015</span>
+      <span class="cert-badge"><span class="cert-dot"></span>IATF 16949</span>
+      <span class="cert-badge"><span class="cert-dot"></span>ISO 14001</span>
+      <span class="cert-badge"><span class="cert-dot"></span>CE Marking</span>
+      <span class="cert-badge"><span class="cert-dot"></span>RoHS Compliant</span>
+      <span class="cert-badge"><span class="cert-dot"></span>REACH</span>
+      <span class="cert-badge"><span class="cert-dot"></span>AS9100D Aerospace</span>
+      <span class="cert-badge"><span class="cert-dot"></span>ISO 9001:2015</span>
+      <span class="cert-badge"><span class="cert-dot"></span>IATF 16949</span>
+      <span class="cert-badge"><span class="cert-dot"></span>ISO 14001</span>
+      <span class="cert-badge"><span class="cert-dot"></span>CE Marking</span>
+      <span class="cert-badge"><span class="cert-dot"></span>RoHS Compliant</span>
+      <span class="cert-badge"><span class="cert-dot"></span>REACH</span>
+      <span class="cert-badge"><span class="cert-dot"></span>AS9100D Aerospace</span>
+    </div>
+  </div>
+
+  <div class="cert-cards reveal">
+    <div class="cert-card">
+      <div class="cert-name">ISO 9001</div>
+      <p class="cert-info">Quality Management System — the global benchmark for manufacturing excellence since 1998.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">IATF 16949</div>
+      <p class="cert-info">Automotive Quality Management — required by all major OEMs for Tier-1 and Tier-2 suppliers.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">ISO 14001</div>
+      <p class="cert-info">Environmental Management — committed to reducing our ecological footprint across all operations.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">AS9100D</div>
+      <p class="cert-info">Aerospace Quality — meeting the highest standards for safety-critical aerospace components.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="section-label">Markets We Serve</div>
+  <h2 class="section-title reveal">INDUSTRIES<br>WE SUPPLY</h2>
+
+  <div class="industry-grid reveal">
+    <div class="industry-card">
+      <span class="industry-emoji">🚗</span>
+      <div class="industry-name">Automotive</div>
+      <p class="industry-desc">Engine components, transmission housings, brake assemblies, and structural body parts for global OEMs and Tier-1 suppliers.</p>
+    </div>
+    <div class="industry-card">
+      <span class="industry-emoji">✈️</span>
+      <div class="industry-name">Aerospace</div>
+      <p class="industry-desc">Flight-critical structural components, brackets, and actuator parts produced to AS9100D standards with full material traceability.</p>
+    </div>
+    <div class="industry-card">
+      <span class="industry-emoji">⚡</span>
+      <div class="industry-name">Electronics</div>
+      <p class="industry-desc">Heat sinks, housings, connectors, and enclosures in aluminum and copper — rapid prototyping to mass production.</p>
+    </div>
+    <div class="industry-card">
+      <span class="industry-emoji">🏗️</span>
+      <div class="industry-name">Construction</div>
+      <p class="industry-desc">Structural steel components, fasteners, and hardware for commercial construction and civil engineering projects worldwide.</p>
+    </div>
+    <div class="industry-card">
+      <span class="industry-emoji">🏥</span>
+      <div class="industry-name">Medical</div>
+      <p class="industry-desc">Surgical instrument components, implant fixtures, and device housings in biocompatible materials with FDA-compatible processes.</p>
+    </div>
+    <div class="industry-card">
+      <span class="industry-emoji">🌾</span>
+      <div class="industry-name">Agriculture</div>
+      <p class="industry-desc">Heavy-duty cast and machined components for harvesting equipment, irrigation systems, and agricultural machinery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section id="quote">
+  <div class="section-label">Start a Project</div>
+  <h2 class="section-title reveal">REQUEST A<br>QUOTE</h2>
+
+  <div class="quote-layout reveal">
+    <div class="quote-form">
+      <div class="form-row">
+        <div class="field">
+          <label>Full Name *</label>
+          <input type="text" placeholder="John Smith">
+        </div>
+        <div class="field">
+          <label>Company *</label>
+          <input type="text" placeholder="ACME Corp">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" placeholder="john@acme.com">
+        </div>
+        <div class="field">
+          <label>Country *</label>
+          <select>
+            <option value="">Select country…</option>
+            <option>United States</option>
+            <option>Germany</option>
+            <option>United Kingdom</option>
+            <option>Japan</option>
+            <option>India</option>
+            <option>Australia</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Product / Service Required *</label>
+        <select>
+          <option value="">Select service…</option>
+          <option>CNC Machined Parts</option>
+          <option>Sheet Metal Fabrication</option>
+          <option>Die Casting</option>
+          <option>Custom Assembly</option>
+          <option>Surface Finishing</option>
+          <option>Tooling & Fixtures</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>Estimated Quantity</label>
+          <input type="text" placeholder="e.g. 5,000 pcs/month">
+        </div>
+        <div class="field">
+          <label>Target Lead Time</label>
+          <input type="text" placeholder="e.g. 6 weeks">
+        </div>
+      </div>
+      <div class="field">
+        <label>Project Description</label>
+        <textarea placeholder="Describe your requirements, materials, tolerances, applications…"></textarea>
+      </div>
+      <button class="btn-primary" onclick="alert('Thank you! We\'ll respond within 24 hours.')">Submit Request →</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">We respond to all quotes within 24 business hours.</p>
+    </div>
+
+    <div class="quote-info">
+      <div>
+        <div class="section-label" style="margin-bottom:12px">Why Choose SteelCore?</div>
+        <p style="font-size:15px;color:var(--light);font-weight:300;line-height:1.75;">From first drawing to final shipment, every project is handled by a dedicated engineering team committed to your specification and timeline.</p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title">MOQ &amp; Pricing</div>
+        <p class="info-block-text">No minimum order quantity for prototypes. Volume pricing available from 500 pcs. Tooling amortized over production runs.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Lead Times</div>
+        <p class="info-block-text">Prototypes: 7–14 days. Production: 4–6 weeks typical. Expedited options available for urgent requirements.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Shipping &amp; Logistics</div>
+        <p class="info-block-text">Worldwide air and sea freight. All major Incoterms supported. Custom packaging and labelling available.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Payment Terms</div>
+        <p class="info-block-text">T/T, L/C, and credit terms for established partners. 30% deposit on new orders, balance before shipment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-bar">
+    <div>
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title" style="font-size:50px;margin-bottom:0">LET'S BUILD<br>SOMETHING GREAT</h2>
+    </div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <span class="contact-type">Phone</span>
+        <span class="contact-val">+1 (800) 783-2657</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-type">Email</span>
+        <span class="contact-val">sales@steelcore.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-type">Headquarters</span>
+        <span class="contact-val">Detroit, Michigan, USA</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-type">Hours</span>
+        <span class="contact-val">Mon–Fri 08:00–18:00 EST</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="#quote" class="btn-primary">Request a Quote</a>
+    <a href="mailto:sales@steelcore.com" class="btn-outline">Email Us Directly</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a class="logo" href="#">STEEL<span>CORE</span></a>
+    <p class="footer-copy" style="margin-top:8px;">© 2025 SteelCore Industries. All rights reserved.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#products">Products</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#certifications">Quality</a>
+    <a href="#industries">Industries</a>
+    <a href="#quote">Quote</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Capability panel switcher
+  const capData = {
+    cnc: {
+      title: 'CNC MACHINING',
+      body: 'Our CNC machining center operates 340+ 3-axis, 4-axis, and 5-axis machining centers running 24/7. We handle prototypes to high-volume production runs with consistent quality control at every step.',
+      specs: [
+        ['Max Part Size', '1,500 × 800 × 600 mm'],
+        ['Tolerance', '±0.005 mm'],
+        ['Surface Finish', 'Ra 0.4 µm'],
+        ['Materials', 'Al, SS, Ti, Cu, Brass, Plastics'],
+      ]
+    },
+    laser: {
+      title: 'LASER CUTTING',
+      body: 'Our fiber laser cutting systems handle flat sheet and tube cutting with ±0.1 mm accuracy. Real-time nesting software maximizes material utilization across all order sizes.',
+      specs: [
+        ['Max Sheet Size', '3,000 × 1,500 mm'],
+        ['Thickness Range', '0.4 mm – 25 mm Steel'],
+        ['Tolerance', '±0.1 mm'],
+        ['Materials', 'Mild Steel, SS, Al, Copper'],
+      ]
+    },
+    casting: {
+      title: 'DIE CASTING',
+      body: 'High-pressure aluminum and zinc die casting for complex net-shape components. Vacuum-assisted cavity filling eliminates porosity in structural applications.',
+      specs: [
+        ['Clamping Force', '160 – 1,600 tonnes'],
+        ['Shot Weight', '0.05 – 12 kg Al'],
+        ['Cycle Time', '30 – 120 seconds'],
+        ['Tolerance', 'CT5 – CT7'],
+      ]
+    },
+    welding: {
+      title: 'WELDING & JOINING',
+      body: 'MIG, TIG, spot welding, and robotic welding cells for structural assemblies. All welders are CWI-certified and procedures qualified to AWS/EN standards.',
+      specs: [
+        ['Processes', 'MIG, TIG, Spot, Robotic'],
+        ['Max Weldment', '4,000 × 2,000 mm'],
+        ['Materials', 'Steel, SS, Al, Copper'],
+        ['Standards', 'AWS D1.1, EN ISO 3834'],
+      ]
+    },
+    qc: {
+      title: 'QUALITY CONTROL',
+      body: 'Every batch is measured on our CMM and vision inspection systems. Full first-article inspection reports, CPk studies, and material certs provided with every shipment.',
+      specs: [
+        ['CMM Accuracy', '±0.002 mm'],
+        ['Inspection Coverage', '100% critical dims'],
+        ['Reporting', 'PPAP, FAI, CoC, CMM'],
+        ['Standards', 'AIAG, VDA, NADCAP'],
+      ]
+    }
+  };
+
+  function setCap(el, key) {
+    document.querySelectorAll('.cap-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    const d = capData[key];
+    const detail = document.getElementById('cap-detail');
+    detail.innerHTML = `
+      <div class="cap-detail-title">${d.title}</div>
+      <p class="cap-detail-body">${d.body}</p>
+      <div class="spec-grid">
+        ${d.specs.map(s=>`<div class="spec-row"><span class="spec-key">${s[0]}</span><span class="spec-val">${s[1]}</span></div>`).join('')}
+      </div>
+    `;
+  }
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

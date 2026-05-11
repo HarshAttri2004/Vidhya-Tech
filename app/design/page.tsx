@@ -26,12 +26,12 @@ const designs = [
      type: 'internal'
   },
   {
-    title: 'Dashboard UI',
-    category: 'UI/UX',
-    image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200',
-    link: 'https://example.com',
-    type: 'external',
-  },
+  title: 'Steelcore Factory Website',
+  category: 'Industrial',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQA-o6cvD1rhMQsDKh8OTHZOdmYY5IRNC7R1a0tEuAVg&s',
+  link: '/design/factory',
+  type: 'internal'
+},
   {
     title: 'E-commerce Design',
     category: 'Web',
