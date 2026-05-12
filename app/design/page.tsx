@@ -21,14 +21,14 @@ const designs = [
    {
      title: 'Restaurant Website',
      category: 'Website',
-     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd5gDVElwBUh_a8XutB9QLzv2v61e7eq9g-w&s',
+     image: '/images/resturant.png',
      link: '/design/restaurant',
      type: 'internal'
   },
   {
   title: 'Steelcore Factory Website',
   category: 'Industrial',
-  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQA-o6cvD1rhMQsDKh8OTHZOdmYY5IRNC7R1a0tEuAVg&s',
+  image: '/images/steelcore Factory.png',
   link: '/design/factory',
   type: 'internal'
 },
@@ -56,7 +56,7 @@ const designs = [
   {
   title:  'School ERP Software',
   category: 'software',
-  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq23393hryKmHQ8iPEKyw0-C0_8m9Zrk7dUg&s',
+  image: '/images/ERP Software.png',
   link: '/design/erpsoftware'
 },
   {
