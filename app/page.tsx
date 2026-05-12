@@ -139,7 +139,7 @@ const teamMembers = [
     id: 1,
     name: 'Harsh Kumar',
     role: 'Web Development',
-    image: '/images/Harsh sir.png',
+    image: '/images/Happu sir.png',
     imagePosition: '50% 42%',
     icon: '👨‍💻',  // Fallback icon
     description: 'Expert in building scalable web applications with modern technologies.',
