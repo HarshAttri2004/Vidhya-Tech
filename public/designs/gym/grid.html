@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- App-like Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <title>IRON FORGE INDIA | Premium Fitness Club</title>
+    
+    <!-- Google Fonts: Oswald for Headings, Roboto for Body -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #fbff00; /* Neon Yellow/Gold for premium look */
+            --dark: #050505;
+            --darker: #000000;
+            --card-bg: #111111;
+            --text-light: #ffffff;
+            --text-grey: #aaaaaa;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo, th {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* --- SPLASH SCREEN (APP OPENING) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+        }
+        
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-logo {
+            font-size: 3.5rem;
+            color: #fff;
+            font-weight: 700;
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        .splash-logo span {
+            color: var(--primary);
+        }
+
+        .loading-bar {
+            width: 150px;
+            height: 4px;
+            background: #333;
+            margin-top: 20px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            background: var(--primary);
+            animation: loading 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); text-shadow: 0 0 10px rgba(251, 255, 0, 0); }
+            100% { transform: scale(1.05); text-shadow: 0 0 20px rgba(251, 255, 0, 0.5); }
+        }
+
+        @keyframes loading {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        /* --- MAIN CONTENT (Hidden initially to prevent layout shifts during splash) --- */
+        #main-app {
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+        }
+        #main-app.visible {
+            opacity: 1;
+        }
+
+        /* Rest of the CSS remains exactly the same */
+        section { padding: 100px 8%; }
+        .bg-darker { background-color: var(--darker); }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title span { color: var(--primary); }
+
+        .btn {
+            padding: 15px 35px;
+            background: var(--primary);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-decoration: none;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+        .btn:hover { background: #fff; transform: scale(1.05); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.5s;
+        }
+        nav.sticky {
+            background: rgba(0,0,0,0.95);
+            padding: 15px 8%;
+            border-bottom: 1px solid var(--primary);
+        }
+        .logo { font-size: 2.2rem; color: #fff; font-weight: 700; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        .burger { display: none; cursor: pointer; font-size: 1.8rem; color: var(--primary); }
+
+        /* --- HERO SLIDER --- */
+        .slider-container { position: relative; height: 100vh; width: 100%; overflow: hidden; }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1s ease-in-out;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; background-size: cover; background-position: center;
+        }
+        .slide.active { opacity: 1; }
+        .slide::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65);
+        }
+        .slide-content { position: relative; z-index: 10; max-width: 900px; padding: 0 20px; }
+        .slide-content h1 { font-size: 6rem; line-height: 1.1; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .slide-content h1 span { color: var(--primary); }
+        .slide-content p { font-size: 1.5rem; margin-bottom: 40px; color: var(--text-grey); }
+
+        /* --- SHARED GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+        /* --- ABOUT US --- */
+        .about-flex { display: flex; gap: 60px; align-items: center; flex-wrap: wrap; }
+        .about-img { flex: 1; min-width: 300px; position: relative; }
+        .about-img img { width: 100%; border-radius: 5px; filter: grayscale(50%); transition: var(--transition); }
+        .about-img img:hover { filter: grayscale(0%); }
+        .about-img::before {
+            content: ''; position: absolute; top: -20px; left: -20px; width: 150px; height: 150px;
+            border-top: 5px solid var(--primary); border-left: 5px solid var(--primary); z-index: -1;
+        }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-text h2 { font-size: 3rem; margin-bottom: 20px; text-align: left; }
+
+        /* --- CLASSES --- */
+        .class-card { background: var(--card-bg); text-align: center; overflow: hidden; border-bottom: 4px solid transparent; transition: var(--transition); }
+        .class-card:hover { border-bottom: 4px solid var(--primary); transform: translateY(-10px); }
+        .class-card img { width: 100%; height: 250px; object-fit: cover; }
+        .class-card-body { padding: 30px; }
+        .class-card-body h3 { font-size: 1.8rem; margin-bottom: 10px; }
+
+        /* --- TRAINERS --- */
+        .trainer-card { background: var(--card-bg); text-align: center; padding: 40px 20px; border: 1px solid #222; transition: var(--transition); }
+        .trainer-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(251, 255, 0, 0.1); }
+        .trainer-card img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); margin-bottom: 20px; transition: var(--transition); }
+        .trainer-card:hover img { transform: scale(1.1); }
+        .trainer-card h3 { font-size: 1.5rem; }
+        .trainer-card p { color: var(--primary); font-weight: 700; margin-bottom: 15px; }
+        .social-icons i { color: #fff; margin: 0 10px; font-size: 1.2rem; cursor: pointer; transition: var(--transition); }
+        .social-icons i:hover { color: var(--primary); }
+
+        /* --- SCHEDULE --- */
+        .schedule-table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background: var(--card-bg); min-width: 700px; }
+        th, td { padding: 20px; text-align: center; border: 1px solid #222; }
+        th { background: var(--primary); color: #000; font-size: 1.2rem; }
+        td { color: var(--text-grey); transition: var(--transition); }
+        td:hover { background: #222; color: #fff; cursor: pointer; }
+
+        /* --- PRICING --- */
+        .pricing-card { background: var(--card-bg); padding: 50px 30px; border: 1px solid #222; text-align: center; position: relative; transition: var(--transition); }
+        .pricing-card:hover { border-color: var(--primary); }
+        .pricing-card.popular { border: 2px solid var(--primary); transform: scale(1.05); background: #151515; }
+        .price { font-size: 4rem; font-family: 'Oswald', sans-serif; color: var(--primary); margin: 20px 0; }
+        .price span { font-size: 1.2rem; color: var(--text-grey); font-family: 'Roboto', sans-serif; }
+        .pricing-card ul { list-style: none; margin-bottom: 40px; text-align: left; padding-left: 20px; }
+        .pricing-card li { margin-bottom: 15px; font-size: 1rem; }
+        .pricing-card i { color: var(--primary); margin-right: 15px; }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-card { background: #111; padding: 40px; border-left: 5px solid var(--primary); position: relative; }
+        .testimonial-card i.fa-quote-left { font-size: 2rem; color: #333; position: absolute; top: 20px; right: 20px; }
+        .testimonial-text { font-style: italic; color: var(--text-grey); margin-bottom: 20px; font-size: 1.1rem; }
+        .client { display: flex; align-items: center; gap: 15px; }
+        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .client h4 { font-size: 1.2rem; margin: 0; }
+        .client span { color: var(--primary); font-size: 0.9rem; }
+
+        /* --- GALLERY --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .gallery-item { overflow: hidden; position: relative; height: 300px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); filter: grayscale(30%); }
+        .gallery-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
+
+        /* --- CONTACT --- */
+        .contact-box { background: var(--card-bg); padding: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; border-top: 5px solid var(--primary); }
+        .contact-info h3 { font-size: 2.5rem; margin-bottom: 20px; }
+        .contact-info p { margin-bottom: 20px; font-size: 1.1rem; display: flex; align-items: center; gap: 15px; }
+        .contact-info i { color: var(--primary); font-size: 1.5rem; width: 30px; text-align: center; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 15px 20px; background: #000; border: 1px solid #333; color: #fff; margin-bottom: 20px; font-family: 'Roboto', sans-serif; transition: var(--transition); }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); outline: none; }
+
+        footer { text-align: center; padding: 40px; background: #000; border-top: 1px solid #222; }
+        footer p { color: var(--text-grey); }
+        footer span { color: var(--primary); font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .slide-content h1 { font-size: 4rem; }
+            .section-title { font-size: 2.8rem; }
+            .contact-box { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .burger { display: block; }
+            .nav-links { position: absolute; top: 75px; right: -100%; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); flex-direction: column; align-items: center; padding-top: 50px; transition: right 0.4s ease; }
+            .nav-links.nav-active { right: 0; }
+            .nav-links li { margin-bottom: 30px; }
+            .nav-links a { font-size: 1.2rem; }
+            .slide-content h1 { font-size: 3rem; }
+            .about-flex { flex-direction: column; }
+            .about-img::before { display: none; }
+            .pricing-card.popular { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPLASH SCREEN (APP OPENING) -->
+    <div id="splash-screen">
+        <div class="splash-logo">IRON<span>FORGE</span></div>
+        <div class="loading-bar"></div>
+    </div>
+
+    <!-- WRAPPER FOR MAIN APP -->
+    <div id="main-app">
+        <!-- NAVIGATION -->
+        <nav id="navbar">
+            <div class="logo">IRON<span>FORGE</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#classes">Classes</a></li>
+                <li><a href="#trainers">Trainers</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#pricing">Membership</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger"><i class="fas fa-bars"></i></div>
+        </nav>
+
+        <!-- 1. HERO SLIDER SECTION -->
+        <section id="home" style="padding: 0;">
+            <div class="slider-container">
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop');">
+                    <div class="slide-content">
+                        <h1 data-aos="fade-up">BUILD YOUR <span>LEGACY</span></h1>
+                        <p data-aos="fade-up" data-aos-delay="200">India's Most Elite Strength & Conditioning Facility.</p>
+                        <a href="#pricing" class="btn" data-aos="zoom-in" data-aos-delay="400">Start Free Trial</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef03a7403f?q=80&w=1470&auto=format&fit=crop');">
+                    <div class="slide-content">
+                        <h1>NO <span>EXCUSES</span></h1>
+                        <p>Push past your limits with our certified expert coaches.</p>
+                        <a href="#classes" class="btn">View Classes</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT SECTION -->
+        <section id="about">
+            <div class="about-flex">
+                <div class="about-img" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1470&auto=format&fit=crop" alt="Gym weights">
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h2>WHO <span>WE ARE</span></h2>
+                    <p>Welcome to Iron Forge. We are more than just a gym; we are a community built on discipline, sweat, and success. Our facility spans over 15,000 sq ft, equipped with cutting-edge machinery imported globally.</p>
+                    <br>
+                    <p>Whether your goal is weight loss, muscle gain, or athletic performance, our environment is designed to breed champions. Join us and transform not just your body, but your mindset.</p>
+                    <br>
+                    <a href="#trainers" class="btn">Meet The Team</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CLASSES SECTION -->
+        <section id="classes" class="bg-darker">
+            <h2 class="section-title" data-aos="fade-up">OUR <span>PROGRAMS</span></h2>
+            <div class="grid">
+                <div class="class-card" data-aos="flip-left">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" alt="Bodybuilding">
+                    <div class="class-card-body">
+                        <h3>Hypertrophy</h3>
+                        <p>Heavy lifting and isolation routines to maximize muscle growth and strength.</p>
+                    </div>
+                </div>
+                <div class="class-card" data-aos="flip-left" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?q=80&w=1470&auto=format&fit=crop" alt="Crossfit">
+                    <div class="class-card-body">
+                        <h3>Combat HIIT</h3>
+                        <p>High-intensity functional training mixed with boxing drills to shred fat.</p>
+                    </div>
+                </div>
+                <div class="class-card" data-aos="flip-left" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop" alt="Yoga">
+                    <div class="class-card-body">
+                        <h3>Ashtanga Yoga</h3>
+                        <p>Enhance your flexibility, core stability, and mental focus with expert yogis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TRAINERS SECTION -->
+        <section id="trainers">
+            <h2 class="section-title" data-aos="fade-down">EXPERT <span>COACHES</span></h2>
+            <div class="grid">
+                <div class="trainer-card" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1567598508481-65985588e295?q=80&w=1470&auto=format&fit=crop" alt="Trainer Rahul">
+                    <h3>Rahul Sharma</h3>
+                    <p>Head Strength Coach</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                <div class="trainer-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?q=80&w=1374&auto=format&fit=crop" alt="Trainer Priya">
+                    <h3>Priya Verma</h3>
+                    <p>Yoga & Pilates Master</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                <div class="trainer-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1470&auto=format&fit=crop" alt="Trainer Vikram">
+                    <h3>Vikram Singh</h3>
+                    <p>CrossFit & MMA Specialist</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SCHEDULE SECTION -->
+        <section id="schedule" class="bg-darker">
+            <h2 class="section-title" data-aos="zoom-in">CLASS <span>SCHEDULE</span></h2>
+            <div class="schedule-table-wrapper" data-aos="fade-right">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: bold;">06:00 AM</td>
+                            <td>Combat HIIT</td>
+                            <td>Open Gym</td>
+                            <td>Ashtanga Yoga</td>
+                            <td>Combat HIIT</td>
+                            <td>Hypertrophy</td>
+                            <td>Cardio Blast</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: bold;">10:00 AM</td>
+                            <td>Ashtanga Yoga</td>
+                            <td>Hypertrophy</td>
+                            <td>Open Gym</td>
+                            <td>Ashtanga Yoga</td>
+                            <td>Core & Abs</td>
+                            <td>Open Gym</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: bold;">05:30 PM</td>
+                            <td>Hypertrophy</td>
+                            <td>Combat HIIT</td>
+                            <td>Hypertrophy</td>
+                            <td>Open Gym</td>
+                            <td>Combat HIIT</td>
+                            <td>Yoga Recovery</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. PRICING SECTION -->
+        <section id="pricing">
+            <h2 class="section-title">MEMBERSHIP <span>PLANS</span></h2>
+            <div class="grid">
+                <div class="pricing-card" data-aos="fade-up">
+                    <h3>SILVER</h3>
+                    <div class="price">₹1,499<span>/mo</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Standard Gym Access</li>
+                        <li><i class="fas fa-check"></i> Locker Room Access</li>
+                        <li><i class="fas fa-times" style="color:#555;"></i> Group Classes</li>
+                        <li><i class="fas fa-times" style="color:#555;"></i> Personal Trainer</li>
+                    </ul>
+                    <button class="btn">Select Plan</button>
+                </div>
+                <div class="pricing-card popular" data-aos="fade-up" data-aos-delay="200">
+                    <h3>GOLD ELITE</h3>
+                    <div class="price">₹2,999<span>/mo</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 24/7 Premium Access</li>
+                        <li><i class="fas fa-check"></i> All Group Classes Included</li>
+                        <li><i class="fas fa-check"></i> Steam & Sauna Access</li>
+                        <li><i class="fas fa-times" style="color:#555;"></i> Personal Trainer</li>
+                    </ul>
+                    <button class="btn">Select Plan</button>
+                </div>
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>PLATINUM</h3>
+                    <div class="price">₹5,499<span>/mo</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> All-Inclusive Access</li>
+                        <li><i class="fas fa-check"></i> Personal Trainer (4 Sessions)</li>
+                        <li><i class="fas fa-check"></i> Customized Diet Plan</li>
+                        <li><i class="fas fa-check"></i> Free Supplement Shakes</li>
+                    </ul>
+                    <button class="btn">Select Plan</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. TESTIMONIALS SECTION -->
+        <section id="testimonials" class="bg-darker">
+            <h2 class="section-title" data-aos="fade-in">MEMBER <span>STORIES</span></h2>
+            <div class="grid">
+                <div class="testimonial-card" data-aos="fade-right">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="testimonial-text">"Joining Iron Forge changed my life. The equipment is top-tier, and Coach Rahul really pushed me to hit my PRs."</p>
+                    <div class="client">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop" alt="Client">
+                        <div>
+                            <h4>Aarav Mehta</h4>
+                            <span>Gold Member</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-left" data-aos-delay="200">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="testimonial-text">"The Ashtanga Yoga classes with Priya are phenomenal. The community vibe makes working out something I actually look forward to."</p>
+                    <div class="client">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop" alt="Client">
+                        <div>
+                            <h4>Neha Kapoor</h4>
+                            <span>Platinum Member</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. GALLERY SECTION -->
+        <section id="gallery">
+            <h2 class="section-title" data-aos="zoom-in">FACILITY <span>GALLERY</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=1374&auto=format&fit=crop" alt="Gym floor">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?q=80&w=1631&auto=format&fit=crop" alt="Dumbbells">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1469&auto=format&fit=crop" alt="Boxing">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1470&auto=format&fit=crop" alt="Treadmills">
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CONTACT SECTION -->
+        <section id="contact" class="bg-darker">
+            <div class="contact-box" data-aos="fade-up">
+                <div class="contact-info">
+                    <h3>GET IN <span>TOUCH</span></h3>
+                    <p>Ready to start? Visit us for a free tour.</p>
+                    <br>
+                    <p><i class="fas fa-map-marker-alt"></i> Sector 62, Noida, UP</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> join@ironforge.in</p>
+                </div>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Inquiry Sent Successfully!');">
+                    <input type="text" placeholder="Your Full Name" required>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <textarea rows="5" placeholder="How can we help you?" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2026 <span>IRON FORGE INDIA</span>. ALL RIGHTS RESERVED.</p>
+        </footer>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- APP SPLASH SCREEN LOGIC ---
+        window.addEventListener('load', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainApp = document.getElementById('main-app');
+            
+            // Wait 2.5 seconds, then hide splash and show main app
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+                mainApp.classList.add('visible');
+                
+                // Initialize Scroll Animations AFTER splash screen is done
+                AOS.init({ duration: 1000, once: true, offset: 100 });
+                
+                // Remove splash from DOM completely after fade out
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 600);
+            }, 2500); 
+        });
+
+        // Sticky Navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('sticky', window.scrollY > 50);
+        });
+
+        // Mobile Menu Toggle
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            if(navLinks.classList.contains('nav-active')) {
+                burger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                burger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('nav-active');
+                burger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Hero Image Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

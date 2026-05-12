@@ -19,7 +19,7 @@ const designs = [
     type: 'internal',
   },
    {
-     title: 'Restaurant Website',
+     title: 'Luna Restaurant Website',
      category: 'Website',
      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd5gDVElwBUh_a8XutB9QLzv2v61e7eq9g-w&s',
      link: '/design/restaurant',
@@ -34,14 +34,14 @@ const designs = [
 },
   {
   title: 'Nexmart E-commerce',
-  category: 'E-commerce',
+  category: 'Website',
   image: 'https://yt3.googleusercontent.com/sC6zwneN2nCExhaPz_l6fUJaw9nFzwUTj43cBefZfYvGI1ktEXcmn5m3nYhpQw4Hge2-wilziQ=s900-c-k-c0x00ffffff-no-rj',
   link: '/design/nexmart',
   type: 'internal'
 },
   {
   title: 'Full E-commerce Website',
-  category: 'E-commerce website',
+  category: 'website',
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB9c_dmxf-2sCzWAoTX2m7cRRXn-2RzUw08g&s',
   link: '/design/ecommerce',
   type: 'internal'
@@ -54,18 +54,17 @@ const designs = [
   type: 'internal'
 },
   {
-  title: 'ERP Software',
+  title:  'School ERP Software',
   category: 'software',
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq23393hryKmHQ8iPEKyw0-C0_8m9Zrk7dUg&s',
   link: '/design/erpsoftware'
 },
   {
-    title: 'SaaS Product Design',
-    category: 'Startup',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200',
-    link: 'https://example.com',
-    type: 'external',
-  },
+  title: 'IRONFORGE Gym Website',
+  category: 'website',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPFH2EQGJxWHsRdltEUURfktBchgSb2BMHHg&s',
+  link: '/design/gym'
+},
   {
     title: 'Restaurant Website',
     category: 'Web',
