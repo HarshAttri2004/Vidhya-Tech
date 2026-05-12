@@ -139,7 +139,7 @@ const teamMembers = [
     id: 1,
     name: 'Harsh Kumar',
     role: 'Web Development',
-    image: '/images/harsh.png',
+    image: '/images/Harsh sir.png',
     imagePosition: '50% 42%',
     icon: '👨‍💻',  // Fallback icon
     description: 'Expert in building scalable web applications with modern technologies.',
@@ -149,7 +149,7 @@ const teamMembers = [
     id: 2,
     name: 'Harsh Vasisth',
     role: 'Web & Software Development',
-    image: '/images/harshv.jpg',
+    image: '/images/Harsh sir9.png',
     imagePosition: '50% 42%',
     icon: '👨‍💼',  // Fallback icon
     description: 'Specialized in full-stack development and software architecture.',
@@ -159,7 +159,7 @@ const teamMembers = [
     id: 3,
     name: 'Lakshya Kumar Gupta',
     role: 'UI/UX Designer',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop',
+    image: '/images/Lakshya Sir.png',
     imagePosition: '50% 42%',
     icon: '🎨',  // Fallback icon
     description: 'Creating beautiful and intuitive user experiences for digital products.',

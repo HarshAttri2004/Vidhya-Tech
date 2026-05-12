@@ -58,7 +58,7 @@ const defaultPortfolios: PortfolioProject[] = [
     id: 5,
     title: 'Restaurant Website',
     description: 'Menu, gallery, reservation, and local SEO-ready restaurant site.',
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c?auto=format&fit=crop&w=900&q=85',
+    image: '/images/rest.png',
     link: '#',
     category: 'Web Development',
     order: 5,
