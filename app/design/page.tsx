@@ -61,8 +61,8 @@ const designs = [
 },
   {
   title: 'IRONFORGE Gym Website',
-  category: '/images/iron force gym website.png',
-  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPFH2EQGJxWHsRdltEUURfktBchgSb2BMHHg&s',
+  category: 'Website',
+  image: '/images/iron force gym website.png',
   link: '/design/gym'
 },
   {
