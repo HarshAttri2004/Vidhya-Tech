@@ -1,9 +1,9 @@
-export default function FactoryDesign() {
+export default function BillingPage() {
   return (
-    <div className="w-full h-screen bg-black">
+    <div className="w-full h-screen">
       <iframe
-        src="/designs/billingerp/index.html"
-        className="w-full h-full border-0"
+        src="/billingerp/index.html"
+        className="w-full h-full border-none"
       />
     </div>
   );
