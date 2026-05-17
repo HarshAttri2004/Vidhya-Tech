@@ -26,10 +26,10 @@ const designs = [
      type: 'internal'
   },
   {
-  title: 'Steelcore Factory Website',
+  title: 'Billing Software',
   category: 'Industrial',
   image: '/images/steelcore Factory.png',
-  link: '/design/factory',
+  link: '/design/billing',
   type: 'internal'
 },
   {
