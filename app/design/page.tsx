@@ -28,8 +28,8 @@ const designs = [
   {
   title: 'Billing Software',
   category: 'Industrial',
-  image: '/images/steelcore Factory.png',
-  link: '/design/billing',
+  image: '/images/billing.png',
+  link: '/design/billingerp',
   type: 'internal'
 },
   {
