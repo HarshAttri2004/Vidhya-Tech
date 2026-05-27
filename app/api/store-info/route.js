@@ -9,6 +9,9 @@ const DEFAULT_HEADERS = [
   'Phone Number',
   'Company/Project Name',
   'Message',
+  'Service Type',
+  'Timeline',
+  'Budget',
   'Date',
 ];
 
@@ -18,6 +21,9 @@ const HEADER_ALIASES = {
   phone: ['Phone Number', 'phone', 'Phone', 'Phone Number'],
   company: ['Company/Project Name', 'Company', 'Project Name', 'company'],
   message: ['Message', 'Requirement', 'Inquiry', 'Details', 'message'],
+  serviceType: ['Service Type', 'service type', 'Service', 'Requested Service'],
+  timeline: ['Timeline', 'Project Timeline', 'Start Time', 'When'],
+  budget: ['Budget', 'Budget Range', 'Estimated Budget', 'Investment', 'Price Range'],
   date: ['Date', 'Created At', 'Submitted At', 'Timestamp', 'date'],
 };
 
@@ -53,6 +59,9 @@ function buildRowForSheet(headerValues, payload) {
   row[pickHeader(headerValues, HEADER_ALIASES.phone)] = payload.phone;
   row[pickHeader(headerValues, HEADER_ALIASES.company)] = payload.company;
   row[pickHeader(headerValues, HEADER_ALIASES.message)] = payload.message;
+  row[pickHeader(headerValues, HEADER_ALIASES.serviceType)] = payload.serviceType;
+  row[pickHeader(headerValues, HEADER_ALIASES.timeline)] = payload.timeline;
+  row[pickHeader(headerValues, HEADER_ALIASES.budget)] = payload.budget;
   row[pickHeader(headerValues, HEADER_ALIASES.date)] =
     payload.date || new Date().toLocaleString();
 
@@ -95,6 +104,24 @@ async function ensureHeaders(sheet) {
     return DEFAULT_HEADERS;
   }
 
+  const missingHeaders = DEFAULT_HEADERS.filter((defaultHeader) => {
+    const defaultMatch = Object.values(HEADER_ALIASES).find((aliases) =>
+      aliases.some((alias) => normalizeHeader(alias) === normalizeHeader(defaultHeader))
+    );
+
+    if (!defaultMatch) return !headerValues.some((header) => normalizeHeader(header) === normalizeHeader(defaultHeader));
+
+    return !headerValues.some((header) =>
+      defaultMatch.some((alias) => normalizeHeader(header) === normalizeHeader(alias))
+    );
+  });
+
+  if (missingHeaders.length) {
+    const nextHeaders = [...headerValues, ...missingHeaders];
+    await sheet.setHeaderRow(nextHeaders);
+    return nextHeaders;
+  }
+
   return headerValues;
 }
 
@@ -104,7 +131,7 @@ export async function POST(req) {
 
     console.log("Incoming Data:", body);
 
-    const { name, email, phone, company, message } = body;
+    const { name, email, phone, company, message, serviceType, timeline, budget } = body;
 
     // ✅ Validation
     if (!name || !email || !phone || !company || !message) {
@@ -173,6 +200,9 @@ export async function POST(req) {
         phone,
         company,
         message,
+        serviceType,
+        timeline,
+        budget,
         date: new Date().toLocaleString(),
       })
     );

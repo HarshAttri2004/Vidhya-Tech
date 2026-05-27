@@ -11,10 +11,16 @@ export default function ChatBox() {
     phone: "",
     company: "",
     message: "",
+    serviceType: "",
+    timeline: "",
+    budget: "",
   });
 
   const [chat, setChat] = useState([
-    { sender: "bot", text: "Hi there! I'm the Vidhya Tech sales assistant.\nWhat's your name?" },
+    {
+      sender: "bot",
+      text: "Hi there! I'm the Vidhya Tech sales assistant.\nI'll ask a few quick questions so I can recommend the right service.\nWhat's your name?",
+    },
   ]);
 
   const [input, setInput] = useState("");
@@ -40,10 +46,16 @@ export default function ChatBox() {
   const getSalesFallback = (lead = {}) => {
     const name = lead?.name?.trim();
     const company = lead?.company?.trim();
+    const serviceType = lead?.serviceType?.trim();
+    const timeline = lead?.timeline?.trim();
+    const budget = lead?.budget?.trim();
     const intro = name ? `Thanks, ${name}.` : "Thanks for sharing that.";
     const companyClause = company ? ` for ${company}` : "";
+    const serviceNote = serviceType ? ` I see you're looking for ${serviceType}.` : "";
+    const timelineClause = timeline ? ` You mentioned the timeline is ${timeline}.` : "";
+    const budgetClause = budget ? ` Your budget is ${budget}.` : "";
 
-    return `${intro} We can help${companyClause} with web development, AI automation, digital marketing, video editing, social media management, AI integration, and custom IT solutions. What result are you aiming for, and when would you like to get started?`;
+    return `${intro}${serviceNote} We can help${companyClause} with web development, AI automation, digital marketing, video editing, social media management, AI integration, and custom IT solutions.${timelineClause}${budgetClause} What would you like us to do next?`;
   };
 
   const handleSend = async (inputText) => {
@@ -55,9 +67,9 @@ export default function ChatBox() {
     setIsTyping(true);
 
     // ==========================================
-    // PHASE 1: THE ONBOARDING FORM (Steps 0 to 4)
+    // PHASE 1: THE ONBOARDING AND QUALIFICATION FLOW (Steps 0 to 7)
     // ==========================================
-    if (step < 5) {
+    if (step < 8) {
       let nextStep = step + 1;
       let botReply = "";
 
@@ -75,7 +87,17 @@ export default function ChatBox() {
           setForm((prev) => ({ ...prev, company: inputText }));
           botReply = "Tell me a little about what you want to build or improve:";
         } else if (step === 4) {
-          const finalData = { ...form, message: inputText };
+          setForm((prev) => ({ ...prev, message: inputText }));
+          botReply =
+            "Which service do you need help with - web development, AI automation, digital marketing, video editing, social media management, or something else?";
+        } else if (step === 5) {
+          setForm((prev) => ({ ...prev, serviceType: inputText }));
+          botReply = "What timeline are you aiming for - immediately, this month, or later?";
+        } else if (step === 6) {
+          setForm((prev) => ({ ...prev, timeline: inputText }));
+          botReply = "What budget range are you comfortable with for this project?";
+        } else if (step === 7) {
+          const finalData = { ...form, budget: inputText };
           setForm(finalData);
           console.log("Sending data:", finalData);
 
@@ -92,8 +114,7 @@ export default function ChatBox() {
           }
 
           // Ask the sales AI to answer on behalf of the company.
-          let aiText =
-            "Thanks for sharing that. We can help with web development, AI automation, digital marketing, video editing, social media management, AI integration, and custom IT solutions. What timeline are you working with?";
+          let aiText = getSalesFallback(finalData);
           try {
             const res = await fetch("/api/chat", {
               method: "POST",
@@ -111,7 +132,7 @@ export default function ChatBox() {
           }
 
           botReply = aiText;
-          nextStep = 5; // Move to continuous chat phase!
+          nextStep = 8; // Move to continuous chat phase!
         }
       } catch (err) {
         console.error("Error:", err);
@@ -128,7 +149,7 @@ export default function ChatBox() {
       setStep(nextStep);
     } 
     // ==========================================
-    // PHASE 2: CONTINUOUS AI CHAT (Step 5+)
+    // PHASE 2: CONTINUOUS AI CHAT (Step 8+)
     // ==========================================
     else {
       const currentLead = { ...form };
