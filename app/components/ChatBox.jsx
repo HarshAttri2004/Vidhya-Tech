@@ -1,9 +1,103 @@
 "use client";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+const panelVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.78,
+    x: 18,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 280,
+      damping: 24,
+      mass: 0.9,
+      when: "beforeChildren",
+      staggerChildren: 0.04,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.78,
+    x: 18,
+    y: 24,
+    transition: {
+      duration: 0.18,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const lightTheme = {
+  shell:
+    "border-slate-200 bg-white/95 text-slate-900 shadow-[0_30px_120px_rgba(15,23,42,.22)]",
+  header: "border-slate-200/90 bg-white/75",
+  headline: "text-slate-900",
+  subline: "text-slate-500",
+  surface:
+    "bg-[radial-gradient(circle_at_top,_rgba(255,204,0,.12),_transparent_58%),linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.96))]",
+  botBubble: "border border-slate-200 bg-slate-100 text-slate-800",
+  userBubble:
+    "bg-gradient-to-br from-[#ffdf71] to-[#ffbf1a] text-black shadow-[0_12px_30px_rgba(255,191,31,.22)]",
+  input:
+    "border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-[#ffcc00] focus:ring-[#ffcc00]/25",
+  send: "bg-gradient-to-br from-[#ffdf71] to-[#ffbf1a] text-black hover:brightness-105",
+  toggle: "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
+  helper: "text-slate-500",
+  typingBubble: "border border-slate-200 bg-slate-100 text-slate-800",
+  launcher:
+    "bg-gradient-to-br from-[#ffdf71] to-[#ffbf1a] text-black shadow-[0_18px_50px_rgba(255,191,31,.34)]",
+  launcherOpen: "bg-slate-900 text-white shadow-[0_18px_50px_rgba(15,23,42,.36)]",
+};
+
+const darkTheme = {
+  shell:
+    "border-white/10 bg-[#0b0d12]/95 text-white shadow-[0_30px_120px_rgba(0,0,0,.55)]",
+  header: "border-white/10 bg-white/[0.04]",
+  headline: "text-white",
+  subline: "text-white/55",
+  surface:
+    "bg-[radial-gradient(circle_at_top,_rgba(255,204,0,.10),_transparent_62%),linear-gradient(180deg,rgba(11,13,18,.98),rgba(7,9,14,.98))]",
+  botBubble: "border border-white/10 bg-white/6 text-white",
+  userBubble:
+    "bg-gradient-to-br from-[#ffdf71] to-[#ffbf1a] text-black shadow-[0_12px_30px_rgba(255,191,31,.18)]",
+  input:
+    "border-white/10 bg-white/5 text-white placeholder:text-white/45 focus:border-[#ffcc00] focus:ring-[#ffcc00]/25",
+  send: "bg-gradient-to-br from-[#ffdf71] to-[#ffbf1a] text-black hover:brightness-105",
+  toggle: "border-white/10 bg-white/5 text-white hover:bg-white/10",
+  helper: "text-white/55",
+  typingBubble: "border border-white/10 bg-white/6 text-white",
+  launcher:
+    "bg-gradient-to-br from-[#ffdf71] to-[#ffbf1a] text-black shadow-[0_18px_50px_rgba(255,191,31,.34)]",
+  launcherOpen: "bg-white/10 text-white border border-white/10 shadow-[0_18px_50px_rgba(0,0,0,.36)]",
+};
 
 export default function ChatBox() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+
+    try {
+      return window.localStorage.getItem("vt-chat-theme") === "dark";
+    } catch {
+      return false;
+    }
+  });
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -25,6 +119,33 @@ export default function ChatBox() {
 
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false); // Added this so they can't spam enter while waiting
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("vt-chat-theme", darkMode ? "dark" : "light");
+    } catch {
+      // Ignore storage issues.
+    }
+  }, [darkMode]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }, [chat, open, isTyping]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const timer = window.setTimeout(() => {
+      inputRef.current?.focus();
+    }, 220);
+
+    return () => window.clearTimeout(timer);
+  }, [open]);
 
   const isWeakReply = (text) => {
     const value = (text || "").toLowerCase();
@@ -191,71 +312,164 @@ export default function ChatBox() {
     }
   };
 
+  const theme = darkMode ? darkTheme : lightTheme;
+  const launcherClass = open ? theme.launcherOpen : theme.launcher;
+
   return (
     <>
       {/* Floating Button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-5 bg-yellow-400 text-black px-4 py-2 rounded-full z-50 shadow-lg transition-transform hover:scale-105"
+      <motion.button
+        onClick={() => setOpen((prev) => !prev)}
+        whileHover={{ scale: 1.05, y: -1 }}
+        whileTap={{ scale: 0.96 }}
+        className={`fixed bottom-5 right-5 z-50 rounded-full px-5 py-3 text-sm font-black tracking-wide transition-all ${launcherClass}`}
+        aria-label={open ? "Close chatbot" : "Open chatbot"}
       >
-        {open ? "Close" : "Ask me"}
-      </button>
+        {open ? "Close" : "Ask Me"}
+      </motion.button>
 
       {/* Chat Box */}
-      {open && (
-        <div className="fixed bottom-20 right-5 w-80 bg-white text-black p-3 rounded-xl z-50 shadow-2xl border border-gray-200">
-          
-          <div className="bg-yellow-400 text-center font-bold py-2 -mx-3 -mt-3 mb-3 rounded-t-xl">
-            Vidhya Tech Assistant
-          </div>
-
-          {/* Chat Messages */}
-          <div className="h-64 overflow-y-auto mb-3 space-y-2 pr-2">
-            {chat.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div
-                  className={`px-3 py-2 rounded-lg text-sm max-w-[85%] whitespace-pre-wrap ${
-                    msg.sender === "user"
-                      ? "bg-yellow-400 text-black rounded-br-none"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200"
-                  }`}
-                >
-                  {msg.text}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Input Box (Now permanently visible!) */}
-          <div className="flex gap-2">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={isTyping}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !isTyping) {
-                  handleSend(input);
-                }
-              }}
-              className="border border-gray-300 flex-1 p-2 rounded-lg text-sm focus:outline-none focus:border-yellow-400"
-              placeholder={isTyping ? "AI is typing..." : "Type your message..."}
-            />
-
-            <button
-              onClick={() => handleSend(input)}
-              disabled={isTyping || !input.trim()}
-              className="bg-black text-white px-4 rounded-lg text-sm font-semibold disabled:bg-gray-400 hover:bg-gray-800 transition"
+      <AnimatePresence initial={false} mode="wait">
+        {open && (
+          <motion.div
+            key="chat-panel"
+            variants={panelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            style={{ transformOrigin: "bottom right" }}
+            className={`fixed bottom-20 right-5 z-50 w-[min(24rem,calc(100vw-1.5rem))] overflow-hidden rounded-[28px] border backdrop-blur-2xl ${theme.shell}`}
+          >
+            <motion.div
+              variants={childVariants}
+              className={`relative overflow-hidden border-b px-4 py-3 ${theme.header}`}
             >
-              Send
-            </button>
-          </div>
-        </div>
-      )}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ffcc00]/70 to-transparent opacity-80" />
+
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start gap-3">
+                  <div className="mt-1.5 flex gap-1.5">
+                    <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                    <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                    <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                  </div>
+
+                  <div>
+                    <div className={`text-sm font-black tracking-[0.18em] uppercase ${theme.headline}`}>
+                      Vidhya Tech Assistant
+                    </div>
+                    <div className={`mt-1 text-[11px] uppercase tracking-[0.2em] ${theme.subline}`}>
+                      Sales mode | qualifying leads in real time
+                    </div>
+                  </div>
+                </div>
+
+                <motion.button
+                  type="button"
+                  onClick={() => setDarkMode((prev) => !prev)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] transition ${theme.toggle}`}
+                  aria-pressed={darkMode}
+                >
+                  {darkMode ? "Light Mode" : "Dark Mode"}
+                </motion.button>
+              </div>
+            </motion.div>
+
+            <div className={`relative h-64 overflow-y-auto px-3 py-4 ${theme.surface}`}>
+              <div className="space-y-3">
+                {chat.map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    variants={childVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                    layout
+                    className={`flex ${
+                      msg.sender === "user" ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3 py-2.5 text-sm leading-relaxed ${
+                        msg.sender === "user"
+                          ? `${theme.userBubble} rounded-br-md`
+                          : `${theme.botBubble} rounded-bl-md`
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  </motion.div>
+                ))}
+
+                <AnimatePresence initial={false}>
+                  {isTyping && (
+                    <motion.div
+                      key="typing"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      className="flex justify-start"
+                    >
+                      <div className={`rounded-2xl rounded-bl-md px-4 py-3 ${theme.typingBubble}`}>
+                        <div className="flex items-center gap-1.5">
+                          {[0, 1, 2].map((dot) => (
+                            <motion.span
+                              key={dot}
+                              className={`h-2 w-2 rounded-full ${
+                                darkMode ? "bg-white/70" : "bg-slate-700/70"
+                              }`}
+                              animate={{
+                                opacity: [0.35, 1, 0.35],
+                                y: [0, -2, 0],
+                              }}
+                              transition={{
+                                duration: 1.1,
+                                repeat: Infinity,
+                                delay: dot * 0.14,
+                                ease: "easeInOut",
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
+
+            <div className={`border-t p-3 ${theme.header}`}>
+              <div className="flex gap-2">
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={isTyping}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !isTyping) {
+                      handleSend(input);
+                    }
+                  }}
+                  className={`flex-1 rounded-2xl border px-3 py-2.5 text-sm outline-none transition focus:ring-2 ${theme.input}`}
+                  placeholder={isTyping ? "AI is typing..." : "Type your message..."}
+                />
+
+                <button
+                  onClick={() => handleSend(input)}
+                  disabled={isTyping || !input.trim()}
+                  className={`rounded-2xl px-4 text-sm font-black transition ${theme.send} disabled:cursor-not-allowed disabled:opacity-60`}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
