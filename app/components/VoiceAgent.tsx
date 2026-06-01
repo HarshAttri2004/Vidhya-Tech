@@ -162,7 +162,7 @@ export default function VoiceAgent() {
       text: WELCOME_MESSAGE,
     },
   ]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true); // Auto-open on load to prompt for mic permission
   const [draftTranscript, setDraftTranscript] = useState('');
   const [status, setStatus] = useState('Ready to listen');
   const [error, setError] = useState('');
@@ -178,6 +178,7 @@ export default function VoiceAgent() {
   const welcomeSpokenRef = useRef(false);
   const speechIdRef = useRef(0);
   const panelBodyRef = useRef<HTMLDivElement | null>(null);
+  const autoStartedRef = useRef(false);
 
   useEffect(() => {
     messagesRef.current = messages;
@@ -318,18 +319,45 @@ export default function VoiceAgent() {
       }
 
       speakText(WELCOME_MESSAGE, { markWelcome: true });
-      // Keep the greeting visible and audible when the page first loads.
+      
+      // Auto-start listening after welcome is spoken to prompt for mic permission
+      if (!autoStartedRef.current) {
+        autoStartedRef.current = true;
+        setTimeout(() => {
+          if (!isListening && !welcomeSpokenRef.current) {
+            // Welcome is being spoken, wait a bit more
+            setTimeout(() => startListening(), 1500);
+          } else if (welcomeSpokenRef.current && !isListening) {
+            // Welcome has finished, start listening
+            startListening();
+          }
+        }, 100);
+      }
     };
 
-    const timer = window.setTimeout(tryWelcome, 250);
-    window.addEventListener('pointerdown', tryWelcome, { once: true, capture: true });
-    window.addEventListener('keydown', tryWelcome, { once: true, capture: true });
-
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener('pointerdown', tryWelcome, true);
-      window.removeEventListener('keydown', tryWelcome, true);
+    // Wait for voices to load before speaking
+    const handleVoicesChanged = () => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        tryWelcome();
+        window.removeEventListener('voiceschanged', handleVoicesChanged);
+      }
     };
+
+    if (window.speechSynthesis.getVoices().length > 0) {
+      tryWelcome();
+    } else {
+      window.addEventListener('voiceschanged', handleVoicesChanged);
+      // Fallback: try after 500ms if voices don't load
+      const timer = window.setTimeout(() => {
+        tryWelcome();
+        window.removeEventListener('voiceschanged', handleVoicesChanged);
+      }, 500);
+      return () => {
+        window.clearTimeout(timer);
+        window.removeEventListener('voiceschanged', handleVoicesChanged);
+      };
+    }
   }, []);
 
   function appendMessage(role: Role, text: string) {
@@ -516,7 +544,7 @@ export default function VoiceAgent() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.95 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="pointer-events-auto mb-3 w-[min(92vw,360px)] overflow-hidden rounded-3xlrder border-white/10 bg-slate-950/90 text-white shadow-[0_24px_100px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+            className="pointer-events-auto mb-3 w-[min(92vw,360px)] overflow-hidden rounded-3xl border border-white/10 bg-slate-950/90 text-white shadow-[0_24px_100px_rgba(0,0,0,0.6)] backdrop-blur-xl"
           >
             <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
               <div className="flex items-center gap-2">
@@ -596,13 +624,19 @@ export default function VoiceAgent() {
 
       <button
         type="button"
-        onClick={isOpen ? closeWidget : () => {
-          setIsOpen(true);
-          setTimeout(() => startListening(), 150);
+        onClick={() => {
+          if (isListening) {
+            recognitionRef.current?.stop();
+          } else if (isOpen) {
+            startListening();
+          } else {
+            setIsOpen(true);
+            setTimeout(() => startListening(), 150);
+          }
         }}
         disabled={isProcessing}
-        aria-pressed={isOpen}
-        aria-label={isOpen ? 'Close voice agent' : 'Open voice agent'}
+        aria-pressed={isListening}
+        aria-label={isListening ? 'Stop listening' : 'Start listening'}
         className={`pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full transition-all duration-200 ${
           isOpen || isListening
             ? 'border-[#ffcc00]/40 bg-[#ffcc00]/14 shadow-[0_0_0_8px_rgba(255,204,0,0.08)]'
