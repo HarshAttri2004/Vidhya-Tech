@@ -281,7 +281,7 @@ npm run dev -- -p 3001
 
 ### Build Errors
 ```bash
-rm -rf .next node_modules package-lock.json
+rm -rf build node_modules package-lock.json
 npm install
 npm run build
 ```
