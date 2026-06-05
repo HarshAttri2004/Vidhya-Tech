@@ -721,8 +721,95 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ CLIENTS SECTION ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
+      {/* ============ OPTION A: REAL STATS BAND ============ */}
+      {/* TODO: Replace with real client logos once clients provide permission */}
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute inset-0 opacity-10">
+          <motion.div
+            className="absolute w-96 h-96 bg-[#ffcc00] rounded-full blur-3xl"
+            style={{ left: '10%', top: '50%' }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+            transition={{ duration: 8, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute w-96 h-96 bg-[#ffcc00] rounded-full blur-3xl"
+            style={{ right: '10%', top: '30%' }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+            transition={{ duration: 8, repeat: Infinity, delay: 2 }}
+          />
+        </div>
+
+        <div className="mx-auto max-w-7xl relative z-10">
+          <motion.div
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+              WHY CHOOSE US
+            </motion.p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Trusted By Clients Across India
+            </h2>
+            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
+              Real results from real projects. Here&apos;s what we&apos;ve achieved for our clients.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {[
+              { icon: '✅', number: '14+', label: 'Projects Delivered', description: 'Completed across web, mobile, and AI solutions' },
+              { icon: '😊', number: '9+', label: 'Happy Clients', description: 'Businesses transformed and thriving' },
+              { icon: '⏰', number: '2+', label: 'Years Experience', description: 'Building digital excellence since 2022' },
+              { icon: '🚀', number: '24hr', label: 'Response Time', description: 'Quick communication & support guaranteed' },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                className="group relative rounded-2xl border border-[#ffcc00]/30 bg-white/[0.02] backdrop-blur-sm hover:border-[#ffcc00]/80 p-8 transition-all duration-300"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, y: -10 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="relative">
+                  <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                    {stat.icon}
+                  </div>
+
+                  <div className="text-5xl font-black text-[#ffcc00] mb-2">
+                    {stat.number}
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {stat.label}
+                  </h3>
+
+                  <p className="text-sm text-white/70 leading-relaxed">
+                    {stat.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============ OPTION B: PROJECT CATEGORIES (ALTERNATIVE) ============ */}
+      {/* Uncomment to use this version instead of Option A */}
+      {/*
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <motion.div
             className="text-center mb-20"
@@ -732,33 +819,50 @@ export default function Home() {
             viewport={{ once: true, margin: '-100px' }}
           >
             <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-              OUR CLIENTS
+              INDUSTRIES SERVED
             </motion.p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Trusted By Leading Brands
+              Trusted By Clients Across Industries
             </h2>
             <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              We&apos;ve partnered with companies across various industries to deliver exceptional digital solutions.
+              We&apos;ve built digital solutions for schools, e-commerce brands, fitness studios, restaurants, and startups across India.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {['https://schoolaxis.in/assets/img/saas-c/team/school4.jpg', 'https://schoolaxis.in/assets/img/saas-c/team/school8.jpg', 'https://schoolaxis.in/assets/img/saas-c/team/school12.jpg', 'https://www.uneecops.com/wp-content/uploads/2023/09/Group-322.png', 'https://www.uneecops.com/wp-content/uploads/2023/09/Group-315.png', 'https://www.striven.com/wp-content/uploads/newsweek-logo.webp'].map((logo, index) => (
+          <motion.div
+            className="flex flex-wrap justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {[
+              { icon: '🎓', label: 'Educational Institutions' },
+              { icon: '🛍️', label: 'E-Commerce Brands' },
+              { icon: '💪', label: 'Fitness Studios' },
+              { icon: '🍽️', label: 'Restaurants & Cafes' },
+              { icon: '🚀', label: 'Tech Startups' },
+              { icon: '📱', label: 'Service Providers' },
+            ].map((category, index) => (
               <motion.div
                 key={index}
-                className="flex items-center justify-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-[#ffcc00]/50 transition-all duration-300 h-32"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="group relative rounded-full border-2 border-[#ffcc00]/50 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00] px-6 py-3 transition-all duration-300 cursor-pointer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.08, duration: 0.5 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 204, 0, 0.1)' }}
               >
-                <img src={logo} alt={`Client ${index + 1}`} className="w-full h-full object-contain filter brightness-75 hover:brightness-100 transition-all" />
+                <span className="text-2xl mr-3">{category.icon}</span>
+                <span className="font-bold text-white group-hover:text-[#ffcc00] transition-colors">
+                  {category.label}
+                </span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
+      */}
 
       {/* ============ CERTIFICATIONS SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black">
