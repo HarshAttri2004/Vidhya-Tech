@@ -18,8 +18,43 @@ interface PortfolioResponse {
   data?: PortfolioProject[];
 }
 
+const defaultPortfolios: PortfolioProject[] = FEATURED_PROJECTS.map((project) => ({
+  ...project,
+}));
+
+function isRenderablePortfolio(project: Partial<PortfolioProject> | null | undefined): project is PortfolioProject {
+  return Boolean(
+    project &&
+      typeof project.id === 'number' &&
+      typeof project.title === 'string' &&
+      project.title.trim() &&
+      typeof project.description === 'string' &&
+      project.description.trim() &&
+      typeof project.image === 'string' &&
+      project.image.trim() &&
+      typeof project.link === 'string' &&
+      project.link.trim() &&
+      typeof project.category === 'string' &&
+      project.category.trim()
+  );
+}
+
+function mergePortfolios(base: PortfolioProject[], remote: PortfolioProject[]) {
+  const seen = new Set(base.map((project) => `${project.title}|${project.link}`));
+  const merged = [...base];
+
+  for (const project of remote) {
+    const key = `${project.title}|${project.link}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(project);
+  }
+
+  return merged;
+}
+
 export default function PortfolioPage() {
-  const [portfolios, setPortfolios] = useState<PortfolioProject[]>([...FEATURED_PROJECTS]);
+  const [portfolios, setPortfolios] = useState<PortfolioProject[]>(defaultPortfolios);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,8 +65,10 @@ export default function PortfolioPage() {
         const response = await fetch('/api/portfolio');
         const data = (await response.json()) as PortfolioResponse;
 
-        if (isMounted && data.data?.length) {
-          setPortfolios(data.data);
+        const apiPortfolios = (data.data ?? []).filter(isRenderablePortfolio);
+
+        if (isMounted && apiPortfolios.length) {
+          setPortfolios(mergePortfolios(defaultPortfolios, apiPortfolios));
         }
       } finally {
         if (isMounted) setLoading(false);
