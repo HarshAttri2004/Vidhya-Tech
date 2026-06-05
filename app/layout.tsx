@@ -12,6 +12,7 @@ import {
   SITE_URL_OBJECT,
   absoluteUrl,
 } from '@/lib/seo';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   metadataBase: SITE_URL_OBJECT,
@@ -107,6 +108,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
