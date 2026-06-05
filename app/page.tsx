@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -6,8 +6,15 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Link from 'next/link';
 import VoiceAgent from './components/VoiceAgent';
-import Image from 'next/image';
 import { heroSlides } from './heroSlides';
+import {
+  CERTIFICATES,
+  CLIENT_VALUE_CARDS,
+  FEATURED_PROJECTS,
+  SITE_STAT_CARDS,
+  SITE_STATS,
+  TEAM_MEMBERS,
+} from '@/lib/site-data';
 // import { img } from 'framer-motion/client';
 // Services Data
 const services = [
@@ -67,107 +74,8 @@ const services = [
 ];
 
 // Portfolio Projects
-const portfolioProjects = [
-  {
-    id: 1,
-    title: 'School Website',
-    category: 'Web Design',
-    description:
-      'Modern educational platform with enrollment system and course management.',
-    image:
-      'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2Nob29sc3xlbnwwfHwwfHx8MA%3D%3D',
-    link: '/designs/mainportfolio1/index.html'
-  },
-
-  {
-    id: 2,
-    title: 'E-Commerce Website',
-    category: 'Web Development',
-    description:
-      'Modern product storefront with conversion-focused pages and checkout flow.',
-    image:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop',
-    link: '/design/ecommerce',
-  },
-
-  {
-    id: 3,
-    title: 'AI Chatbot Solution',
-    category: 'AI Solutions',
-    description:
-      'Automated support flow for lead capture and service questions.',
-    image:
-      'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200&auto=format&fit=crop',
-    link: '/services',
-  },
-
-  {
-    id: 4,
-    title: 'Fitness Website Design',
-    category: 'Web Design',
-    description:
-      'Bold fitness landing page with packages and booking CTA.',
-    image:
-      'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop',
-    link: '/design/gym',
-  },
-
-  {
-    id: 5,
-    title: 'Restaurant Website',
-    category: 'Web Development',
-    description:
-      'Menu, gallery, reservation, and local SEO-ready restaurant site.',
-    image:
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop',
-    link: '/design/restaurant',
-  },
-
-  {
-    id: 6,
-    title: 'Marketing Campaign',
-    category: 'Marketing',
-    description:
-      'Launch assets and social media campaign for a brand rollout.',
-    image:
-      'https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=1200&auto=format&fit=crop',
-    link: '/services',
-  },
-];
-// Team Members
-const teamMembers = [
-  {
-    id: 1,
-    name: 'Harsh Kumar',
-    role: 'Web Development',
-    image: '/images/Happu sir.png',
-    imagePosition: '50% 42%',
-    linkedin: 'https://www.linkedin.com/in/harsh-kumar-69864036a',
-    description: 'Expert in building scalable web applications with modern technologies.',
-    bgColor: 'from-blue-600 to-blue-400'
-  },
-  {
-    id: 2,
-    name: 'Harsh Vasisth',
-    role: 'Web & Software Development',
-    image: '/images/Harsh sir9.png',
-    imagePosition: '50% 42%',
-    linkedin: 'https://www.linkedin.com/in/harsh-vashisth-9259b7268/',
-    icon: '👨‍💼',  // Fallback icon
-    description: 'Specialized in full-stack development and software architecture.',
-    bgColor: 'from-purple-600 to-purple-400'
-  },
-  {
-    id: 3,
-    name: 'Lakshya Kumar Gupta',
-    role: 'UI/UX Designer',
-    image: '/images/Lakshya Sir.png',
-    imagePosition: '50% 42%',
-    linkedin: 'https://www.linkedin.com/in/lakshya-kumar-gupta-41a44b35b/',
-    description: 'Creating beautiful and intuitive user experiences for digital products.',
-    bgColor: 'from-pink-600 to-pink-400'
-  }
-];
+const portfolioProjects = FEATURED_PROJECTS;
+const teamMembers = TEAM_MEMBERS;
 
 // Animated Circle Component with Enhanced Zoom
 const AnimatedCircle = ({ delay = 0, size = 300, opacity = 0.1 }) => {
@@ -300,9 +208,9 @@ const HeroCarousel = () => {
 // Animated Stats Component
 const AnimatedStats = () => {
   const stats = [
-    { number: 14, suffix: '+', label: 'Projects Completed' },
-    { number: 9, suffix: '+', label: 'Happy Clients' },
-    { number: 2, suffix: '+', label: 'Years Experience' },
+    { number: SITE_STATS.projects, label: 'Projects Completed' },
+    { number: SITE_STATS.clients, label: 'Happy Clients' },
+    { number: SITE_STATS.years, label: 'Years Experience' },
   ];
 
   const containerVariants = {
@@ -337,7 +245,6 @@ const AnimatedStats = () => {
         <motion.div key={index} variants={itemVariants} className="text-center">
           <div className="text-4xl md:text-5xl font-black text-[#ffcc00]">
             {stat.number}
-            {stat.suffix}
           </div>
           <p className="text-sm text-white/60 mt-2">{stat.label}</p>
         </motion.div>
@@ -368,7 +275,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                🚀 Digital Solutions That Drive Real Growth
+                Digital Solutions That Drive Real Growth
               </motion.div>
 
               <motion.h1
@@ -470,8 +377,8 @@ export default function Home() {
 
         {/* Content */}
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-blue-600/30 border border-blue-400 flex items-center justify-center text-xl mb-4">
-            💻
+                    <div className="w-12 h-12 rounded-full bg-blue-600/30 border border-blue-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+            WEB
           </div>
 
           <h3 className="text-white text-2xl font-bold mb-3">
@@ -499,8 +406,8 @@ export default function Home() {
         </div>
 
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-xl mb-4">
-            🤖
+                    <div className="w-12 h-12 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+            AI
           </div>
 
           <h3 className="text-white text-2xl font-bold mb-3">
@@ -528,8 +435,8 @@ export default function Home() {
         </div>
 
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-pink-600/30 border border-pink-400 flex items-center justify-center text-xl mb-4">
-            📢
+                    <div className="w-12 h-12 rounded-full bg-pink-600/30 border border-pink-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+            MKT
           </div>
 
           <h3 className="text-white text-2xl font-bold mb-3">
@@ -557,8 +464,8 @@ export default function Home() {
         </div>
 
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-xl mb-4">
-            🎬
+                    <div className="w-12 h-12 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+            VID
           </div>
 
           <h3 className="text-white text-2xl font-bold mb-3">
@@ -586,8 +493,8 @@ export default function Home() {
         </div>
 
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-orange-600/30 border border-orange-400 flex items-center justify-center text-xl mb-4">
-            👥
+                    <div className="w-12 h-12 rounded-full bg-orange-600/30 border border-orange-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+            SOC
           </div>
 
           <h3 className="text-white text-2xl font-bold mb-3">
@@ -615,8 +522,8 @@ export default function Home() {
         </div>
 
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-green-600/30 border border-green-400 flex items-center justify-center text-xl mb-4">
-            🧠
+                    <div className="w-12 h-12 rounded-full bg-green-600/30 border border-green-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+            INT
           </div>
 
           <h3 className="text-white text-2xl font-bold mb-3">
@@ -651,7 +558,7 @@ export default function Home() {
               Our Portfolio
             </h2>
             <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              Explore our recent projects that showcase our expertise in web design, development, and digital solutions.
+              Explore a small set of approved projects that showcase our web design, development, and digital solutions.
             </p>
           </motion.div>
 
@@ -697,7 +604,7 @@ export default function Home() {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => window.open(project.link, '_blank')}
                   >
-                    View Project →
+                    View Project {'->'}
                   </motion.button>
                 </div>
               </motion.a>
@@ -717,14 +624,15 @@ export default function Home() {
             >
               View All Projects
             </Link>
+            <p className="mt-4 text-sm text-white/50">
+              More approved projects will be added as they are published.
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ============ OPTION A: REAL STATS BAND ============ */}
-      {/* TODO: Replace with real client logos once clients provide permission */}
+      {/* ============ STATS BAND ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
-        {/* Background Glow */}
         <div className="absolute inset-0 opacity-10">
           <motion.div
             className="absolute w-96 h-96 bg-[#ffcc00] rounded-full blur-3xl"
@@ -755,44 +663,39 @@ export default function Home() {
               Why Clients Choose Vidhya Tech
             </h2>
             <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              Real results from real projects. Here&apos;s what we&apos;ve achieved for our clients.
+              A quick snapshot of the work we have delivered and the response time we keep for new enquiries.
             </p>
           </motion.div>
 
           <motion.div
-            className="grid md:grid-cols-4 gap-6"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            {[
-              { icon: '✅', number: '14+', label: 'Projects Delivered', description: 'Completed across web, mobile, and AI solutions' },
-              { icon: '😊', number: '9+', label: 'Happy Clients', description: 'Businesses transformed and thriving' },
-              { icon: '⏰', number: '2+', label: 'Years Experience', description: 'Building digital excellence since 2022' },
-              { icon: '🚀', number: '24hr', label: 'Response Time', description: 'Quick communication & support guaranteed' },
-            ].map((stat, index) => (
+            {SITE_STAT_CARDS.map((stat, index) => (
               <motion.div
-                key={index}
-                className="group relative rounded-2xl border border-[#ffcc00]/30 bg-white/[0.02] backdrop-blur-sm hover:border-[#ffcc00]/80 p-8 transition-all duration-300"
+                key={stat.label}
+                className="group relative rounded-2xl border border-[#ffcc00]/30 bg-white/[0.02] backdrop-blur-sm hover:border-[#ffcc00]/80 p-6 transition-all duration-300"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
+                transition={{ delay: index * 0.08, duration: 0.6 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -10 }}
+                whileHover={{ scale: 1.03, y: -8 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div className="relative">
-                  <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#ffcc00]/40 bg-[#ffcc00]/10 text-sm font-black tracking-[0.2em] text-[#ffcc00]">
                     {stat.icon}
                   </div>
 
-                  <div className="text-5xl font-black text-[#ffcc00] mb-2">
+                  <div className="text-4xl font-black text-[#ffcc00] mb-2">
                     {stat.number}
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-lg font-bold text-white mb-2">
                     {stat.label}
                   </h3>
 
@@ -804,9 +707,7 @@ export default function Home() {
             ))}
           </motion.div>
         </div>
-      </section>
-
-      {/* ============ OPTION B: PROJECT CATEGORIES (ALTERNATIVE) ============ */}
+      </section>      {/* ============ OPTION B: PROJECT CATEGORIES (ALTERNATIVE) ============ */}
       {/* Uncomment to use this version instead of Option A */}
       {/*
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
@@ -837,12 +738,12 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {[
-              { icon: '🎓', label: 'Educational Institutions' },
-              { icon: '🛍️', label: 'E-Commerce Brands' },
-              { icon: '💪', label: 'Fitness Studios' },
-              { icon: '🍽️', label: 'Restaurants & Cafes' },
-              { icon: '🚀', label: 'Tech Startups' },
-              { icon: '📱', label: 'Service Providers' },
+              { icon: 'ðŸŽ“', label: 'Educational Institutions' },
+              { icon: 'ðŸ›ï¸', label: 'E-Commerce Brands' },
+              { icon: 'ðŸ’ª', label: 'Fitness Studios' },
+              { icon: 'ðŸ½ï¸', label: 'Restaurants & Cafes' },
+              { icon: 'ðŸš€', label: 'Tech Startups' },
+              { icon: 'ðŸ“±', label: 'Service Providers' },
             ].map((category, index) => (
               <motion.div
                 key={index}
@@ -879,76 +780,37 @@ export default function Home() {
       </h2>
 
       <p className="text-white/70 max-w-3xl mx-auto text-lg">
-        Industry-recognized certifications and expertise that drive our excellence.
+        Industry-recognized certifications and expertise that drive our work.
       </p>
     </div>
 
     {/* Grid */}
-    <div className="grid md:grid-cols-3 gap-8">
-
-      {/* CARD */}
-      {[
-        {
-          img: "/certificates/google.png",
-          title: "Google Cloud Certified",
-          subtitle: "Cloud Associate",
-        },
-        {
-          img: "/certificates/aws.png",
-          title: "AWS Certified",
-          subtitle: "Solutions Architect",
-        },
-        {
-          img: "/certificates/meta.png",
-          title: "Meta Blueprint",
-          subtitle: "Digital Marketing",
-        },
-        {
-          img: "/certificates/hubspot.png",
-          title: "HubSpot Academy",
-          subtitle: "Inbound Certification",
-        },
-        {
-          img: "/certificates/figma.png",
-          title: "Figma Professional",
-          subtitle: "UI/UX Design",
-        },
-        {
-          img: "/certificates/openai.png",
-          title: "OpenAI Partner",
-          subtitle: "AI Implementation",
-        },
-      ].map((cert, index) => (
-
+    <div className="grid gap-8 md:grid-cols-3">
+      {CERTIFICATES.map((cert) => (
         <div
-          key={index}
+          key={cert.title}
           className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-[#ffcc00]/50 transition-all duration-300"
         >
+          <div className="rounded-xl overflow-hidden mb-5 bg-white p-2">
+            <img
+              src={cert.img}
+              alt={cert.title}
+              className="w-full h-[180px] object-contain rounded-lg"
+            />
+          </div>
 
-         {/* Certificate Image */}
-               <div className="rounded-xl overflow-hidden mb-5 bg-white p-2">
-                <img
-                  src={cert.img}
-                  alt={cert.title}
-                  className="w-full h-[180px] object-contain rounded-lg"
-                />
-              </div>
-            {/* Title */}
-            <h3 className="text-lg md:text-xl font-bold text-white text-center">
-              {cert.title}
-            </h3>
+          <h3 className="text-lg md:text-xl font-bold text-white text-center">
+            {cert.title}
+          </h3>
 
-            {/* Subtitle */}
-            <p className="text-[#ffcc00] text-sm font-bold text-center mt-2 uppercase tracking-widest">
-              {cert.subtitle}
-            </p>
+          <p className="text-[#ffcc00] text-sm font-bold text-center mt-2 uppercase tracking-widest">
+            {cert.subtitle}
+          </p>
         </div>
       ))}
     </div>
   </div>
-</section>
-
-      {/* ============ TEAM SECTION ============ */}
+</section>      {/* ============ TEAM SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -984,28 +846,20 @@ export default function Home() {
                 />
 
                 <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300">
-                  {/* Avatar Container */}
                   <motion.div
                     className="mb-8 flex justify-center"
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3, delay: index * 0.3, repeat: Infinity }}
                   >
-                    {member.image && member.image.trim() !== '' ? (
-                      <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${member.bgColor} flex items-center justify-center text-4xl border-2 border-[#ffcc00]/50 shadow-lg`}>
-                        {member.icon}
-                      </div>
-                    )}
+                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   </motion.div>
 
-                  {/* Name and Role */}
                   <h3 className="text-2xl font-black text-white text-center mb-2">
                     {member.name}
                   </h3>
@@ -1013,132 +867,74 @@ export default function Home() {
                     {member.role}
                   </p>
 
-                
-
-                  {/* Description */}
                   <p className="text-white/70 text-center leading-relaxed mb-6">
                     {member.description}
                   </p>
 
-                  {/* Social Links */}
-                  <motion.div
-                    className="flex justify-center gap-3"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <button className="w-10 h-10 rounded-full border border-[#ffcc00]/30 flex items-center justify-center hover:bg-[#ffcc00] hover:text-black transition-all">
-                      f
-                    </button>
-                    <button className="w-10 h-10 rounded-full border border-[#ffcc00]/30 flex items-center justify-center hover:bg-[#ffcc00] hover:text-black transition-all">
-                      𝕏
-                    </button>
+                  <div className="flex justify-center">
                     <a
-                     href={member.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-full border border-[#ffcc00]/30 flex items-center justify-center hover:bg-[#ffcc00] hover:text-black transition-all"
-                          >
-                            in
-                          </a>
-                  </motion.div>
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-[#ffcc00]/30 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-[#ffcc00] hover:text-black"
+                    >
+                      LinkedIn
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* ============ TESTIMONIALS SECTION ============ */}
+      </section>      {/* ============ WHAT CLIENTS APPRECIATE SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
-  <div className="mx-auto max-w-7xl">
-    <motion.div
-      className="text-center mb-16"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
-      <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-        TESTIMONIALS
-      </p>
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-        What Our Clients Say
-      </h2>
-    </motion.div>
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+              WHAT CLIENTS APPRECIATE
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Delivery Themes
+            </h2>
+            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
+              The practical themes we design around most often: communication, clear design, and dependable follow-through.
+            </p>
+          </motion.div>
 
-    <div className="grid md:grid-cols-3 gap-6">
-      {[
-        {
-          text: 'Vidhya Tech transformed our online presence completely. Highly professional!',
-          author: 'Amit Sharma',
-          company: 'Tech Startup',
-          image: 'https://randomuser.me/api/portraits/men/32.jpg',
-          rating: 5
-        },
-        {
-          text: 'Amazing results on our AI integration project. Exceeded expectations!',
-          author: 'Rohit Verma',
-          company: 'E-commerce Business',
-          image: 'https://randomuser.me/api/portraits/men/45.jpg',
-          rating: 5
-        },
-        {
-          text: 'Their creative approach and timely delivery made all the difference.',
-          author: 'Sandeep Gupta',
-          company: 'Digital Marketing Agency',
-          image: 'https://randomuser.me/api/portraits/men/65.jpg',
-          rating: 5
-        },
-      ].map((testimonial, index) => (
-        <motion.div
-          key={index}
-          className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-[#ffcc00]/30 transition-all"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-
-          {/* 👤 Profile */}
-          <div className="flex items-center gap-4 mb-4">
-            <img
-              src={testimonial.image}
-              alt={testimonial.author}
-              className="w-12 h-12 rounded-full object-cover border-2 border-[#ffcc00]"
-            />
-            <div>
-              <p className="font-black text-white">{testimonial.author}</p>
-              <p className="text-sm text-white/60">{testimonial.company}</p>
-            </div>
-          </div>
-
-          {/* ⭐ Real Stars */}
-          <div className="flex mb-4">
-            {[...Array(testimonial.rating)].map((_, i) => (
-              <svg
-                key={i}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-5 h-5 text-[#ffcc00]"
+          <div className="grid md:grid-cols-3 gap-6">
+            {CLIENT_VALUE_CARDS.map((card, index) => (
+              <motion.div
+                key={`${card.title}-${index}`}
+                className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-[#ffcc00]/30 transition-all"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
               >
-                <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.32.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.386a.562.562 0 01-.84.61l-4.73-2.885a.563.563 0 00-.586 0l-4.73 2.885a.562.562 0 01-.84-.61l1.285-5.386a.563.563 0 00-.182-.557L2.043 10.385a.562.562 0 01.32-.988l5.518-.442a.563.563 0 00.475-.345l2.125-5.111z" />
-              </svg>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className={`grid h-12 w-12 place-items-center rounded-full ${card.avatarClass} text-sm font-black text-white`}>
+                    {card.initials}
+                  </div>
+                  <div>
+                    <p className="font-black text-white">{card.title}</p>
+                    <p className="text-sm text-white/60">{card.context}</p>
+                  </div>
+                </div>
+
+                <p className="text-white/80 leading-relaxed italic">
+                  {card.text}
+                </p>
+              </motion.div>
             ))}
           </div>
-
-          {/* 💬 Review */}
-          <p className="text-white/80 leading-relaxed italic">
-            &ldquo;{testimonial.text}&rdquo;
-          </p>
-
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
-      {/* ============ CTA SECTION ============ */}
+        </div>
+      </section>      {/* ============ CTA SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-r from-[#ffcc00]/10 to-[#ffcc00]/5 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-20">
@@ -1197,3 +993,5 @@ export default function Home() {
     </div>
   );
 }
+
+

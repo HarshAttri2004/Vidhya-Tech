@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { LocationSection } from '../components/ProofSections';
+import { SITE_EMAIL } from '@/lib/seo';
 
 interface ContactForm {
   name: string;
@@ -68,8 +69,8 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-10 grid gap-5 text-sm text-white/70">
-              <a href="mailto:vidhyatech1@gmail.com" className="transition hover:text-[#ffcc00]">
-                Email: vidhyatech1@gmail.com
+              <a href={`mailto:${SITE_EMAIL}`} className="transition hover:text-[#ffcc00]">
+                Email: {SITE_EMAIL}
               </a>
               <a href="tel:+917817097517" className="transition hover:text-[#ffcc00]">
                 Phone: +91 7817097517

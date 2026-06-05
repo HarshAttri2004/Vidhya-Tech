@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { FEATURED_PROJECTS } from '@/lib/site-data';
 
 interface PortfolioProject {
   id: number;
@@ -10,72 +11,15 @@ interface PortfolioProject {
   image: string;
   link: string;
   category: string;
-  order: number;
+  order?: number;
 }
 
 interface PortfolioResponse {
   data?: PortfolioProject[];
 }
 
-const defaultPortfolios: PortfolioProject[] = [
-  {
-    id: 1,
-    title: 'Digital Agency Website',
-    description: 'Premium landing page for a growing agency brand.',
-    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85',
-    link: '/designs/portfolio/index.html',
-    category: 'Web Design',
-    order: 1,
-  },
-  {
-    id: 2,
-    title: 'E-Commerce Website',
-    description: 'Modern product storefront with conversion-focused pages.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85',
-    link: '/design/ecommerce',
-    category: 'Web Development',
-    order: 2,
-  },
-  {
-    id: 3,
-    title: 'AI Chatbot Solution',
-    description: 'Automated support flow for lead capture and service questions.',
-    image: 'https://images.unsplash.com/photo-1677756119517-756a188d2d94?auto=format&fit=crop&w=900&q=85',
-    link: '/services',
-    category: 'AI Solutions',
-    order: 3,
-  },
-  {
-    id: 4,
-    title: 'Fitness Website Design',
-    description: 'Bold fitness landing page with packages and booking CTA.',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=85',
-    link: '/design/gym',
-    category: 'Web Design',
-    order: 4,
-  },
-  {
-    id: 5,
-    title: 'Restaurant Website',
-    description: 'Menu, gallery, reservation, and local SEO-ready restaurant site.',
-    image: '/images/rest.png',
-    link: '/design/restaurant',
-    category: 'Web Development',
-    order: 5,
-  },
-  {
-    id: 6,
-    title: 'Marketing Campaign',
-    description: 'Launch assets and social media campaign for a brand rollout.',
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=900&q=85',
-    link: '/services',
-    category: 'Marketing',
-    order: 6,
-  },
-];
-
 export default function PortfolioPage() {
-  const [portfolios, setPortfolios] = useState<PortfolioProject[]>(defaultPortfolios);
+  const [portfolios, setPortfolios] = useState<PortfolioProject[]>([...FEATURED_PROJECTS]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -108,7 +52,10 @@ export default function PortfolioPage() {
           <p className="text-lg font-black uppercase text-[#ffcc00] sm:text-xl">Our Work</p>
           <h1 className="mt-3 text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">Our Portfolio</h1>
           <p className="mt-5 text-base leading-7 text-white/65">
-            Explore recent projects and see how we help businesses transform their digital presence.
+            Explore a small, approved selection of projects that show how we help businesses transform their digital presence.
+          </p>
+          <p className="mt-3 text-sm text-white/45">
+            More approved projects will be added as they are published.
           </p>
         </div>
 

@@ -10,6 +10,8 @@ import {
   SITE_PHONE,
   SITE_URL,
   SITE_URL_OBJECT,
+  SITE_OG_IMAGE,
+  SITE_TWITTER_IMAGE,
   absoluteUrl,
 } from '@/lib/seo';
 
@@ -26,11 +28,15 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   category: 'technology',
   keywords: SITE_KEYWORDS,
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     siteName: SITE_NAME,
     url: '/',
+    images: [SITE_OG_IMAGE],
     title: SITE_FULL_TITLE,
     description: SITE_DESCRIPTION,
   },
@@ -38,6 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_FULL_TITLE,
     description: SITE_DESCRIPTION,
+    images: [SITE_TWITTER_IMAGE],
   },
   robots: {
     index: true,
@@ -53,23 +60,32 @@ export const metadata: Metadata = {
   },
 };
 
-const organizationJsonLd = {
+const professionalServiceJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'ProfessionalService',
   name: SITE_NAME,
   url: SITE_URL,
   logo: absoluteUrl('/images/logo.jpg'),
+  description: SITE_DESCRIPTION,
+  email: SITE_EMAIL,
+  telephone: SITE_PHONE,
   sameAs: [SITE_LINKEDIN],
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      contactType: 'customer support',
-      email: SITE_EMAIL,
-      telephone: SITE_PHONE,
-      areaServed: 'IN',
-      availableLanguage: ['en', 'hi'],
-    },
-  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IN',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Digital Services',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Development' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Automation' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Marketing' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Video Editing' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media Management' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Integration' } },
+    ],
+  },
 };
 
 const websiteJsonLd = {
@@ -93,19 +109,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(professionalServiceJsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteJsonLd),
-          }}
-        />
         {children}
       </body>
     </html>

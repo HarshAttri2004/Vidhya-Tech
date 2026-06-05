@@ -1,63 +1,40 @@
 'use client';
 
 import Link from 'next/link';
+import {
+  BUSINESS_TYPES,
+  CERTIFICATES,
+  CLIENT_VALUE_CARDS,
+  SITE_STAT_CARDS,
+} from '@/lib/site-data';
+import { SITE_EMAIL } from '@/lib/seo';
 
-const clients = [
-  { name: 'Retail Brand', category: 'E-Commerce', result: 'Product pages and checkout flow' },
-  { name: 'Fitness Studio', category: 'Local Business', result: 'Booking website and campaign assets' },
-  { name: 'Food Startup', category: 'Restaurant', result: 'Menu website and social launch' },
-  { name: 'Education Coach', category: 'Creator', result: 'Landing page and lead automation' },
-  { name: 'Real Estate Team', category: 'Services', result: 'Listing funnel and CRM capture' },
-  { name: 'Beauty Studio', category: 'D2C', result: 'Brand site and Instagram creatives' },
-];
+const industryCards = BUSINESS_TYPES.map((industry) => {
+  const descriptions: Record<string, string> = {
+    'Schools and educational institutions':
+      'Admission sites, course pages, and parent-friendly school portals.',
+    'E-commerce brands':
+      'Product pages, checkout flows, and conversion-focused storefronts.',
+    'Fitness studios and coaches':
+      'Booking sites, membership pages, and trainer lead capture flows.',
+    'Restaurants and cafes':
+      'Menus, reservations, local SEO, and online ordering support.',
+    'Service businesses':
+      'Lead-focused websites, quote forms, and trust-building service pages.',
+    'Startups and creators':
+      'Fast launch pages, personal brands, and clear sales journeys.',
+  };
 
-const proofStats = [
-  ['12+', 'Project builds'],
-  ['7+', 'Client conversations'],
-  ['6', 'Core service lines'],
-  ['24h', 'First response target'],
-];
+  return {
+    title: industry,
+    result: descriptions[industry],
+  };
+});
 
-const storySteps = [
-  {
-    year: '01',
-    title: 'Started With Practical Websites',
-    text: 'Vidhya Tech began with a simple focus: build clean websites that help small brands look credible and generate enquiries.',
-  },
-  {
-    year: '02',
-    title: 'Added Automation And AI',
-    text: 'As client needs grew, we added form flows, chatbot logic, AI content support, and workflow automation into our delivery.',
-  },
-  {
-    year: '03',
-    title: 'Built A Full Growth System',
-    text: 'Today the service combines design, development, marketing, video, and AI integration so every launch feels connected.',
-  },
-];
-
-const certificatePlaceholders = [
-  { title: 'Web Development Track', issuer: 'Credential Placeholder', note: 'Replace with real certificate before launch' },
-  { title: 'AI Automation Track', issuer: 'Credential Placeholder', note: 'Replace with real certificate before launch' },
-  { title: 'Digital Marketing Track', issuer: 'Credential Placeholder', note: 'Replace with real certificate before launch' },
-];
-
-const reviewTemplates = [
-  {
-    name: 'Sample Client',
-    role: 'Founder, Local Brand',
-    text: 'The website structure, visuals, and lead form flow made the business feel much more premium online.',
-  },
-  {
-    name: 'Sample Client',
-    role: 'Marketing Lead',
-    text: 'The team understood the offer quickly and turned it into a clean digital experience with strong calls to action.',
-  },
-  {
-    name: 'Sample Client',
-    role: 'Service Business Owner',
-    text: 'The project felt organized from the first call to launch, with useful ideas for content and automation.',
-  },
+const deliveryPrinciples = [
+  'Discovery first process',
+  'Responsive design delivery',
+  'AI ready business workflows',
 ];
 
 export function ClientsShowcase() {
@@ -65,24 +42,23 @@ export function ClientsShowcase() {
     <section id="clients" className="border-b border-white/10 bg-[#030303] px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="Our Clients"
-          title="Brands We Can Build For"
-          text="A premium client showcase layout using business categories and sample client labels until your real client names are ready."
+          eyebrow="Industries"
+          title="Industries We Build For"
+          text="A clear view of the business types we support with design, development, and automation."
         />
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {clients.map((client) => (
-            <article key={client.name + client.category} className="rounded-lg border border-white/12 bg-white/[0.045] p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ffcc00]/65">
+          {industryCards.map((client) => (
+            <article key={client.title} className="rounded-lg border border-white/12 bg-white/[0.045] p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ffcc00]/65">
               <div className="flex items-start justify-between gap-4">
                 <div className="grid h-14 w-14 shrink-0 place-items-center rounded-md bg-[#ffcc00] text-lg font-black text-black">
-                  {client.name.slice(0, 2).toUpperCase()}
+                  {client.title.slice(0, 2).toUpperCase()}
                 </div>
                 <span className="rounded-full border border-[#ffcc00]/35 px-3 py-1 text-xs font-black uppercase text-[#ffcc00]">
-                  Sample
+                  Supported
                 </span>
               </div>
-              <h3 className="mt-6 text-2xl font-black leading-tight text-white">{client.name}</h3>
-              <p className="mt-2 text-sm font-bold text-[#ffcc00]">{client.category}</p>
+              <h3 className="mt-6 text-2xl font-black leading-tight text-white">{client.title}</h3>
               <p className="mt-4 text-sm leading-7 text-white/62">{client.result}</p>
             </article>
           ))}
@@ -98,22 +74,25 @@ export function SocialProofSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,204,0,.14),transparent_34%)]" />
       <div className="relative mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="Social Proof"
+          eyebrow="Studio Stats"
           title="Numbers That Support The Story"
-          text="A trust-building proof band with clear metrics, project categories, and delivery signals in the same Vidhya Tech color system."
+          text="A quick snapshot of current project counts, service lines, and the response time we aim to keep."
         />
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {proofStats.map(([value, label]) => (
-            <article key={label} className="rounded-lg border border-white/12 bg-black/35 p-7 text-center">
-              <p className="text-6xl font-black text-[#ffcc00]">{value}</p>
-              <p className="mt-3 text-sm font-bold uppercase text-white/58">{label}</p>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          {SITE_STAT_CARDS.map((stat) => (
+            <article key={stat.label} className="rounded-lg border border-white/12 bg-black/35 p-7 text-center">
+              <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#ffcc00]/40 bg-[#ffcc00]/10 text-sm font-black tracking-[0.2em] text-[#ffcc00]">
+                {stat.icon}
+              </div>
+              <p className="text-4xl font-black text-[#ffcc00]">{stat.number}</p>
+              <p className="mt-3 text-sm font-bold uppercase text-white/58">{stat.label}</p>
             </article>
           ))}
         </div>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
-          {['Discovery first process', 'Responsive design delivery', 'AI ready business workflows'].map((item) => (
+          {deliveryPrinciples.map((item) => (
             <div key={item} className="rounded-lg border border-[#ffcc00]/25 bg-[#ffcc00]/10 px-5 py-4 text-sm font-bold text-white">
               {item}
             </div>
@@ -134,7 +113,7 @@ export function BusinessStorySection() {
             A small agency system built for practical digital growth.
           </h2>
           <p className="mt-6 text-base leading-8 text-white/64">
-            The story section gives your brand more depth: where you started, what you learned, and why your services now cover design, development, automation, and marketing together.
+            Vidhya Tech started with straightforward websites and grew into a wider mix of design, development, automation, and marketing support.
           </p>
           <Link href="/contact" className="vt-gold-button mt-8 px-7 py-3 text-sm font-black">
             Start A Project
@@ -142,7 +121,23 @@ export function BusinessStorySection() {
         </div>
 
         <div className="grid gap-5">
-          {storySteps.map((step) => (
+          {[
+            {
+              year: '01',
+              title: 'Started With Practical Websites',
+              text: 'The early focus was simple: build clean websites that help small brands look credible and generate enquiries.',
+            },
+            {
+              year: '02',
+              title: 'Added Automation And AI',
+              text: 'As client needs grew, form flows, chatbot logic, AI content support, and workflow automation became part of delivery.',
+            },
+            {
+              year: '03',
+              title: 'Built A Full Growth System',
+              text: 'Today the service mix spans design, development, marketing, video, and AI integration so launches feel connected.',
+            },
+          ].map((step) => (
             <article key={step.title} className="grid gap-5 rounded-lg border border-white/12 bg-white/[0.045] p-6 sm:grid-cols-[84px_1fr]">
               <div className="grid h-20 w-20 place-items-center rounded-md bg-[#ffcc00] text-2xl font-black text-black">
                 {step.year}
@@ -164,19 +159,21 @@ export function CertificatesSection() {
     <section id="certificates" className="border-b border-white/10 bg-[#030303] px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="Certificate Area"
+          eyebrow="Certificates"
           title="Credential Style Cards"
-          text="These are clearly marked placeholders. Replace them with your real certificates or awards before using them as proof."
+          text="Verified training and skills that support the work we deliver."
         />
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {certificatePlaceholders.map((certificate) => (
+          {CERTIFICATES.map((certificate) => (
             <article key={certificate.title} className="relative overflow-hidden rounded-lg border border-[#ffcc00]/30 bg-[linear-gradient(145deg,rgba(255,204,0,.16),rgba(255,255,255,.04)_48%,rgba(0,0,0,.2))] p-6">
               <div className="absolute right-5 top-5 h-16 w-16 rounded-full border-4 border-[#ffcc00]/45" />
-              <p className="text-base font-black uppercase text-[#ffcc00]">Demo Certificate</p>
-              <h3 className="mt-12 text-2xl font-black leading-tight text-white">{certificate.title}</h3>
-              <p className="mt-3 text-sm font-bold text-white/72">{certificate.issuer}</p>
-              <p className="mt-8 border-t border-white/12 pt-5 text-xs leading-6 text-white/52">{certificate.note}</p>
+              <p className="text-base font-black uppercase text-[#ffcc00]">Verified Skill</p>
+              <div className="mt-6 overflow-hidden rounded-xl bg-white p-2">
+                <img src={certificate.img} alt={certificate.title} className="h-[180px] w-full rounded-lg object-contain" />
+              </div>
+              <h3 className="mt-8 text-2xl font-black leading-tight text-white">{certificate.title}</h3>
+              <p className="mt-3 text-sm font-bold text-white/72">{certificate.subtitle}</p>
             </article>
           ))}
         </div>
@@ -190,29 +187,25 @@ export function ReviewsSection() {
     <section id="reviews" className="bg-[#080808] px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="Review Templates"
-          title="Client Review Style"
-          text="These cards show the review design. Replace the sample text with real client testimonials before publishing as customer proof."
+          eyebrow="What Clients Appreciate"
+          title="Delivery Themes"
+          text="The practical themes we hear most often: communication, clear design, and dependable follow-through."
         />
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {reviewTemplates.map((review, index) => (
-            <article key={`${review.name}-${index}`} className="rounded-lg border border-white/12 bg-white/[0.045] p-7">
+          {CLIENT_VALUE_CARDS.map((card, index) => (
+            <article key={`${card.title}-${index}`} className="rounded-lg border border-white/12 bg-white/[0.045] p-7">
               <div className="flex items-center justify-between gap-4">
-                <div className="flex gap-1 text-[#ffcc00]" aria-label="Five star sample rating">
-                  {'*****'.split('').map((star, starIndex) => (
-                    <span key={`${star}-${starIndex}`}>{star}</span>
-                  ))}
+                <div className={`grid h-12 w-12 place-items-center rounded-full ${card.avatarClass} text-sm font-black text-white`}>
+                  {card.initials}
                 </div>
                 <span className="rounded-full border border-[#ffcc00]/35 px-3 py-1 text-xs font-black uppercase text-[#ffcc00]">
-                  Sample
+                  Theme
                 </span>
               </div>
-              <p className="mt-6 text-base leading-8 text-white/72">&quot;{review.text}&quot;</p>
-              <div className="mt-8 border-t border-white/10 pt-5">
-                <p className="font-black text-white">{review.name}</p>
-                <p className="mt-1 text-sm text-white/52">{review.role}</p>
-              </div>
+              <h3 className="mt-6 text-2xl font-black text-white">{card.title}</h3>
+              <p className="mt-1 text-sm font-bold text-[#ffcc00]">{card.context}</p>
+              <p className="mt-4 text-base leading-8 text-white/72">{card.text}</p>
             </article>
           ))}
         </div>
@@ -234,7 +227,7 @@ export function LocationSection() {
 
           <div className="mt-8 grid gap-4 text-sm text-white/70">
             <a href="tel:+917817097517" className="transition hover:text-[#ffcc00]">Phone: +91 7817097517</a>
-            <a href="mailto:vidhyatech1@gmail.com" className="transition hover:text-[#ffcc00]">Email: vidhyatech1@gmail.com</a>
+            <a href={`mailto:${SITE_EMAIL}`} className="transition hover:text-[#ffcc00]">Email: {SITE_EMAIL}</a>
             <p>Service Area: India and remote clients</p>
           </div>
         </div>

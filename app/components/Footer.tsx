@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SITE_EMAIL } from '@/lib/seo';
 
 export default function Footer() {
   return (
@@ -31,7 +32,7 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-black uppercase text-[#ffcc00]">Contact Info</h3>
           <div className="mt-5 grid gap-3 text-sm text-white/62">
-            <a href="mailto:vidhyatech1@gmail.com" className="transition hover:text-[#ffcc00]">vidhyatech1@gmail.com</a>
+            <a href={`mailto:${SITE_EMAIL}`} className="transition hover:text-[#ffcc00]">{SITE_EMAIL}</a>
             <a href="tel:+917817097517" className="transition hover:text-[#ffcc00]">+91 7817097517</a>
             <p>India</p>
           </div>

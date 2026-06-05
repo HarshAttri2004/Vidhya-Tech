@@ -1,3 +1,5 @@
+import { SITE_URL } from './seo';
+
 export function SocialShareImage() {
   const pillStyle = {
     display: 'flex',
@@ -133,7 +135,7 @@ export function SocialShareImage() {
           </div>
 
           <div style={{ fontSize: '22px', fontWeight: 700, color: 'rgba(255,255,255,0.84)' }}>
-            vidhyatech1@gmail.com
+            {SITE_URL.replace(/^https?:\/\//, '')}
           </div>
         </div>
       </div>

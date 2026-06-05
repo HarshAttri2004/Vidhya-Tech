@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, '');
 const normalizedSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, '') ??
-  'https://vidhyatech.com';
+  configuredSiteUrl && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(configuredSiteUrl)
+    ? configuredSiteUrl
+    : 'https://www.vidhyatech.com';
 
 export const SITE_URL = normalizedSiteUrl;
 export const SITE_URL_OBJECT = new URL(normalizedSiteUrl);
@@ -20,6 +22,7 @@ export const SITE_KEYWORDS = [
   'SEO',
   'India',
 ];
+// TODO: Switch to a domain email once email hosting is set up.
 export const SITE_EMAIL = 'vidhyatech1@gmail.com';
 export const SITE_PHONE = '+91 7817097517';
 export const SITE_LINKEDIN =
@@ -37,6 +40,9 @@ export function absoluteUrl(path: string): string {
   return new URL(path, SITE_URL_OBJECT).toString();
 }
 
+export const SITE_OG_IMAGE = absoluteUrl('/opengraph-image');
+export const SITE_TWITTER_IMAGE = absoluteUrl('/twitter-image');
+
 export function buildRouteMetadata({
   title,
   description,
@@ -52,13 +58,14 @@ export function buildRouteMetadata({
     description,
     keywords: mergedKeywords,
     alternates: {
-      canonical: path,
+      canonical: absoluteUrl(path),
     },
     openGraph: {
       type: 'website',
       locale: 'en_IN',
       siteName: SITE_NAME,
-      url: path,
+      url: absoluteUrl(path),
+      images: [SITE_OG_IMAGE],
       title: fullTitle,
       description,
     },
@@ -66,6 +73,7 @@ export function buildRouteMetadata({
       card: 'summary_large_image',
       title: fullTitle,
       description,
+      images: [SITE_TWITTER_IMAGE],
     },
     robots: noindex
       ? {
