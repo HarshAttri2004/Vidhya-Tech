@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 
 const normalizedSiteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, '') ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ??
-  'http://localhost:3000';
+  'https://vidhyatech.com';
 
 export const SITE_URL = normalizedSiteUrl;
 export const SITE_URL_OBJECT = new URL(normalizedSiteUrl);
