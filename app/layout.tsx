@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     default: SITE_FULL_TITLE,
     template: '%s | Vidhya Tech',
   },
+  icons: {
+    icon: "/favicon.png",
+  },
+
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
@@ -125,23 +129,23 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-  {children}
+        {children}
 
-  {/* Google Analytics */}
-  <Script
-    src="https://www.googletagmanager.com/gtag/js?id=G-8H42VMYLK4"
-    strategy="afterInteractive"
-  />
-  <Script id="google-analytics" strategy="afterInteractive">
-    {`
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8H42VMYLK4"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-8H42VMYLK4');
     `}
-  </Script>
-</body>
+        </Script>
+      </body>
     </html>
   );
 }
