@@ -209,7 +209,7 @@ const HeroCarousel = () => {
     </div>
   );
 };
-// Animated Stats Component
+// Animated Stats Component (now static for faster first paint)
 const AnimatedStats = () => {
   const stats = [
     { number: SITE_STATS.projects, label: 'Projects Completed' },
@@ -217,43 +217,15 @@ const AnimatedStats = () => {
     { number: SITE_STATS.years, label: 'Years Experience' },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8 },
-    },
-  };
-
   return (
-    <motion.div
-      className="grid grid-cols-3 gap-4 pt-8"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
+    <div className="grid grid-cols-3 gap-4 pt-8">
       {stats.map((stat, index) => (
-        <motion.div key={index} variants={itemVariants} className="text-center">
-          <div className="text-4xl md:text-5xl font-black text-[#ffcc00]">
-            {stat.number}
-          </div>
+        <div key={index} className="text-center">
+          <div className="text-4xl md:text-5xl font-black text-[#ffcc00]">{stat.number}</div>
           <p className="text-sm text-white/60 mt-2">{stat.label}</p>
-        </motion.div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 };
 
@@ -266,47 +238,20 @@ export default function Home() {
       <section className="relative flex-1 px-5 py-16 sm:px-6 lg:px-8 min-h-screen flex items-center">
         <div className="mx-auto max-w-7xl w-full">
           <div className="grid gap-12 md:grid-cols-2 md:gap-8 items-center">
-            {/* Left Content */}
-            <motion.div
-              className="space-y-6 z-10"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-              <motion.div
-                className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-              >
+            {/* Left Content (static for fast first paint) */}
+            <div className="space-y-6 z-10">
+              <div className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
                 Digital Solutions That Drive Real Growth
-              </motion.div>
+              </div>
 
-              <motion.h1
-                className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
                 Vidhya Tech -{' '}
-                <motion.span
-                  className="text-[#ffcc00] block"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                >
-                  Web Development & AI Agency in India
-                </motion.span>
-              </motion.h1>
+                <span className="text-[#ffcc00] block">Web Development & AI Agency in India</span>
+              </h1>
 
-              <motion.p
-                className="text-lg text-white/70 max-w-lg leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
+              <p className="text-lg text-white/70 max-w-lg leading-relaxed">
                 Vidhya Tech is a leading web development and AI automation agency in India, helping businesses grow with modern websites, digital marketing, and smart technology solutions.
-              </motion.p>
+              </p>
               {/* SEO hidden text */}
               <p className="hidden">
                 Vidhya Tech offers web development, AI automation, digital marketing,
@@ -317,12 +262,7 @@ export default function Home() {
               <AnimatedStats />
 
               {/* CTA Buttons */}
-              <motion.div
-                className="flex gap-4 pt-8 flex-wrap"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
+              <div className="flex gap-4 pt-8 flex-wrap">
                 <Link
                   href="/services"
                   className="vt-gold-button px-8 py-3 font-black rounded-lg hover:scale-105 transition-transform"
@@ -335,17 +275,13 @@ export default function Home() {
                 >
                   View Portfolio
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Right Carousel */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
+            <div>
               <HeroCarousel />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

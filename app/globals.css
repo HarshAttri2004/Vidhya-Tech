@@ -140,3 +140,30 @@ section[id] {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Lightweight utility animations used across the site */
+@keyframes vtFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vtSlideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: vtFadeIn 700ms ease forwards;
+}
+
+.animate-slideUp {
+  animation: vtSlideUp 700ms ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeIn,
+  .animate-slideUp {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
