@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   BUSINESS_TYPES,
   CERTIFICATES,
@@ -170,7 +171,7 @@ export function CertificatesSection() {
               <div className="absolute right-5 top-5 h-16 w-16 rounded-full border-4 border-[#ffcc00]/45" />
               <p className="text-base font-black uppercase text-[#ffcc00]">Verified Skill</p>
               <div className="mt-6 overflow-hidden rounded-xl bg-white p-2">
-                <img src={certificate.img} alt={certificate.title} className="h-[180px] w-full rounded-lg object-contain" />
+                <Image src={certificate.img} alt={certificate.title} className="h-[180px] w-full rounded-lg object-contain" width={300} height={180} quality={60} sizes="(max-width: 768px) 100vw, 33vw" />
               </div>
               <h3 className="mt-8 text-2xl font-black leading-tight text-white">{certificate.title}</h3>
               <p className="mt-3 text-sm font-bold text-white/72">{certificate.subtitle}</p>

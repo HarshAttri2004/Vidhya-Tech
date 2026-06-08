@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const designs = [
@@ -136,10 +136,14 @@ function CardContent({ design }: { design: DesignItem }) {
   return (
     <>
       <div className="relative h-[200px] overflow-hidden">
-        <img
+        <Image
           src={design.image}
           alt={design.title}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+          width={600}
+          height={200}
+          quality={60}
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
 

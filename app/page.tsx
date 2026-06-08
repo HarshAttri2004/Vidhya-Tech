@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Link from 'next/link';
@@ -85,7 +86,7 @@ const AnimatedCircle = ({ delay = 0, size = 300, opacity = 0.1 }) => {
       style={{
         width: size,
         height: size,
-      
+
       }}
       animate={{
         scale: [1, 1.5, 0.8, 1],
@@ -116,13 +117,13 @@ const HeroCarousel = () => {
   return (
     <div className="relative flex items-center justify-center w-full h-[500px] md:h-[650px] overflow-hidden">
 
-    
-     {/* Background Glow */}
+
+      {/* Background Glow */}
       <div className="absolute right-[10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-[#ffcc00]/40 bg-[#ffcc00]/10 blur-3xl z-0" />
 
       {/* Animated Ring */}
       <motion.div
-          className="absolute right-[10%] top-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border-2 border-[#ffcc00]/40 z-0"
+        className="absolute right-[10%] top-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border-2 border-[#ffcc00]/40 z-0"
         animate={{
           scale: [1, 1.05, 1],
           rotate: [0, 3, 0],
@@ -150,7 +151,7 @@ const HeroCarousel = () => {
         >
           {/* Main Card */}
           <motion.div
-          className="relative z-10 w-full max-w-[520px] h-[350px] md:h-[500px] rounded-[32px] overflow-hidden border-4 border-white/90 shadow-[0_0_60px_rgba(255,204,0,0.15)]"
+            className="relative z-10 w-full max-w-[520px] h-[350px] md:h-[500px] rounded-[32px] overflow-hidden border-4 border-white/90 shadow-[0_0_60px_rgba(255,204,0,0.15)]"
             animate={{
               y: [0, -10, 0],
             }}
@@ -161,10 +162,14 @@ const HeroCarousel = () => {
             }}
           >
             {/* Image */}
-            <img
+            <Image
               src={slide.image}
-              alt={slide.title}
+              alt={slide.title || 'Hero slide'}
               className="w-full h-full object-cover"
+              width={600}
+              height={500}
+              quality={60}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
 
             {/* Overlay */}
@@ -194,11 +199,10 @@ const HeroCarousel = () => {
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`transition-all duration-300 rounded-full ${
-              currentIndex === index
+            className={`transition-all duration-300 rounded-full ${currentIndex === index
                 ? "w-10 h-3 bg-[#ffcc00]"
                 : "w-3 h-3 bg-white/40"
-            }`}
+              }`}
           />
         ))}
       </div>
@@ -284,14 +288,14 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
               >
-                We Build Digital{' '}
+                Vidhya Tech -{' '}
                 <motion.span
                   className="text-[#ffcc00] block"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
                 >
-                  Solutions That Scale
+                  Web Development & AI Agency in India
                 </motion.span>
               </motion.h1>
 
@@ -301,8 +305,13 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
               >
-                Vidhya Tech is a full-service digital agency helping brands stand out in the digital world through innovative websites, AI solutions, and creative marketing.
+                Vidhya Tech is a leading web development and AI automation agency in India, helping businesses grow with modern websites, digital marketing, and smart technology solutions.
               </motion.p>
+              {/* SEO hidden text */}
+              <p className="hidden">
+                Vidhya Tech offers web development, AI automation, digital marketing,
+                social media management, and video editing services in India.
+              </p>
 
               {/* Stats */}
               <AnimatedStats />
@@ -343,203 +352,227 @@ export default function Home() {
 
       {/* ============ SERVICES SECTION ============ */}
       {/* SERVICES SECTION */}
-<section className="w-full bg-black py-20 px-6 md:px-12">
-  <div className="max-w-7xl mx-auto">
+      <section className="w-full bg-black py-20 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
 
-    {/* Heading */}
-    <div className="text-center mb-14">
-      <h2 className="text-4xl md:text-6xl font-black text-white">
-        Our <span className="text-yellow-400">Services</span>
-      </h2>
+          {/* Heading */}
+          <div className="text-center mb-14">
+            <h2 className="text-4xl md:text-6xl font-black text-white">
+              Our <span className="text-yellow-400">Services</span>
+            </h2>
 
-      <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
-        Complete digital solutions to grow your business
-        and deliver measurable results.
-      </p>
-    </div>
-
-    {/* Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      {/* CARD 1 */}
-      <div className="group rounded-[28px] overflow-hidden border border-blue-500/40 bg-[#07152c] hover:scale-[1.02] transition duration-300">
-
-        {/* Image */}
-        <div className="relative h-[180px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
-            alt="Web Development"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-[#07152c] to-transparent" />
-        </div>
-
-        {/* Content */}
-        <div className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-blue-600/30 border border-blue-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
-            WEB
+            <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
+              Complete digital solutions to grow your business
+              and deliver measurable results.
+            </p>
           </div>
 
-          <h3 className="text-white text-2xl font-bold mb-3">
-            Web Development
-          </h3>
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          <p className="text-gray-300 text-sm leading-relaxed">
-            We build fast, responsive websites that engage and
-            convert your business needs.
-          </p>
-        </div>
-      </div>
+            {/* CARD 1 */}
+            <div className="group rounded-[28px] overflow-hidden border border-blue-500/40 bg-[#07152c] hover:scale-[1.02] transition duration-300">
 
-      {/* CARD 2 */}
-      <div className="group rounded-[28px] overflow-hidden border border-purple-500/40 bg-[#210433] hover:scale-[1.02] transition duration-300">
+              {/* Image */}
+              <div className="relative h-[180px] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=600&auto=format&fit=crop"
+                  alt="Web Development"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  width={600}
+                  height={180}
+                  quality={60}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
 
-        <div className="relative h-[180px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop"
-            alt="AI Automation"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07152c] to-transparent" />
+              </div>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-[#210433] to-transparent" />
-        </div>
+              {/* Content */}
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-full bg-blue-600/30 border border-blue-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+                  WEB
+                </div>
 
-        <div className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
-            AI
+                <h3 className="text-white text-2xl font-bold mb-3">
+                  Web Development
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  We build fast, responsive websites that engage and
+                  convert your business needs.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 2 */}
+            <div className="group rounded-[28px] overflow-hidden border border-purple-500/40 bg-[#210433] hover:scale-[1.02] transition duration-300">
+
+              <div className="relative h-[180px] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop"
+                  alt="AI Automation"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  width={600}
+                  height={180}
+                  quality={60}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#210433] to-transparent" />
+              </div>
+
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+                  AI
+                </div>
+
+                <h3 className="text-white text-2xl font-bold mb-3">
+                  AI Automation
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Automate your business workflows with cutting-edge
+                  AI solutions.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 3 */}
+            <div className="group rounded-[28px] overflow-hidden border border-pink-500/40 bg-[#330017] hover:scale-[1.02] transition duration-300">
+
+              <div className="relative h-[180px] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop"
+                  alt="Digital Marketing"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  width={600}
+                  height={180}
+                  quality={60}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#330017] to-transparent" />
+              </div>
+
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-full bg-pink-600/30 border border-pink-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+                  MKT
+                </div>
+
+                <h3 className="text-white text-2xl font-bold mb-3">
+                  Digital Marketing
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Grow your brand with result-driven marketing
+                  strategies.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 4 */}
+            <div className="group rounded-[28px] overflow-hidden border border-cyan-500/40 bg-[#03242b] hover:scale-[1.02] transition duration-300">
+
+              <div className="relative h-[180px] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=600&auto=format&fit=crop"
+                  alt="Video Editing"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  width={600}
+                  height={180}
+                  quality={60}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#03242b] to-transparent" />
+              </div>
+
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+                  VID
+                </div>
+
+                <h3 className="text-white text-2xl font-bold mb-3">
+                  Video Editing
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Professional video editing services for YouTube,
+                  Reels and social media.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 5 */}
+            <div className="group rounded-[28px] overflow-hidden border border-orange-500/40 bg-[#2b1200] hover:scale-[1.02] transition duration-300">
+
+              <div className="relative h-[180px] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=600&auto=format&fit=crop"
+                  alt="Social Media"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  width={600}
+                  height={180}
+                  quality={60}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2b1200] to-transparent" />
+              </div>
+
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-full bg-orange-600/30 border border-orange-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+                  SOC
+                </div>
+
+                <h3 className="text-white text-2xl font-bold mb-3">
+                  Social Media Management
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  We manage your social media accounts and boost
+                  your online presence.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 6 */}
+            <div className="group rounded-[28px] overflow-hidden border border-green-500/40 bg-[#03240f] hover:scale-[1.02] transition duration-300">
+
+              <div className="relative h-[180px] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?q=80&w=600&auto=format&fit=crop"
+                  alt="AI Integration"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  width={600}
+                  height={180}
+                  quality={60}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#03240f] to-transparent" />
+              </div>
+
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-full bg-green-600/30 border border-green-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
+                  INT
+                </div>
+
+                <h3 className="text-white text-2xl font-bold mb-3">
+                  AI Integration
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Integrate AI into your business for smarter
+                  solutions.
+                </p>
+              </div>
+            </div>
+
           </div>
-
-          <h3 className="text-white text-2xl font-bold mb-3">
-            AI Automation
-          </h3>
-
-          <p className="text-gray-300 text-sm leading-relaxed">
-            Automate your business workflows with cutting-edge
-            AI solutions.
-          </p>
         </div>
-      </div>
-
-      {/* CARD 3 */}
-      <div className="group rounded-[28px] overflow-hidden border border-pink-500/40 bg-[#330017] hover:scale-[1.02] transition duration-300">
-
-        <div className="relative h-[180px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
-            alt="Digital Marketing"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-[#330017] to-transparent" />
-        </div>
-
-        <div className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-pink-600/30 border border-pink-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
-            MKT
-          </div>
-
-          <h3 className="text-white text-2xl font-bold mb-3">
-            Digital Marketing
-          </h3>
-
-          <p className="text-gray-300 text-sm leading-relaxed">
-            Grow your brand with result-driven marketing
-            strategies.
-          </p>
-        </div>
-      </div>
-
-      {/* CARD 4 */}
-      <div className="group rounded-[28px] overflow-hidden border border-cyan-500/40 bg-[#03242b] hover:scale-[1.02] transition duration-300">
-
-        <div className="relative h-[180px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop"
-            alt="Video Editing"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-[#03242b] to-transparent" />
-        </div>
-
-        <div className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
-            VID
-          </div>
-
-          <h3 className="text-white text-2xl font-bold mb-3">
-            Video Editing
-          </h3>
-
-          <p className="text-gray-300 text-sm leading-relaxed">
-            Professional video editing services for YouTube,
-            Reels and social media.
-          </p>
-        </div>
-      </div>
-
-      {/* CARD 5 */}
-      <div className="group rounded-[28px] overflow-hidden border border-orange-500/40 bg-[#2b1200] hover:scale-[1.02] transition duration-300">
-
-        <div className="relative h-[180px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=1200&auto=format&fit=crop"
-            alt="Social Media"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-[#2b1200] to-transparent" />
-        </div>
-
-        <div className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-orange-600/30 border border-orange-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
-            SOC
-          </div>
-
-          <h3 className="text-white text-2xl font-bold mb-3">
-            Social Media Management
-          </h3>
-
-          <p className="text-gray-300 text-sm leading-relaxed">
-            We manage your social media accounts and boost
-            your online presence.
-          </p>
-        </div>
-      </div>
-
-      {/* CARD 6 */}
-      <div className="group rounded-[28px] overflow-hidden border border-green-500/40 bg-[#03240f] hover:scale-[1.02] transition duration-300">
-
-        <div className="relative h-[180px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?q=80&w=1200&auto=format&fit=crop"
-            alt="AI Integration"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-[#03240f] to-transparent" />
-        </div>
-
-        <div className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-green-600/30 border border-green-400 flex items-center justify-center text-xs font-black tracking-[0.2em] text-white mb-4">
-            INT
-          </div>
-
-          <h3 className="text-white text-2xl font-bold mb-3">
-            AI Integration
-          </h3>
-
-          <p className="text-gray-300 text-sm leading-relaxed">
-            Integrate AI into your business for smarter
-            solutions.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* ============ PORTFOLIO SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
@@ -583,10 +616,14 @@ export default function Home() {
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      width={200}
+                      height={200}
+                      quality={60}
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -767,50 +804,54 @@ export default function Home() {
 
       {/* ============ CERTIFICATIONS SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black">
-  <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl">
 
-    {/* Heading */}
-    <div className="text-center mb-20">
-      <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-        CREDENTIALS
-      </p>
+          {/* Heading */}
+          <div className="text-center mb-20">
+            <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+              CREDENTIALS
+            </p>
 
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
-        Our Certifications & Skills
-      </h2>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+              Our Certifications & Skills
+            </h2>
 
-      <p className="text-white/70 max-w-3xl mx-auto text-lg">
-        Industry-recognized certifications and expertise that drive our work.
-      </p>
-    </div>
-
-    {/* Grid */}
-    <div className="grid gap-8 md:grid-cols-3">
-      {CERTIFICATES.map((cert) => (
-        <div
-          key={cert.title}
-          className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-[#ffcc00]/50 transition-all duration-300"
-        >
-          <div className="rounded-xl overflow-hidden mb-5 bg-white p-2">
-            <img
-              src={cert.img}
-              alt={cert.title}
-              className="w-full h-[180px] object-contain rounded-lg"
-            />
+            <p className="text-white/70 max-w-3xl mx-auto text-lg">
+              Industry-recognized certifications and expertise that drive our work.
+            </p>
           </div>
 
-          <h3 className="text-lg md:text-xl font-bold text-white text-center">
-            {cert.title}
-          </h3>
+          {/* Grid */}
+          <div className="grid gap-8 md:grid-cols-3">
+            {CERTIFICATES.map((cert) => (
+              <div
+                key={cert.title}
+                className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-[#ffcc00]/50 transition-all duration-300"
+              >
+                <div className="rounded-xl overflow-hidden mb-5 bg-white p-2">
+                  <Image
+                    src={cert.img}
+                    alt={cert.title}
+                    className="w-full h-[180px] object-contain rounded-lg"
+                    width={300}
+                    height={180}
+                    quality={60}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
 
-          <p className="text-[#ffcc00] text-sm font-bold text-center mt-2 uppercase tracking-widest">
-            {cert.subtitle}
-          </p>
+                <h3 className="text-lg md:text-xl font-bold text-white text-center">
+                  {cert.title}
+                </h3>
+
+                <p className="text-[#ffcc00] text-sm font-bold text-center mt-2 uppercase tracking-widest">
+                  {cert.subtitle}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>      {/* ============ TEAM SECTION ============ */}
+      </section>      {/* ============ TEAM SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -852,10 +893,14 @@ export default function Home() {
                     transition={{ duration: 3, delay: index * 0.3, repeat: Infinity }}
                   >
                     <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
-                      <img
+                      <Image
                         src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover"
+                        width={96}
+                        height={96}
+                        quality={60}
+                        sizes="96px"
                       />
                     </div>
                   </motion.div>
@@ -970,7 +1015,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.8 }}
             viewport={{ once: true }}
           >
-             Let&apos;s discuss how we can help you achieve your digital goals with innovative solutions tailored to your unique business needs.
+            Let&apos;s discuss how we can help you achieve your digital goals with innovative solutions tailored to your unique business needs.
           </motion.p>
 
           <motion.div
@@ -988,10 +1033,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-         {/* <VoiceAgent /> */}
+      {/* <VoiceAgent /> */}
       <Footer />
     </div>
   );
 }
-
-

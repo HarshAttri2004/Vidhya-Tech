@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { FEATURED_PROJECTS } from '@/lib/site-data';
 
 interface PortfolioProject {
@@ -103,7 +104,7 @@ export default function PortfolioPage() {
             <article key={project.id} className="group overflow-hidden rounded-lg border border-white/15 bg-white/[0.035] transition duration-300 hover:-translate-y-1 hover:border-[#ffcc00]/65">
               <div className="relative h-52 overflow-hidden bg-[#111]">
                 {project.image ? (
-                  <img src={project.image} alt={project.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                  <Image src={project.image} alt={project.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" width={400} height={208} quality={60} sizes="(max-width: 768px) 100vw, 50vw" />
                 ) : (
                   <div className="grid h-full place-items-center bg-[linear-gradient(135deg,#151515,#282000)] px-6 text-center text-lg font-black text-white">
                     {project.title}
