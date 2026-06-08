@@ -640,22 +640,12 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <motion.div
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {SITE_STAT_CARDS.map((stat, index) => (
-              <motion.div
+              <div
                 key={stat.label}
-                className="group relative rounded-2xl border border-[#ffcc00]/30 bg-white/[0.02] backdrop-blur-sm hover:border-[#ffcc00]/80 p-6 transition-all duration-300"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.08, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.03, y: -8 }}
+                className={`opacity-0 animate-fadeIn group relative rounded-2xl border border-[#ffcc00]/30 bg-white/[0.02] backdrop-blur-sm p-6 transition duration-300 hover:scale-105 hover:-translate-y-2 hover:border-[#ffcc00]/80`}
+                style={{ animationDelay: `${index * 80}ms` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -676,9 +666,9 @@ export default function Home() {
                     {stat.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>      {/* ============ OPTION B: PROJECT CATEGORIES (ALTERNATIVE) ============ */}
       {/* Uncomment to use this version instead of Option A */}
