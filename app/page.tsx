@@ -199,6 +199,8 @@ const HeroCarousel = () => {
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            aria-current={currentIndex === index ? "true" : "false"}
             className={`transition-all duration-300 rounded-full ${currentIndex === index
                 ? "w-10 h-3 bg-[#ffcc00]"
                 : "w-3 h-3 bg-white/40"

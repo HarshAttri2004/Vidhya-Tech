@@ -88,7 +88,7 @@ const organizationJsonLd = {
   '@type': 'Organization',
   name: 'Vidhya Tech',
   url: 'https://www.vidhyatech.com',
-  logo: 'https://www.vidhyatech.com/images/logo.jpg',
+  logo: 'https://www.vidhyatech.com/public/logo.png',
   sameAs: [
     SITE_LINKEDIN,
     'https://www.instagram.com/your-instagram' // replace
@@ -103,6 +103,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+       {/* ✅ Preconnect for Google Fonts (Speed Boost) */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+
+
         {/* Existing */}
         <script
           type="application/ld+json"
@@ -132,9 +137,9 @@ export default function RootLayout({
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8H42VMYLK4"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
