@@ -62,7 +62,7 @@ const professionalServiceJsonLd = {
   '@type': 'ProfessionalService',
   name: SITE_NAME,
   url: SITE_URL,
-  logo: absoluteUrl('/images/logo.jpg'),
+  logo: absoluteUrl('/logo.png'),  // ✅ Correct
   description: SITE_DESCRIPTION,
   email: SITE_EMAIL,
   telephone: SITE_PHONE,
@@ -88,10 +88,9 @@ const organizationJsonLd = {
   '@type': 'Organization',
   name: 'Vidhya Tech',
   url: 'https://www.vidhyatech.com',
-  logo: 'https://www.vidhyatech.com/public/logo.png',
+  logo: absoluteUrl('/logo.png'),  // ✅ Correct
   sameAs: [
     SITE_LINKEDIN,
-    'https://www.instagram.com/your-instagram' // replace
   ],
 };
 
