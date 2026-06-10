@@ -12,6 +12,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        destination: "https://www.vidhyatech.com/:path*",
+        permanent: true,
+        has: [
+          {
+            type: "host",
+            value: "vidhyatech.com",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
