@@ -22,85 +22,199 @@ export const metadata: Metadata = {
     default: SITE_FULL_TITLE,
     template: '%s | Vidhya Tech',
   },
+  // ✅ NEW: Proper icon configuration (removed query strings)
   icons: {
-    icon: "/favicon.ico?v=2",
+    icon: [
+      { url: '/favicon.ico', type: 'image/x-icon' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/apple-icon.png',
+    shortcut: '/favicon.ico',
   },
+  // ✅ NEW: Manifests (tells browsers about your app)
+  manifest: '/manifest.json',
+  
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  authors: [{ name: SITE_NAME }],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: 'technology',
   keywords: SITE_KEYWORDS,
+  
+  // ✅ NEW: Verification tags
+  verification: {
+    // Add your Google Search Console verification code here if available
+    // google: 'your-google-verification-code',
+  },
+  
+  // ✅ IMPROVED: Alternate links for locale/canonical
   alternates: {
     canonical: '/',
+    types: {
+      'application/rss+xml': [
+        { url: '/feed.xml', title: `${SITE_NAME} Blog` },
+      ],
+    },
   },
+  
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     siteName: SITE_NAME,
-    url: '/',
-    images: [SITE_OG_IMAGE],
     title: SITE_FULL_TITLE,
     description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    images: [
+      {
+        url: SITE_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: SITE_FULL_TITLE,
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_FULL_TITLE,
     description: SITE_DESCRIPTION,
     images: [SITE_TWITTER_IMAGE],
+    creator: '@vidhyatech',
+    site: '@vidhyatech',
   },
+  
+  // ✅ NEW: Comprehensive robots configuration
   robots: {
     index: true,
     follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  
+  // ✅ NEW: Viewport configuration
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
+  
+  // ✅ NEW: Color scheme preferences
+  colorScheme: 'light dark',
+  
+  // ✅ NEW: Format detection settings
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+    date: true,
+    url: true,
   },
 };
 
-// ✅ Existing Schema
-const professionalServiceJsonLd = {
+// 🔥 PRIMARY SCHEMA: Organization (Most Important for Google Knowledge Panel)
+const organizationJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: SITE_NAME,
+  '@type': 'Organization',
+  '@id': SITE_URL,
+  name: SITE_NAME, // 🎯 Explicit: This is your brand name
+  alternateName: ['Vidhya Tech', 'vidhyatech', 'Vidhya Tech Agency'],
   url: SITE_URL,
-  logo: absoluteUrl('/logo.png'),  // ✅ Correct
+  logo: {
+    '@type': 'ImageObject',
+    url: absoluteUrl('/logo.png'),
+    width: 512,
+    height: 512,
+  },
+  image: absoluteUrl('/logo.png'),
   description: SITE_DESCRIPTION,
   email: SITE_EMAIL,
   telephone: SITE_PHONE,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Service',
+    telephone: SITE_PHONE,
+    email: SITE_EMAIL,
+  },
   sameAs: [SITE_LINKEDIN],
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'IN',
   },
+  foundingDate: '2023',
+  knowsAbout: [
+    'Web Development',
+    'AI Automation',
+    'Digital Marketing',
+    'Software Development',
+    'SEO',
+  ],
+  areaServed: 'IN',
+  serviceType: ['Web Development', 'AI Automation', 'Digital Marketing'],
 };
 
-// ✅ Existing Schema
+// 🔥 SECONDARY SCHEMA: Website (Tells Google the URL and site name)
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Vidhya Tech',
+  '@id': SITE_URL,
+  name: SITE_NAME, // 🎯 Explicit site name
+  url: SITE_URL,
   alternateName: 'vidhyatech.com',
-  url: 'https://www.vidhyatech.com',
   description: SITE_DESCRIPTION,
+  isPartOf: {
+    '@id': SITE_URL,
+  },
   potentialAction: {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://www.vidhyatech.com/?s={search_term_string}',
+      urlTemplate: `${SITE_URL}/?s={search_term_string}`,
     },
     'query-input': 'required name=search_term_string',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl('/logo.png'),
+    },
+  },
 };
 
-// 🔥 NEW IMPORTANT (ADD THIS)
-const organizationJsonLd = {
+// 🔥 TERTIARY SCHEMA: Professional Service (About your services)
+const professionalServiceJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Vidhya Tech',
-  url: 'https://www.vidhyatech.com',
-  logo: absoluteUrl('/logo.png'),  // ✅ Correct
-  sameAs: [
-    SITE_LINKEDIN,
-  ],
+  '@type': 'ProfessionalService',
+  '@id': SITE_URL,
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: {
+    '@type': 'ImageObject',
+    url: absoluteUrl('/logo.png'),
+    width: 512,
+    height: 512,
+  },
+  description: SITE_DESCRIPTION,
+  email: SITE_EMAIL,
+  telephone: SITE_PHONE,
+  areaServed: 'IN',
+  availableLanguage: ['en', 'hi'],
+  sameAs: [SITE_LINKEDIN],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IN',
+  },
 };
 
 export default function RootLayout({
@@ -115,26 +229,31 @@ export default function RootLayout({
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
 
-
-        {/* Existing */}
+        {/* ✅ CRITICAL: JSON-LD Structured Data (in correct order) */}
+        {/* 1. ORGANIZATION (Most important - defines brand name) */}
         <script
+          key="organization-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(professionalServiceJsonLd),
+            __html: JSON.stringify(organizationJsonLd),
           }}
         />
+        
+        {/* 2. WEBSITE (Reinforces site name and purpose) */}
         <script
+          key="website-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(websiteJsonLd),
           }}
         />
-
-        {/* 🔥 NEW ADD THIS */}
+        
+        {/* 3. PROFESSIONAL SERVICE (Describes services) */}
         <script
+          key="service-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
+            __html: JSON.stringify(professionalServiceJsonLd),
           }}
         />
       </head>
