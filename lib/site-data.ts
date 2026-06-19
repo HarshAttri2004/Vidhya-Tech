@@ -127,7 +127,7 @@ export const TEAM_MEMBERS = [
   {
     id: 2,
     name: 'Harsh Vasisth',
-    role: 'Co-Founder & Technical Architect',
+    role: 'Founder & Technical Architect',
     image: '/images/Harsh sir9.jpeg',
     linkedin: 'https://www.linkedin.com/in/harsh-vashisth-9259b7268/',
     description: 'Architects robust software solutions and seamless full-stack platforms, ensuring reliability and innovation at the core.',

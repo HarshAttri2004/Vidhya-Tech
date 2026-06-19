@@ -68,7 +68,9 @@ export default function Header() {
 
         {/* Navigation Links */}
         <div
-          className={`${isOpen ? 'flex' : 'hidden'} absolute inset-x-5 top-[80px] flex-col gap-1 rounded-xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-4 shadow-2xl md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none lg:gap-9`}
+          className={`${
+            isOpen ? 'flex' : 'hidden'
+          } absolute inset-x-5 top-[80px] flex-col gap-1 rounded-xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-4 shadow-2xl md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:backdrop-blur-none md:p-0 md:shadow-none lg:gap-9`}
         >
           {navItems.map((item) => {
             const isActive = pathname === item.match || (pathname === '/' && item.label === 'Home');
@@ -78,17 +80,24 @@ export default function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`relative rounded-md px-3 py-2 text-sm font-bold transition-colors md:px-0 ${isActive ? 'text-[#ffcc00]' : 'text-gray-300 hover:text-white'}`}
+                className={`relative rounded-md px-3 py-2 text-sm font-bold transition-colors md:px-0 ${
+                  isActive ? 'text-[#ffcc00]' : 'text-gray-300 hover:text-white'
+                }`}
               >
                 {item.label}
-                <span className={`absolute bottom-0 left-3 h-[2px] bg-[#ffcc00] transition-all duration-300 md:left-0 ${isActive ? 'w-full' : 'w-0'}`} />
+                <span
+                  className={`absolute bottom-0 left-3 h-[2px] bg-[#ffcc00] transition-all duration-300 md:left-0 ${
+                    isActive ? 'w-full' : 'w-0'
+                  }`}
+                />
               </Link>
             );
           })}
-          <Link 
-            href="/contact" 
-            onClick={() => setIsOpen(false)} 
-            className="vt-gold-button mt-4 px-6 py-2.5 text-center text-sm font-black md:mt-0 rounded-lg hover:scale-105 transition-transform shadow-[0_0_15px_rgba(255,204,0,0.3)]"
+          <Link
+            href="/contact"
+            onClick={() => setIsOpen(false)}
+            // 👇 Yahan se extra shadow nikaal di hai taaki glow/rays na aayein
+            className="vt-gold-button mt-4 px-6 py-2.5 text-center text-sm font-black md:mt-0 rounded-lg hover:scale-105 transition-transform"
           >
             Get In Touch
           </Link>

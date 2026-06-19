@@ -651,18 +651,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Premium CTA Banner */}
+       {/* Premium CTA Banner (Optimized Animation & No Lag) */}
         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="relative rounded-3xl overflow-hidden border border-[#ffcc00]/30 bg-gradient-to-br from-[#1a1a1a] to-black p-8 md:p-12 shadow-[0_0_50px_rgba(255,204,0,0.05)]"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            viewport={{ once: true }}
+            className="relative rounded-3xl overflow-hidden border border-[#ffcc00]/20 bg-[#0d0d0d] p-8 md:p-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.4 }} // Bahut fast aur simple fade-in
+            viewport={{ once: true, margin: '-20px' }}
           >
-            {/* Background Glow inside card */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffcc00]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-
+            {/* Background Glow inside card - Static without blur filters */}
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#ffcc00]/5 rounded-full pointer-events-none" />
+            
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="text-center md:text-left max-w-2xl">
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
@@ -672,16 +672,15 @@ export default function Home() {
                   Explore how we've used our digital arsenal to build high-performing websites and successful marketing campaigns for our clients.
                 </p>
               </div>
-
+              
               <div className="flex-shrink-0">
                 <Link
                   href="/portfolio"
-                  className="group relative inline-flex items-center justify-center px-8 py-4 font-black text-black bg-[#ffcc00] rounded-xl overflow-hidden transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,204,0,0.3)] hover:shadow-[0_0_30px_rgba(255,204,0,0.5)]"
+                  // Removed heavy scale-105 animation on hover, kept it static and snappy
+                  className="group relative inline-flex items-center justify-center px-8 py-4 font-black text-black bg-[#ffcc00] rounded-xl overflow-hidden transition-colors duration-200"
                 >
-                  {/* Hover light sweep effect */}
-                  <div className="absolute inset-0 -translate-x-full bg-white/30 skew-x-12 group-hover:animate-[shimmer_1.5s_infinite]" />
                   <span className="relative">Explore Full Portfolio</span>
-                  <svg className="relative w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="relative w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </Link>
@@ -689,7 +688,6 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-
         {/* Global Keyframes for Shimmer effect (Add this if you don't have it in your globals.css, or tailwind config) */}
         <style dangerouslySetInnerHTML={{
           __html: `
@@ -1059,7 +1057,7 @@ export default function Home() {
         </div>
       </section>
       {/* <VoiceAgent /> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
