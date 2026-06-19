@@ -202,8 +202,8 @@ const HeroCarousel = () => {
             aria-label={`Go to slide ${index + 1}`}
             aria-current={currentIndex === index ? "true" : "false"}
             className={`transition-all duration-300 rounded-full ${currentIndex === index
-                ? "w-10 h-3 bg-[#ffcc00]"
-                : "w-3 h-3 bg-white/40"
+              ? "w-10 h-3 bg-[#ffcc00]"
+              : "w-3 h-3 bg-white/40"
               }`}
           />
         ))}
@@ -231,6 +231,67 @@ const AnimatedStats = () => {
   );
 };
 
+
+
+
+
+// ============ CUSTOM TYPEWRITER EFFECT ============
+// Words array ko component ke BAHAR rakhna zaroori hai
+const TYPEWRITER_WORDS = [
+  "Web Development & AI Agency in India",
+  "Your Digital Growth Partners",
+  "Experts in Smart AI Automation",
+  "Masters of Digital Marketing"
+];
+
+const TypewriterEffect = () => {
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [blink, setBlink] = useState(true);
+
+  // Blinking cursor
+  useEffect(() => {
+    const timeout = setTimeout(() => setBlink((prev) => !prev), 500);
+    return () => clearTimeout(timeout);
+  }, [blink]);
+
+  // Typing logic
+  useEffect(() => {
+    const currentWord = TYPEWRITER_WORDS[index];
+
+    // Jab word pura type ho jaye, 2 seconds ka pause
+    if (subIndex === currentWord.length + 1 && !isDeleting) {
+      const timeout = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(timeout);
+    }
+
+    // Jab delete ho kar khali ho jaye, agle word par jana
+    if (subIndex === 0 && isDeleting) {
+      setIsDeleting(false);
+      setIndex((prev) => (prev + 1) % TYPEWRITER_WORDS.length);
+      return;
+    }
+
+    // Speed of typing and deleting
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (isDeleting ? -1 : 1));
+    }, Math.max(isDeleting ? 30 : 80, Math.floor(Math.random() * 50)));
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, isDeleting]); // Words array ab dependencies mein nahi hai
+
+  const currentText = (TYPEWRITER_WORDS[index] || "").substring(0, subIndex);
+
+return (
+    // Yahan humne min-h hata kar fixed 'h-[...]' laga diya hai
+    <span className="text-[#ffcc00] block text-3xl md:text-4xl lg:text-5xl mt-3 h-[80px] md:h-[96px] lg:h-[110px] font-bold">
+      {currentText}
+      <span className={`${blink ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 font-normal`}>|</span>
+    </span>
+  );
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-black text-white overflow-hidden">
@@ -248,7 +309,7 @@ export default function Home() {
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
                 Vidhya Tech -{' '}
-                <span className="text-[#ffcc00] block">Web Development & AI Agency in India</span>
+                <TypewriterEffect />
               </h1>
 
               <p className="text-lg text-white/70 max-w-lg leading-relaxed">
@@ -512,8 +573,8 @@ export default function Home() {
         </div>
       </section>
 
-      
-    {/* ============ UNIQUE AGENCY TECH STACK & PORTFOLIO CTA ============ */}
+
+      {/* ============ UNIQUE AGENCY TECH STACK & PORTFOLIO CTA ============ */}
       <section className="py-24 bg-black relative overflow-hidden">
         {/* Background Subtle Gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-[#ffcc00]/[0.02] to-black pointer-events-none" />
@@ -601,7 +662,7 @@ export default function Home() {
           >
             {/* Background Glow inside card */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffcc00]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-            
+
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="text-center md:text-left max-w-2xl">
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
@@ -611,7 +672,7 @@ export default function Home() {
                   Explore how we've used our digital arsenal to build high-performing websites and successful marketing campaigns for our clients.
                 </p>
               </div>
-              
+
               <div className="flex-shrink-0">
                 <Link
                   href="/portfolio"
@@ -630,7 +691,8 @@ export default function Home() {
         </div>
 
         {/* Global Keyframes for Shimmer effect (Add this if you don't have it in your globals.css, or tailwind config) */}
-        <style dangerouslySetInnerHTML={{__html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           @keyframes shimmer {
             100% { transform: translateX(200%); }
           }
@@ -640,27 +702,23 @@ export default function Home() {
       {/* ============ STATS BAND ============ */}
       {/* ============ HOW WE GROW YOUR BUSINESS (PROCESS ARC) ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
-        {/* Subtle Background Glow */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none flex justify-center items-center">
-          <motion.div
-            className="w-[800px] h-[400px] bg-[#ffcc00] rounded-[100%] blur-[150px] opacity-10"
-            animate={{ opacity: [0.05, 0.1, 0.05], scale: [1, 1.05, 1] }}
-            transition={{ duration: 8, repeat: Infinity }}
-          />
+        {/* Static Background Glow (Optimized for Performance) */}
+        <div className="absolute inset-0 pointer-events-none flex justify-center items-center">
+          <div className="w-[800px] h-[400px] bg-[#ffcc00] rounded-[100%] blur-[120px] opacity-[0.08]" />
         </div>
 
         <div className="mx-auto max-w-7xl relative z-10">
           {/* Header */}
           <motion.div
             className="text-center mb-24 md:mb-32"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-50px' }}
           >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-[0.3em] mb-4 inline-block px-5 py-2 border border-[#ffcc00]/30 rounded-full bg-[#ffcc00]/5">
-              WHY CHOOSE US
-            </motion.p>
+            <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-[0.3em] mb-4 inline-block px-5 py-2 border border-[#ffcc00]/30 rounded-full bg-[#ffcc00]/5">
+              OUR PROVEN PROCESS
+            </p>
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight text-white">
               Reach! Engage! Sell! Repeat!
             </h2>
@@ -671,7 +729,7 @@ export default function Home() {
 
           {/* Arc Layout Grid Container */}
           <div className="relative pb-24 pt-20 mt-10">
-            
+
             {/* Desktop Curved Dashed Line */}
             <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-[180px] border-t-2 border-dashed border-[#ffcc00]/30 rounded-t-[100%] z-0" />
 
@@ -684,11 +742,11 @@ export default function Home() {
                 { id: '04', translate: 'translate-y-[15px]' },
                 { id: '05', translate: 'translate-y-[62px]' }
               ].map((num) => (
-                <div 
-                  key={num.id} 
-                  className={`text-2xl font-black text-[#ffcc00] font-mono tracking-wider transition-all duration-300 ${num.translate}`}
+                <div
+                  key={num.id}
+                  className={`text-2xl font-black text-[#ffcc00] font-mono tracking-wider ${num.translate}`}
                 >
-                  <span className="bg-black px-3 py-1 rounded-full border border-[#ffcc00]/30 shadow-[0_0_15px_rgba(255,204,0,0.2)]">
+                  <span className="bg-black px-3 py-1 rounded-full border border-[#ffcc00]/30 shadow-md shadow-[#ffcc00]/10">
                     {num.id}
                   </span>
                 </div>
@@ -731,27 +789,27 @@ export default function Home() {
               ].map((step, index) => (
                 <motion.div
                   key={index}
-                  className={`relative group rounded-[24px] p-7 md:p-8 border border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl hover:border-[#ffcc00]/40 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(255,204,0,0.15)] flex flex-col items-center text-center ${step.translate} overflow-hidden`}
-                  initial={{ opacity: 0, y: 50 }}
+                  className={`relative group rounded-[24px] p-7 md:p-8 border border-white/5 bg-[#0a0a0a] hover:border-[#ffcc00]/40 transition-colors duration-300 flex flex-col items-center text-center ${step.translate} overflow-hidden`}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.7, ease: "easeOut" }}
+                  transition={{ delay: index * 0.05, duration: 0.4, ease: "easeOut" }}
                   viewport={{ once: true }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
-                  <div className="absolute top-0 left-[20%] right-[20%] h-[1px] bg-gradient-to-r from-transparent via-[#ffcc00]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
+                  <div className="absolute top-0 left-[20%] right-[20%] h-[1px] bg-gradient-to-r from-transparent via-[#ffcc00]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   {/* Premium Icon Badge */}
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#1a1a1a] to-black border border-white/10 group-hover:border-[#ffcc00]/50 flex items-center justify-center text-[#ffcc00] mb-6 shadow-inner shadow-white/5 transition-all duration-500 group-hover:scale-110 relative z-10">
+                  <div className="w-16 h-16 rounded-full bg-[#111] border border-white/10 group-hover:border-[#ffcc00]/50 flex items-center justify-center text-[#ffcc00] mb-6 transition-colors duration-300 relative z-10">
                     <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       {step.icon}
                     </svg>
                   </div>
 
                   {/* Refined Typography */}
-                  <h3 className="text-xl font-bold text-white mb-3 leading-tight tracking-wide relative z-10 group-hover:text-[#ffcc00] transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-white mb-3 leading-tight tracking-wide relative z-10 group-hover:text-[#ffcc00] transition-colors duration-200">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-300 leading-relaxed group-hover:text-white transition-colors duration-300 relative z-10">
+                  <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-200 transition-colors duration-200 relative z-10">
                     {step.desc}
                   </p>
                 </motion.div>
@@ -760,25 +818,25 @@ export default function Home() {
           </div>
         </div>
 
-       {/* STANDALONE VIDHYA TECH TEXT SECTION (Solid Gold Glow) */}
+        {/* STANDALONE VIDHYA TECH TEXT SECTION (Solid Gold Glow) */}
         <div className="hidden md:flex justify-center items-center mt-8 pb-10 w-full select-none pointer-events-none overflow-hidden px-4">
           <span className="font-black text-[#ffcc00] uppercase tracking-[0.1em] whitespace-nowrap leading-none text-[7vw] xl:text-[90px] drop-shadow-[0_0_30px_rgba(255,204,0,0.6)]">
             VIDHYA TECH
           </span>
         </div>
-      </section>      
+      </section>
 
       {/* ============ CERTIFICATIONS SECTION ============ */}
       {/* <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black">
         <div className="mx-auto max-w-7xl"> */}
 
-          {/* Heading */}
-          {/* <div className="text-center mb-20">
+      {/* Heading */}
+      {/* <div className="text-center mb-20">
             <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
               CREDENTIALS
             </p> */}
 
-            {/* <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+      {/* <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
               Our Certifications & Skills
             </h2>
 
@@ -787,8 +845,8 @@ export default function Home() {
             </p>
           </div> */}
 
-          {/* Grid */}
-          {/* <div className="grid gap-8 md:grid-cols-3">
+      {/* Grid */}
+      {/* <div className="grid gap-8 md:grid-cols-3">
             {CERTIFICATES.map((cert) => (
               <div
                 key={cert.title}
@@ -818,7 +876,7 @@ export default function Home() {
           </div>
         </div>
       </section>      */}
-       {/* ============ TEAM SECTION ============ */}
+      {/* ============ TEAM SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -854,11 +912,8 @@ export default function Home() {
                 />
 
                 <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300">
-                  <motion.div
-                    className="mb-8 flex justify-center"
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, delay: index * 0.3, repeat: Infinity }}
-                  >
+                  {/* ✅ Ab images ek jagah fixed (stop) rahengi */}
+                  <div className="mb-8 flex justify-center">
                     <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
                       <Image
                         src={member.image}
@@ -866,12 +921,11 @@ export default function Home() {
                         className="w-full h-full object-cover"
                         width={96}
                         height={96}
-                        quality={60}
+                        quality={75}
                         sizes="96px"
                       />
                     </div>
-                  </motion.div>
-
+                  </div>
                   <h3 className="text-2xl font-black text-white text-center mb-2">
                     {member.name}
                   </h3>
@@ -898,8 +952,10 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>    
-        {/* ============ WHAT CLIENTS APPRECIATE SECTION ============ */}
+      </section>
+
+
+      {/* ============ WHAT CLIENTS APPRECIATE SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -947,8 +1003,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>    
-        {/* ============ CTA SECTION ============ */}
+      </section>
+      {/* ============ CTA SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-r from-[#ffcc00]/10 to-[#ffcc00]/5 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-20">

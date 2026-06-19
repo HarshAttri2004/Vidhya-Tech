@@ -1,6 +1,10 @@
 import Script from "next/script";
 import type { Metadata } from 'next';
 import './globals.css';
+// 👇 NEW: Header aur Footer import karein
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 import {
   SITE_DESCRIPTION,
   SITE_EMAIL,
@@ -22,7 +26,6 @@ export const metadata: Metadata = {
     default: SITE_FULL_TITLE,
     template: '%s | Vidhya Tech',
   },
-  // ✅ NEW: Proper icon configuration (removed query strings)
   icons: {
     icon: [
       { url: '/favicon.ico', type: 'image/x-icon' },
@@ -31,7 +34,6 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
     shortcut: '/favicon.ico',
   },
-  // ✅ NEW: Manifests (tells browsers about your app)
   manifest: '/manifest.json',
   
   description: SITE_DESCRIPTION,
@@ -42,13 +44,10 @@ export const metadata: Metadata = {
   category: 'technology',
   keywords: SITE_KEYWORDS,
   
-  // ✅ NEW: Verification tags
   verification: {
-    // Add your Google Search Console verification code here if available
     // google: 'your-google-verification-code',
   },
   
-  // ✅ IMPROVED: Alternate links for locale/canonical
   alternates: {
     canonical: '/',
     types: {
@@ -84,7 +83,6 @@ export const metadata: Metadata = {
     site: '@vidhyatech',
   },
   
-  // ✅ NEW: Comprehensive robots configuration
   robots: {
     index: true,
     follow: true,
@@ -100,7 +98,6 @@ export const metadata: Metadata = {
     },
   },
   
-  // ✅ NEW: Viewport configuration
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -108,10 +105,8 @@ export const metadata: Metadata = {
     userScalable: true,
   },
   
-  // ✅ NEW: Color scheme preferences
   colorScheme: 'light dark',
   
-  // ✅ NEW: Format detection settings
   formatDetection: {
     telephone: true,
     email: true,
@@ -121,12 +116,11 @@ export const metadata: Metadata = {
   },
 };
 
-// 🔥 PRIMARY SCHEMA: Organization (Most Important for Google Knowledge Panel)
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': SITE_URL,
-  name: SITE_NAME, // 🎯 Explicit: This is your brand name
+  name: SITE_NAME,
   alternateName: ['Vidhya Tech', 'vidhyatech', 'Vidhya Tech Agency'],
   url: SITE_URL,
   logo: {
@@ -162,12 +156,11 @@ const organizationJsonLd = {
   serviceType: ['Web Development', 'AI Automation', 'Digital Marketing'],
 };
 
-// 🔥 SECONDARY SCHEMA: Website (Tells Google the URL and site name)
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   '@id': SITE_URL,
-  name: SITE_NAME, // 🎯 Explicit site name
+  name: SITE_NAME,
   url: SITE_URL,
   alternateName: 'vidhyatech.com',
   description: SITE_DESCRIPTION,
@@ -192,7 +185,6 @@ const websiteJsonLd = {
   },
 };
 
-// 🔥 TERTIARY SCHEMA: Professional Service (About your services)
 const professionalServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -223,14 +215,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
-       {/* ✅ Preconnect for Google Fonts (Speed Boost) */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
 
-        {/* ✅ CRITICAL: JSON-LD Structured Data (in correct order) */}
-        {/* 1. ORGANIZATION (Most important - defines brand name) */}
         <script
           key="organization-schema"
           type="application/ld+json"
@@ -239,7 +228,6 @@ export default function RootLayout({
           }}
         />
         
-        {/* 2. WEBSITE (Reinforces site name and purpose) */}
         <script
           key="website-schema"
           type="application/ld+json"
@@ -248,7 +236,6 @@ export default function RootLayout({
           }}
         />
         
-        {/* 3. PROFESSIONAL SERVICE (Describes services) */}
         <script
           key="service-schema"
           type="application/ld+json"
@@ -258,10 +245,20 @@ export default function RootLayout({
         />
       </head>
 
-      <body>
-        {children}
+      {/* 👇 NEW: body classes for layout structure */}
+      <body className="bg-black text-white antialiased min-h-screen flex flex-col">
+        
+        {/* 👇 NEW: Global Header added here */}
+        <Header />
 
-        {/* Google Analytics */}
+        {/* 👇 NEW: main wrapper with pt-24 added so content doesn't hide behind fixed header */}
+        <main className="flex-1 pt-24">
+          {children}
+        </main>
+
+        {/* 👇 NEW: Global Footer added here */}
+        <Footer />
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8H42VMYLK4"
           strategy="lazyOnload"
