@@ -173,7 +173,7 @@ const HeroCarousel = () => {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" /> */}
 
             {/* Content */}
             <div className="absolute bottom-0 left-0 p-6 md:p-8 z-10">
@@ -181,11 +181,11 @@ const HeroCarousel = () => {
                 {slide.label}
               </p>
 
-              <h3 className="text-2xl md:text-4xl font-black text-white leading-tight mb-3">
+              <h3 className="text-2xl md:text-4xl font-black text-bl leading-tight mb-3">
                 {slide.title}
               </h3>
 
-              <p className="text-sm md:text-base text-white/70 max-w-md leading-relaxed">
+              <p className="text-sm md:text-base text-[#ffcc00] max-w-md leading-relaxed">
                 {slide.text}
               </p>
             </div>
@@ -512,245 +512,283 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ PORTFOLIO SECTION ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
-        <div className="mx-auto max-w-7xl">
+      
+    {/* ============ UNIQUE AGENCY TECH STACK & PORTFOLIO CTA ============ */}
+      <section className="py-24 bg-black relative overflow-hidden">
+        {/* Background Subtle Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#ffcc00]/[0.02] to-black pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center mb-20"
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: '-100px' }}
           >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-              OUR WORK
+            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-[0.3em] mb-4 inline-block px-5 py-2 border border-[#ffcc00]/30 rounded-full bg-[#ffcc00]/5">
+              OUR DIGITAL ARSENAL
             </motion.p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Our Portfolio
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight text-white">
+              Tools That Drive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffcc00] to-[#ffaa00]">Results</span>
             </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              Explore a small set of approved projects that showcase our web design, development, and digital solutions.
-            </p>
-          </motion.div>
-
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {portfolioProjects.map((project, index) => (
-              <motion.a
-                key={project.id}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] hover:border-[#ffcc00]/50 transition-all duration-300 block cursor-pointer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="aspect-video bg-gradient-to-br overflow-hidden flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/5 to-transparent" />
-                  <motion.div
-                    className="w-24 h-24 md:w-32 md:h-32"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  >
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      width={200}
-                      height={200}
-                      quality={60}
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                  </motion.div>
-                </div>
-                <div className="p-6 border-t border-white/10 group-hover:bg-white/[0.05] transition-all">
-                  <p className="text-xs font-bold text-[#ffcc00] uppercase tracking-widest mb-3">
-                    {project.category}
-                  </p>
-                  <h3 className="text-lg font-black text-white leading-tight group-hover:text-[#ffcc00] transition-colors mb-3">{project.title}</h3>
-                  <p className="text-sm text-white/70 mb-4 leading-relaxed">{project.description}</p>
-                  <motion.button
-                    className="inline-block px-4 py-2 bg-[#ffcc00] text-black font-bold rounded-lg hover:bg-white transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => window.open(project.link, '_blank')}
-                  >
-                    View Project {'->'}
-                  </motion.button>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <Link
-              href="/portfolio"
-              className="vt-gold-button px-8 py-3 font-black rounded-lg inline-block hover:scale-105 transition-transform"
-            >
-              View All Projects
-            </Link>
-            <p className="mt-4 text-sm text-white/50">
-              More approved projects will be added as they are published.
+            <p className="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed">
+              We combine cutting-edge development frameworks with powerful marketing tools and AI integrations to build scalable, high-converting digital ecosystems.
             </p>
           </motion.div>
         </div>
+
+        {/* INFINITE SCROLLING MARQUEES */}
+        <div className="relative w-full flex flex-col gap-6 md:gap-8 mb-20 overflow-hidden py-4">
+          {/* Fading Edges for Marquee */}
+          <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-r from-black via-transparent to-black" />
+
+          {/* Row 1: Development Stack (Moves Left) */}
+          <div className="flex w-max">
+            <motion.div
+              className="flex gap-6 md:gap-8 px-3 md:px-4"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+            >
+              {[
+                'React.js', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'JavaScript', 'TypeScript', 'Vercel', 'Node.js',
+                // Duplicate for infinite loop illusion
+                'React.js', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'JavaScript', 'TypeScript', 'Vercel', 'Node.js'
+              ].map((tech, index) => (
+                <div
+                  key={`row1-${index}`}
+                  className="flex items-center gap-3 px-8 py-4 rounded-full border border-white/10 bg-white/[0.01] backdrop-blur-sm whitespace-nowrap"
+                >
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc00] shadow-[0_0_10px_#ffcc00]" />
+                  <span className="text-lg font-bold text-white/90">{tech}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Row 2: Marketing & AI Stack (Moves Right) */}
+          <div className="flex w-max justify-end" style={{ transform: "translateX(-50%)" }}>
+            <motion.div
+              className="flex gap-6 md:gap-8 px-3 md:px-4"
+              animate={{ x: ["0%", "50%"] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+            >
+              {[
+                'Morden Websites', 'Meta Ads', 'Google Analytics', 'SEO Optimization', 'WhatsApp AI Bots', 'Figma Design', 'Video Editing', 'Lead Gen',
+                // Duplicate for infinite loop illusion
+                'Morden Websites', 'Meta Ads', 'Google Analytics', 'SEO Optimization', 'WhatsApp AI Bots', 'Figma Design', 'Video Editing', 'Lead Gen'
+              ].map((tech, index) => (
+                <div
+                  key={`row2-${index}`}
+                  className="flex items-center gap-3 px-8 py-4 rounded-full border border-white/10 bg-white/[0.01] backdrop-blur-sm whitespace-nowrap"
+                >
+                  <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
+                  <span className="text-lg font-bold text-white/90">{tech}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Premium CTA Banner */}
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            className="relative rounded-3xl overflow-hidden border border-[#ffcc00]/30 bg-gradient-to-br from-[#1a1a1a] to-black p-8 md:p-12 shadow-[0_0_50px_rgba(255,204,0,0.05)]"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {/* Background Glow inside card */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffcc00]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="text-center md:text-left max-w-2xl">
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
+                  Want to see these technologies in action?
+                </h3>
+                <p className="text-gray-400 text-base md:text-lg">
+                  Explore how we've used our digital arsenal to build high-performing websites and successful marketing campaigns for our clients.
+                </p>
+              </div>
+              
+              <div className="flex-shrink-0">
+                <Link
+                  href="/portfolio"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 font-black text-black bg-[#ffcc00] rounded-xl overflow-hidden transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,204,0,0.3)] hover:shadow-[0_0_30px_rgba(255,204,0,0.5)]"
+                >
+                  {/* Hover light sweep effect */}
+                  <div className="absolute inset-0 -translate-x-full bg-white/30 skew-x-12 group-hover:animate-[shimmer_1.5s_infinite]" />
+                  <span className="relative">Explore Full Portfolio</span>
+                  <svg className="relative w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Global Keyframes for Shimmer effect (Add this if you don't have it in your globals.css, or tailwind config) */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes shimmer {
+            100% { transform: translateX(200%); }
+          }
+        `}} />
       </section>
 
       {/* ============ STATS BAND ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      {/* ============ HOW WE GROW YOUR BUSINESS (PROCESS ARC) ============ */}
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
+        {/* Subtle Background Glow */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none flex justify-center items-center">
           <motion.div
-            className="absolute w-96 h-96 bg-[#ffcc00] rounded-full blur-3xl"
-            style={{ left: '10%', top: '50%' }}
-            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+            className="w-[800px] h-[400px] bg-[#ffcc00] rounded-[100%] blur-[150px] opacity-10"
+            animate={{ opacity: [0.05, 0.1, 0.05], scale: [1, 1.05, 1] }}
             transition={{ duration: 8, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute w-96 h-96 bg-[#ffcc00] rounded-full blur-3xl"
-            style={{ right: '10%', top: '30%' }}
-            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-            transition={{ duration: 8, repeat: Infinity, delay: 2 }}
           />
         </div>
 
         <div className="mx-auto max-w-7xl relative z-10">
+          {/* Header */}
           <motion.div
-            className="text-center mb-20"
+            className="text-center mb-24 md:mb-32"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: '-100px' }}
           >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-[0.3em] mb-4 inline-block px-5 py-2 border border-[#ffcc00]/30 rounded-full bg-[#ffcc00]/5">
               WHY CHOOSE US
             </motion.p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Why Clients Choose Vidhya Tech
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight text-white">
+              Reach! Engage! Sell! Repeat!
             </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              A quick snapshot of the work we have delivered and the response time we keep for new enquiries.
+            <p className="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed">
+              A strategic journey designed to transform strangers into loyal customers and drive consistent business growth.
             </p>
           </motion.div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {SITE_STAT_CARDS.map((stat, index) => (
-              <div
-                key={stat.label}
-                className={`opacity-0 animate-fadeIn group relative rounded-2xl border border-[#ffcc00]/30 bg-white/[0.02] backdrop-blur-sm p-6 transition duration-300 hover:scale-105 hover:-translate-y-2 hover:border-[#ffcc00]/80`}
-                style={{ animationDelay: `${index * 80}ms` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {/* Arc Layout Grid Container */}
+          <div className="relative pb-24 pt-20 mt-10">
+            
+            {/* Desktop Curved Dashed Line */}
+            <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-[180px] border-t-2 border-dashed border-[#ffcc00]/30 rounded-t-[100%] z-0" />
 
-                <div className="relative">
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#ffcc00]/40 bg-[#ffcc00]/10 text-sm font-black tracking-[0.2em] text-[#ffcc00]">
-                    {stat.icon}
-                  </div>
-
-                  <div className="text-4xl font-black text-[#ffcc00] mb-2">
-                    {stat.number}
-                  </div>
-
-                  <h3 className="text-lg font-bold text-white mb-2">
-                    {stat.label}
-                  </h3>
-
-                  <p className="text-sm text-white/70 leading-relaxed">
-                    {stat.description}
-                  </p>
+            {/* PROCESS STEP NUMBERS (Positioned exactly above the dashed arc line) */}
+            <div className="hidden md:grid grid-cols-5 gap-5 absolute top-[-10px] left-0 right-0 z-20 pointer-events-none text-center">
+              {[
+                { id: '01', translate: 'translate-y-[62px]' },
+                { id: '02', translate: 'translate-y-[15px]' },
+                { id: '03', translate: '-translate-y-[20px]' },
+                { id: '04', translate: 'translate-y-[15px]' },
+                { id: '05', translate: 'translate-y-[62px]' }
+              ].map((num) => (
+                <div 
+                  key={num.id} 
+                  className={`text-2xl font-black text-[#ffcc00] font-mono tracking-wider transition-all duration-300 ${num.translate}`}
+                >
+                  <span className="bg-black px-3 py-1 rounded-full border border-[#ffcc00]/30 shadow-[0_0_15px_rgba(255,204,0,0.2)]">
+                    {num.id}
+                  </span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Process Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-5 relative z-10">
+              {[
+                {
+                  title: 'Brand Awareness',
+                  desc: "Let's spread the word! We position your brand in front of the right audience.",
+                  translate: 'translate-y-0 md:translate-y-[140px]',
+                  icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                },
+                {
+                  title: 'Traffic & Engage',
+                  desc: 'Make your audience fall in love with your product through targeted campaigns.',
+                  translate: 'translate-y-0 md:translate-y-[60px]',
+                  icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                },
+                {
+                  title: 'Advertise & Retarget',
+                  desc: 'Chase your customer all over the internet and make them hit "Pay Now".',
+                  translate: 'translate-y-0 md:-translate-y-[10px]',
+                  icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                },
+                {
+                  title: 'Retention',
+                  desc: 'Keep making your customers come back to you with automated systems.',
+                  translate: 'translate-y-0 md:translate-y-[60px]',
+                  icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                },
+                {
+                  title: 'Consistent Growth',
+                  desc: 'Get busy collecting revenue 365 days a year with scaling strategies.',
+                  translate: 'translate-y-0 md:translate-y-[140px]',
+                  icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                }
+              ].map((step, index) => (
+                <motion.div
+                  key={index}
+                  className={`relative group rounded-[24px] p-7 md:p-8 border border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl hover:border-[#ffcc00]/40 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(255,204,0,0.15)] flex flex-col items-center text-center ${step.translate} overflow-hidden`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.7, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
+                  <div className="absolute top-0 left-[20%] right-[20%] h-[1px] bg-gradient-to-r from-transparent via-[#ffcc00]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Premium Icon Badge */}
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#1a1a1a] to-black border border-white/10 group-hover:border-[#ffcc00]/50 flex items-center justify-center text-[#ffcc00] mb-6 shadow-inner shadow-white/5 transition-all duration-500 group-hover:scale-110 relative z-10">
+                    <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      {step.icon}
+                    </svg>
+                  </div>
+
+                  {/* Refined Typography */}
+                  <h3 className="text-xl font-bold text-white mb-3 leading-tight tracking-wide relative z-10 group-hover:text-[#ffcc00] transition-colors duration-300">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-300 leading-relaxed group-hover:text-white transition-colors duration-300 relative z-10">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-      </section>      {/* ============ OPTION B: PROJECT CATEGORIES (ALTERNATIVE) ============ */}
-      {/* Uncomment to use this version instead of Option A */}
-      {/*
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-              INDUSTRIES SERVED
-            </motion.p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Trusted By Clients Across Industries
-            </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              We&apos;ve built digital solutions for schools, e-commerce brands, fitness studios, restaurants, and startups across India.
-            </p>
-          </motion.div>
 
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            {[
-              { icon: 'ðŸŽ“', label: 'Educational Institutions' },
-              { icon: 'ðŸ›ï¸', label: 'E-Commerce Brands' },
-              { icon: 'ðŸ’ª', label: 'Fitness Studios' },
-              { icon: 'ðŸ½ï¸', label: 'Restaurants & Cafes' },
-              { icon: 'ðŸš€', label: 'Tech Startups' },
-              { icon: 'ðŸ“±', label: 'Service Providers' },
-            ].map((category, index) => (
-              <motion.div
-                key={index}
-                className="group relative rounded-full border-2 border-[#ffcc00]/50 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00] px-6 py-3 transition-all duration-300 cursor-pointer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.08, duration: 0.5 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 204, 0, 0.1)' }}
-              >
-                <span className="text-2xl mr-3">{category.icon}</span>
-                <span className="font-bold text-white group-hover:text-[#ffcc00] transition-colors">
-                  {category.label}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
+       {/* STANDALONE VIDHYA TECH TEXT SECTION (Solid Gold Glow) */}
+        <div className="hidden md:flex justify-center items-center mt-8 pb-10 w-full select-none pointer-events-none overflow-hidden px-4">
+          <span className="font-black text-[#ffcc00] uppercase tracking-[0.1em] whitespace-nowrap leading-none text-[7vw] xl:text-[90px] drop-shadow-[0_0_30px_rgba(255,204,0,0.6)]">
+            VIDHYA TECH
+          </span>
         </div>
-      </section>
-      */}
+      </section>      
 
       {/* ============ CERTIFICATIONS SECTION ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black">
-        <div className="mx-auto max-w-7xl">
+      {/* <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black">
+        <div className="mx-auto max-w-7xl"> */}
 
           {/* Heading */}
-          <div className="text-center mb-20">
+          {/* <div className="text-center mb-20">
             <p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
               CREDENTIALS
-            </p>
+            </p> */}
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+            {/* <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
               Our Certifications & Skills
             </h2>
 
             <p className="text-white/70 max-w-3xl mx-auto text-lg">
               Industry-recognized certifications and expertise that drive our work.
             </p>
-          </div>
+          </div> */}
 
           {/* Grid */}
-          <div className="grid gap-8 md:grid-cols-3">
+          {/* <div className="grid gap-8 md:grid-cols-3">
             {CERTIFICATES.map((cert) => (
               <div
                 key={cert.title}
@@ -779,7 +817,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>      {/* ============ TEAM SECTION ============ */}
+      </section>      */}
+       {/* ============ TEAM SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -859,7 +898,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>      {/* ============ WHAT CLIENTS APPRECIATE SECTION ============ */}
+      </section>    
+        {/* ============ WHAT CLIENTS APPRECIATE SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -907,7 +947,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>      {/* ============ CTA SECTION ============ */}
+      </section>    
+        {/* ============ CTA SECTION ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-r from-[#ffcc00]/10 to-[#ffcc00]/5 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-20">
