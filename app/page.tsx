@@ -572,6 +572,83 @@ export default function Home() {
           </div>
         </div>
       </section>
+       {/* ============ TEAM SECTION ============ */}
+      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
+              OUR TEAM
+            </motion.p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Meet the Innovators
+            </h2>
+            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
+              A powerhouse of innovators, creators, and strategists committed to turning ideas into exceptional digital experiences.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={member.id}
+                className="group relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.15, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <motion.div
+                  className={`absolute inset-0 bg-gradient-to-br ${member.bgColor} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300`}
+                />
+
+                <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300">
+                  {/* ✅ Ab images ek jagah fixed (stop) rahengi */}
+                  <div className="mb-8 flex justify-center">
+                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                        width={96}
+                        height={96}
+                        quality={75}
+                        sizes="96px"
+                      />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-white text-center mb-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-[#ffcc00] font-bold text-center mb-4 text-sm uppercase tracking-widest">
+                    {member.role}
+                  </p>
+
+                  <p className="text-white/70 text-center leading-relaxed mb-6">
+                    {member.description}
+                  </p>
+
+                  <div className="flex justify-center">
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-[#ffcc00]/30 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-[#ffcc00] hover:text-black"
+                    >
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
 
       {/* ============ UNIQUE AGENCY TECH STACK & PORTFOLIO CTA ============ */}
@@ -874,83 +951,7 @@ export default function Home() {
           </div>
         </div>
       </section>      */}
-      {/* ============ TEAM SECTION ============ */}
-      <section className="px-5 py-24 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-black relative overflow-hidden">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            <motion.p className="text-sm font-bold text-[#ffcc00] uppercase tracking-widest mb-4 inline-block px-4 py-2 border border-[#ffcc00]/30 rounded-full">
-              OUR TEAM
-            </motion.p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Meet Our Experts
-            </h2>
-            <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-              A talented team of developers, designers, and strategists dedicated to bringing your vision to life.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.id}
-                className="group relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${member.bgColor} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300`}
-                />
-
-                <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-[#ffcc00]/50 transition-all duration-300">
-                  {/* ✅ Ab images ek jagah fixed (stop) rahengi */}
-                  <div className="mb-8 flex justify-center">
-                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#ffcc00]/70 bg-black shadow-[0_0_30px_rgba(255,204,0,.25)]">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                        width={96}
-                        height={96}
-                        quality={75}
-                        sizes="96px"
-                      />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-black text-white text-center mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-[#ffcc00] font-bold text-center mb-4 text-sm uppercase tracking-widest">
-                    {member.role}
-                  </p>
-
-                  <p className="text-white/70 text-center leading-relaxed mb-6">
-                    {member.description}
-                  </p>
-
-                  <div className="flex justify-center">
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full border border-[#ffcc00]/30 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-[#ffcc00] hover:text-black"
-                    >
-                      LinkedIn
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+     
 
 
       {/* ============ WHAT CLIENTS APPRECIATE SECTION ============ */}
