@@ -118,7 +118,7 @@ export const TEAM_MEMBERS = [
   {
     id: 1,
     name: 'Harsh Kumar',
-    role: 'Co-Founder & Lead Developer',
+    role: 'Head of User Experience (UX)',
     image: '/images/Happu sir.png',
     linkedin: 'https://www.linkedin.com/in/harsh-kumar-69864036a',
     description: 'Drives the technical vision by building lightning-fast, highly scalable web applications using modern tech like React and Next.js.',
@@ -126,8 +126,8 @@ export const TEAM_MEMBERS = [
   },
   {
     id: 2,
-    name: 'Harsh Vasisth',
-    role: 'Founder & Technical Architect',
+    name: 'Harsh Vashisth',
+    role: 'Head of Technical Strategy',
     image: '/images/Harshsir9.jpeg',
     linkedin: 'https://www.linkedin.com/in/harsh-vashisth-9259b7268/',
     description: 'Architects robust software solutions and seamless full-stack platforms, ensuring reliability and innovation at the core.',
@@ -136,7 +136,7 @@ export const TEAM_MEMBERS = [
   {
     id: 3,
     name: 'Lakshya Kumar Gupta',
-    role: 'Co-Founder & Head of Design',
+    role: 'Head of Product Delivery',
     image: '/images/Lakshya Sir.jpeg',
     linkedin: 'https://www.linkedin.com/in/lakshya-kumar-gupta-41a44b35b/',
     description: 'Transforms complex ideas into intuitive, visually stunning user experiences that engage and convert.',
