@@ -5,6 +5,13 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+function databaseUnavailable() {
+  return NextResponse.json(
+    { error: 'Database is not configured in this environment' },
+    { status: 503 }
+  );
+}
+
 function isRenderablePortfolio(project: {
   title: string;
   description: string;
@@ -23,6 +30,8 @@ function isRenderablePortfolio(project: {
 
 export async function GET() {
   try {
+    if (!prisma) return NextResponse.json({ data: [] });
+
     const portfolios = await prisma.portfolio.findMany({
       orderBy: { order: 'asc' },
     });
@@ -34,6 +43,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const { title, description, image, link, category, order } = await req.json();
 
     if (!isNonEmptyString(title) || !isNonEmptyString(description) || !isNonEmptyString(image) || !isNonEmptyString(category)) {
@@ -62,6 +73,8 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const { id, title, description, image, link, category, order } = await req.json();
 
     if (!isNonEmptyString(title) || !isNonEmptyString(description) || !isNonEmptyString(image) || !isNonEmptyString(category)) {
@@ -91,6 +104,8 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const { id } = await req.json();
 
     await prisma.portfolio.delete({

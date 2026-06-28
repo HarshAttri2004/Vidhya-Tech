@@ -2,22 +2,23 @@ import 'dotenv/config';
 import { PrismaClient } from '@/generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) {
-  throw new Error('Missing DATABASE_URL environment variable. Please add it to .env or your deployment environment.');
-}
+const connectionString = process.env.DATABASE_URL?.trim();
 
-const adapter = new PrismaPg({ connectionString });
+const globalForPrisma = global as unknown as { prisma?: PrismaClient };
 
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+function createPrismaClient() {
+  const adapter = new PrismaPg({ connectionString: connectionString as string });
 
-export const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
+  return new PrismaClient({
     adapter,
     log: ['error'],
   });
+}
 
-if (process.env.NODE_ENV !== 'production') {
+export const prisma = connectionString
+  ? globalForPrisma.prisma ?? createPrismaClient()
+  : null;
+
+if (connectionString && process.env.NODE_ENV !== 'production' && prisma) {
   globalForPrisma.prisma = prisma;
 }

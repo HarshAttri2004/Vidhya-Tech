@@ -1,8 +1,17 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
+function databaseUnavailable() {
+  return NextResponse.json(
+    { error: 'Database is not configured in this environment' },
+    { status: 503 }
+  );
+}
+
 export async function GET() {
   try {
+    if (!prisma) return NextResponse.json({ data: [] });
+
     const services = await prisma.service.findMany({
       orderBy: { order: 'asc' },
     });
@@ -14,6 +23,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const { title, description, icon, image, order } = await req.json();
 
     const service = await prisma.service.create({
@@ -34,6 +45,8 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const { id, title, description, icon, image, order } = await req.json();
 
     const service = await prisma.service.update({
@@ -49,6 +62,8 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const { id } = await req.json();
 
     await prisma.service.delete({

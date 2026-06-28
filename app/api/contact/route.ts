@@ -3,8 +3,17 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
+function databaseUnavailable() {
+  return NextResponse.json(
+    { success: false, error: 'Database is not configured in this environment' },
+    { status: 503 }
+  );
+}
+
 export async function GET() {
   try {
+    if (!prisma) return NextResponse.json({ data: [] });
+
     const contacts = await prisma.contact.findMany({
       orderBy: { createdAt: 'desc' },
     });
@@ -47,6 +56,8 @@ async function readContactPayload(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!prisma) return databaseUnavailable();
+
     const payload = await readContactPayload(req);
 
     const name = typeof payload.name === 'string' ? payload.name.trim() : '';
