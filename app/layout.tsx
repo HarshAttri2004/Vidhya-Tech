@@ -28,11 +28,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/logo.png', type: 'image/png' },
       { url: '/favicon.ico', type: 'image/x-icon' },
       { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
     ],
-    apple: '/apple-icon.png',
-    shortcut: '/favicon.ico',
+    apple: '/logo.png',
+    shortcut: '/logo.png',
   },
   manifest: '/manifest.json',
   
@@ -162,7 +163,7 @@ const websiteJsonLd = {
   '@id': SITE_URL,
   name: SITE_NAME,
   url: SITE_URL,
-  alternateName: 'vidhyatech.com',
+  alternateName: SITE_NAME,
   description: SITE_DESCRIPTION,
   isPartOf: {
     '@id': SITE_URL,
