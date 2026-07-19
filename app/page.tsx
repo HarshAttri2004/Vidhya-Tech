@@ -774,7 +774,6 @@ export default function Home() {
         `}} />
       </section>
 
-      {/* ============ STATS BAND ============ */}
       {/* ============ HOW WE GROW YOUR BUSINESS (PROCESS ARC) ============ */}
       <section className="px-5 py-24 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
         {/* Static Background Glow (Optimized for Performance) */}

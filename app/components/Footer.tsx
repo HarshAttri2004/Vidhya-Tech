@@ -31,7 +31,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/company/vidhyatech/ "
+                href="https://www.linkedin.com/company/vidhyatech/"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0A66C2] text-white shadow-lg shadow-blue-800/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#0959a8]"
@@ -79,6 +79,8 @@ export default function Footer() {
             <Link href="/portfolio" className="transition hover:text-[#ffcc00]">Portfolio</Link>
             <Link href="/pricing" className="transition hover:text-[#ffcc00]">Pricing</Link>
             <Link href="/contact" className="transition hover:text-[#ffcc00]">Contact</Link>
+            <Link href="/privacy-policy" className="transition hover:text-[#ffcc00]">Privacy Policy</Link>
+            <Link href="/terms-and-conditions" className="transition hover:text-[#ffcc00]">Terms & Conditions</Link>
           </div>
         </div>
 

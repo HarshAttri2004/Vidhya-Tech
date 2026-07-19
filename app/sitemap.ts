@@ -9,6 +9,8 @@ const publicRoutes = [
   '/pricing',
   '/contact',
   '/design',
+  '/privacy-policy',
+  '/terms-and-conditions',
 ];
 
 const designRoutes = [
